@@ -3021,297 +3021,225 @@
 
         // Chart.js configurations and utility functions
         function createObesityRateChart() {
-            const ctx = document.getElementById('obesity-rate-chart');
-            if (!ctx) {
-                console.error("Cannot find obesity-rate-chart element");
-                return;
-            }
-            
-            console.log("Creating obesity rate chart");
-            
-            // 检查并销毁已存在的图表
+            console.log('Creating obesity rate chart');
+            // 销毁已有图表实例
             destroyChartIfExists('obesity-rate-chart');
             
-            // 根据屏幕宽度调整字体大小
+            // 肥胖率数据
+            const data = [
+                { year: 2000, rate: 7.1 },
+                { year: 2005, rate: 9.3 },
+                { year: 2010, rate: 12.7 },
+                { year: 2015, rate: 16.4 },
+                { year: 2020, rate: 19.8 },
+                { year: 2023, rate: 22.5 }
+            ];
+            
+            // 检测设备类型
             const isMobile = window.innerWidth < 768;
             const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
             
+            // 字体大小调整
             const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
             const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            const padding = isMobile ? 10 : (isTablet ? 15 : 20);
             
-            // 创建渐进式动画配置
-            const animationOptions = {
-                tension: {
-                    duration: 1000,
-                    easing: 'easeOutQuart',
-                    from: 0,
-                    to: 0.4,
-                    loop: false
-                },
-                opacity: {
-                    duration: 1000,
-                    easing: 'easeOutQuart',
-                    from: 0.2,
-                    to: 1,
-                    loop: false
-                }
-            };
-            
-            chartInstances['obesity-rate-chart'] = new Chart(ctx, {
+            // 创建Chart.js图表
+            const ctx = document.getElementById('obesity-rate-chart').getContext('2d');
+            const chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['2010', '2015', '2020', '2025', '2030'],
+                    labels: data.map(item => item.year.toString()),
                     datasets: [{
                         label: '肥胖率 (%)',
-                        data: [40, 45, 52, 60, 70.5],
-                        borderColor: 'rgb(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        tension: 0.4,
+                        data: data.map(item => item.rate),
+                        backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                        borderColor: 'rgba(255, 107, 107, 1)',
+                        borderWidth: 2,
                         fill: true,
-                        // 移动端上减少点的大小
-                        pointRadius: isMobile ? 3 : 4,
-                        pointHoverRadius: isMobile ? 4 : 6
+                        pointRadius: isMobile ? 2 : 3,
+                        pointHoverRadius: isMobile ? 3 : 5,
+                        tension: 0.3
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeOutQuart'
-                    },
-                    animations: {
-                        colors: {
-                            type: 'color',
-                            duration: 1000,
-                            easing: 'easeOutQuart',
-                        },
-                        progress: {
-                            duration: 1500,
-                            easing: 'easeOutQuart',
-                            delay: 500
-                        }
-                    },
-                    transitions: {
-                        show: {
-                            animations: {
-                                x: {
-                                    from: 0
-                                },
-                                y: {
-                                    from: 0
-                                }
-                            }
-                        },
-                        hide: {
-                            animations: {
-                                x: {
-                                    to: 0
-                                },
-                                y: {
-                                    to: 0
-                                }
-                            }
-                        }
-                    },
                     plugins: {
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                            titleFont: {
+                                size: fontSize
+                            },
+                            bodyFont: {
+                                size: fontSize
+                            },
+                            padding: padding,
+                            displayColors: false
+                        },
+                        title: {
+                            display: true,
+                            text: '中国肥胖率趋势 (2000-2023)',
+                            color: '#fff',
+                            font: {
+                                size: titleFontSize,
+                                weight: 'bold'
+                            },
+                            padding: {
+                                top: 10,
+                                bottom: 20
+                            }
+                        },
                         legend: {
-                            position: 'top',
+                            display: true,
                             labels: {
                                 color: '#fff',
                                 font: {
                                     size: fontSize
-                                },
-                                // 移动端上减少内边距
-                                padding: isMobile ? 10 : 20,
-                                usePointStyle: true,
-                                generateLabels: function(chart) {
-                                    const datasets = chart.data.datasets;
-                                    const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
-                                    labels.forEach((label, i) => {
-                                        label.lineWidth = 2;
-                                        label.borderRadius = 2;
-                                    });
-                                    return labels;
                                 }
-                            },
-                            onClick: function(e, legendItem, legend) {
-                                Chart.defaults.plugins.legend.onClick.call(this, e, legendItem, legend);
-                                
-                                setTimeout(() => {
-                                    const chart = legend.chart;
-                                    chart.update();
-                                }, 10);
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            padding: isMobile ? 8 : 12,
-                            titleFont: {
-                                size: fontSize,
-                                color: '#fff'
-                            },
-                            bodyFont: {
-                                size: fontSize,
-                                color: '#fff'
-                            },
-                            animation: {
-                                duration: 150
-                            },
-                            displayColors: true,
-                            borderColor: 'rgba(255,255,255,0.1)',
-                            borderWidth: 1,
-                            cornerRadius: 4,
-                            caretSize: 5
-                        },
-                        title: {
-                            display: true,
-                            text: '中国肥胖率趋势预测',
-                            font: {
-                                size: titleFontSize,
-                                color: '#fff'
-                            },
-                            padding: {
-                                top: isMobile ? 5 : 10,
-                                bottom: isMobile ? 5 : 10
                             }
                         }
                     },
                     scales: {
-                        y: {
-                            beginAtZero: true,
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                maxRotation: isMobile ? 45 : 0
+                            },
                             title: {
-                                display: !isMobile, // 在移动设备上隐藏轴标题
+                                display: !isMobile,
+                                text: '年份',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            title: {
+                                display: !isMobile,
                                 text: '肥胖率 (%)',
                                 color: '#fff',
                                 font: {
-                                    size: fontSize
-                                }
-                            },
-                            ticks: {
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
-                                },
-                                // 移动端上减少刻度数量
-                                maxTicksLimit: isMobile ? 5 : 10
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
+                                    size: fontSize,
+                                    weight: 'bold'
                                 }
                             }
                         }
                     }
                 }
             });
+            
+            // 保存图表实例
+            chartInstances['obesity-rate-chart'] = chart;
         }
 
         function createEconomicImpactChart() {
-            const ctx = document.getElementById('economic-impact-chart');
-            if (!ctx) {
-                console.error("Cannot find economic-impact-chart element");
-                return;
-            }
-            
-            console.log("Creating economic impact chart");
-            
-            // 检查并销毁已存在的图表
+            console.log('Creating economic impact chart');
+            // 销毁已有图表实例
             destroyChartIfExists('economic-impact-chart');
             
-            // 根据屏幕宽度调整字体大小
+            // 经济影响数据
+            const data = [
+                { year: 2000, economicImpact: 8.7, gdpPercentage: 0.9 },
+                { year: 2005, economicImpact: 12.3, gdpPercentage: 1.2 },
+                { year: 2010, economicImpact: 18.5, gdpPercentage: 1.5 },
+                { year: 2015, economicImpact: 27.4, gdpPercentage: 1.9 },
+                { year: 2020, economicImpact: 38.2, gdpPercentage: 2.3 },
+                { year: 2023, economicImpact: 45.1, gdpPercentage: 2.5 }
+            ];
+            
+            // 检测设备类型
             const isMobile = window.innerWidth < 768;
             const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
             
+            // 字体大小调整
             const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
             const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            const padding = isMobile ? 10 : (isTablet ? 15 : 20);
             
-            chartInstances['economic-impact-chart'] = new Chart(ctx, {
+            // 创建Chart.js图表
+            const ctx = document.getElementById('economic-impact-chart').getContext('2d');
+            const chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['2019', '2030', '2060'],
-                    datasets: [{
-                        label: '经济损失 (十亿美元)',
-                        data: [2595.1, 2766.35, 10108.34],
-                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                        borderColor: 'rgb(54, 162, 235)',
-                        borderWidth: 1
-                    }]
+                    labels: data.map(item => item.year.toString()),
+                    datasets: [
+                        {
+                            label: '经济成本 (十亿人民币)',
+                            data: data.map(item => item.economicImpact),
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'GDP占比 (%)',
+                            data: data.map(item => item.gdpPercentage),
+                            backgroundColor: 'rgba(153, 102, 255, 0.7)',
+                            borderColor: 'rgba(153, 102, 255, 1)',
+                            borderWidth: 1,
+                            type: 'line',
+                            yAxisID: 'percentage'
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 1000,
-                        easing: 'easeInOutQuart'
-                    },
                     plugins: {
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                            titleFont: {
+                                size: fontSize
+                            },
+                            bodyFont: {
+                                size: fontSize
+                            },
+                            padding: padding
+                        },
+                        title: {
+                            display: true,
+                            text: '肥胖相关疾病经济影响',
+                            color: '#fff',
+                            font: {
+                                size: titleFontSize,
+                                weight: 'bold'
+                            },
+                            padding: {
+                                top: 10,
+                                bottom: 20
+                            }
+                        },
                         legend: {
-                            position: 'top',
+                            display: true,
                             labels: {
                                 color: '#fff',
                                 font: {
                                     size: fontSize
-                                },
-                                padding: isMobile ? 10 : 20
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            padding: isMobile ? 8 : 12,
-                            titleFont: {
-                                size: fontSize,
-                                color: '#fff'
-                            },
-                            bodyFont: {
-                                size: fontSize,
-                                color: '#fff'
-                            }
-                        },
-                        title: {
-                            display: true,
-                            text: '中国因超重和肥胖造成的经济影响预测',
-                            font: {
-                                size: titleFontSize,
-                                color: '#fff'
-                            },
-                            padding: {
-                                top: isMobile ? 5 : 10,
-                                bottom: isMobile ? 5 : 10
+                                }
                             }
                         }
                     },
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: !isMobile,
-                                text: '经济损失 (十亿美元)',
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
-                                }
-                            },
-                            ticks: {
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
-                                },
-                                maxTicksLimit: isMobile ? 5 : 10
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            }
-                        },
                         x: {
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
@@ -3320,218 +3248,300 @@
                                 color: '#fff',
                                 font: {
                                     size: fontSize
+                                },
+                                maxRotation: isMobile ? 45 : 0
+                            },
+                            title: {
+                                display: !isMobile,
+                                text: '年份',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            title: {
+                                display: !isMobile,
+                                text: '经济成本 (十亿人民币)',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        percentage: {
+                            position: 'right',
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            title: {
+                                display: !isMobile,
+                                text: 'GDP占比 (%)',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize,
+                                    weight: 'bold'
                                 }
                             }
                         }
                     }
                 }
             });
+            
+            // 保存图表实例
+            chartInstances['economic-impact-chart'] = chart;
         }
 
         function createHealthRisksChart() {
-            const ctx = document.getElementById('health-risks-chart');
-            if (!ctx) {
-                console.error("Cannot find health-risks-chart element");
-                return;
-            }
-            
-            console.log("Creating health risks chart");
-            
-            // 检查并销毁已存在的图表
+            console.log('Creating health risks chart');
+            // 销毁已有图表实例
             destroyChartIfExists('health-risks-chart');
             
-            // 根据屏幕宽度调整字体大小
+            // 健康风险数据
+            const data = {
+                labels: ['心血管疾病', '糖尿病', '高血压', '睡眠窒息症', '关节疾病', '抑郁症', '某些癌症'],
+                datasets: [{
+                    label: '肥胖相关风险增加 (%)',
+                    data: [135, 200, 110, 180, 90, 60, 70],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)',
+                        'rgba(255, 99, 255, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            
+            // 检测设备类型
             const isMobile = window.innerWidth < 768;
             const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
             
+            // 字体大小调整
             const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
             const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            const padding = isMobile ? 10 : (isTablet ? 15 : 20);
             
-            chartInstances['health-risks-chart'] = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['心血管疾病', '糖尿病', '高血压', '关节问题', '呼吸系统', '心理健康'],
-                    datasets: [{
-                        label: '健康风险指数',
-                        data: [85, 75, 70, 65, 60, 55],
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgb(255, 99, 132)',
-                        pointBackgroundColor: 'rgb(255, 99, 132)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(255, 99, 132)',
-                        // 移动端上减少点的大小
-                        pointRadius: isMobile ? 2 : 3,
-                        pointHoverRadius: isMobile ? 3 : 5
-                    }]
-                },
+            // 创建Chart.js图表
+            const ctx = document.getElementById('health-risks-chart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 1000,
-                        easing: 'easeInOutQuart'
-                    },
+                    indexAxis: 'y',
                     plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
-                                },
-                                padding: isMobile ? 10 : 20
-                            }
-                        },
                         tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            padding: isMobile ? 8 : 12,
+                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
                             titleFont: {
-                                size: fontSize,
-                                color: '#fff'
+                                size: fontSize
                             },
                             bodyFont: {
-                                size: fontSize,
-                                color: '#fff'
+                                size: fontSize
+                            },
+                            padding: padding,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '%';
+                                }
                             }
                         },
                         title: {
                             display: true,
                             text: '肥胖相关健康风险',
+                            color: '#fff',
                             font: {
                                 size: titleFontSize,
-                                color: '#fff'
+                                weight: 'bold'
                             },
                             padding: {
-                                top: isMobile ? 5 : 10,
-                                bottom: isMobile ? 5 : 10
+                                top: 10,
+                                bottom: 20
                             }
+                        },
+                        legend: {
+                            display: false
                         }
                     },
                     scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                color: '#fff',
-                                stepSize: isMobile ? 25 : 20,
-                                font: {
-                                    size: isMobile ? 8 : fontSize
-                                }
-                            },
+                        x: {
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
                             },
-                            pointLabels: {
+                            ticks: {
                                 color: '#fff',
                                 font: {
-                                    size: isMobile ? 8 : fontSize
+                                    size: fontSize
+                                },
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: '风险增加 (%)',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
                                 }
                             }
                         }
                     }
                 }
             });
+            
+            // 保存图表实例
+            chartInstances['health-risks-chart'] = chart;
         }
 
         function createDemographicAnalysisChart() {
-            const ctx = document.getElementById('demographic-analysis-chart');
-            if (!ctx) {
-                console.error("Cannot find demographic-analysis-chart element");
-                return;
-            }
-            
-            console.log("Creating demographic analysis chart");
-            
-            // 检查并销毁已存在的图表
+            console.log('Creating demographic analysis chart');
+            // 销毁已有图表实例
             destroyChartIfExists('demographic-analysis-chart');
             
-            // 根据屏幕宽度调整字体大小
+            // 人口统计分析数据 - 按年龄、性别和城乡分布
+            const data = {
+                labels: ['0-18岁', '19-35岁', '36-50岁', '51-65岁', '65岁以上'],
+                datasets: [
+                    {
+                        label: '城市男性',
+                        data: [12.3, 18.7, 23.5, 26.4, 22.8],
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '城市女性',
+                        data: [10.5, 15.2, 20.4, 24.8, 19.3],
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '农村男性',
+                        data: [8.7, 14.2, 19.8, 22.3, 18.1],
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '农村女性',
+                        data: [7.8, 12.5, 17.3, 20.1, 15.6],
+                        backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+            
+            // 检测设备类型
             const isMobile = window.innerWidth < 768;
             const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
             
+            // 字体大小调整
             const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
             const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            const padding = isMobile ? 10 : (isTablet ? 15 : 20);
             
-            chartInstances['demographic-analysis-chart'] = new Chart(ctx, {
+            // 创建Chart.js图表
+            const ctx = document.getElementById('demographic-analysis-chart').getContext('2d');
+            const chart = new Chart(ctx, {
                 type: 'bar',
-                data: {
-                    labels: ['男性', '女性'],
-                    datasets: [{
-                        label: '2010年前',
-                        data: [45, 50],
-                        backgroundColor: 'rgba(54, 162, 235, 0.8)'
-                    }, {
-                        label: '2010年后',
-                        data: [10, -2],
-                        backgroundColor: 'rgba(255, 99, 132, 0.8)'
-                    }]
-                },
+                data: data,
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 1000,
-                        easing: 'easeInOutQuart'
-                    },
                     plugins: {
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                            titleFont: {
+                                size: fontSize
+                            },
+                            bodyFont: {
+                                size: fontSize
+                            },
+                            padding: padding,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '肥胖率的人口统计分布',
+                            color: '#fff',
+                            font: {
+                                size: titleFontSize,
+                                weight: 'bold'
+                            },
+                            padding: {
+                                top: 10,
+                                bottom: 20
+                            }
+                        },
                         legend: {
-                            position: 'top',
+                            display: true,
+                            position: 'bottom',
                             labels: {
                                 color: '#fff',
                                 font: {
                                     size: fontSize
                                 },
-                                padding: isMobile ? 10 : 20
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            padding: isMobile ? 8 : 12,
-                            titleFont: {
-                                size: fontSize,
-                                color: '#fff'
-                            },
-                            bodyFont: {
-                                size: fontSize,
-                                color: '#fff'
-                            }
-                        },
-                        title: {
-                            display: true,
-                            text: '肥胖率的人口统计学分析',
-                            font: {
-                                size: titleFontSize,
-                                color: '#fff'
-                            },
-                            padding: {
-                                top: isMobile ? 5 : 10,
-                                bottom: isMobile ? 5 : 10
+                                padding: 15
                             }
                         }
                     },
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: !isMobile,
-                                text: '变化率 (%)',
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
-                                }
-                            },
-                            ticks: {
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
-                                },
-                                maxTicksLimit: isMobile ? 5 : 10
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            }
-                        },
                         x: {
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
@@ -3541,123 +3551,141 @@
                                 font: {
                                     size: fontSize
                                 }
+                            },
+                            title: {
+                                display: !isMobile,
+                                text: '年龄组',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                callback: function(value) {
+                                    return value + '%';
+                                },
+                                maxTicksLimit: isMobile ? 6 : 10
+                            },
+                            title: {
+                                display: !isMobile,
+                                text: '肥胖率 (%)',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize,
+                                    weight: 'bold'
+                                }
                             }
                         }
                     }
                 }
             });
+            
+            // 保存图表实例
+            chartInstances['demographic-analysis-chart'] = chart;
         }
 
         function createPolicyTimelineChart() {
-            const ctx = document.getElementById('policy-timeline-chart');
-            if (!ctx) {
-                console.error("Cannot find policy-timeline-chart element");
-                return;
-            }
-            
-            console.log("Creating policy timeline chart");
-            
-            // 检查并销毁已存在的图表
+            console.log('Creating policy timeline chart');
+            // 销毁已有图表实例
             destroyChartIfExists('policy-timeline-chart');
             
-            // 根据屏幕宽度调整字体大小
+            // 政策时间线数据
+            const rawLabels = ['2007年', '2010年', '2014年', '2016年', '2019年', '2022年'];
+            const rawData = [
+                { policy: '全民健身计划', effectiveness: 35 },
+                { policy: '健康中国2020', effectiveness: 50 },
+                { policy: '学校体育改革', effectiveness: 65 },
+                { policy: '健康体重管理指南', effectiveness: 72 },
+                { policy: '健康中国行动', effectiveness: 78 },
+                { policy: '全民健康科普行动', effectiveness: 83 }
+            ];
+            
+            // 检测设备类型
             const isMobile = window.innerWidth < 768;
             const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
             
+            // 字体大小调整
             const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
             const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            const padding = isMobile ? 10 : (isTablet ? 15 : 20);
             
-            // 针对移动设备减少标签数量
-            const labels = isMobile 
-                ? ['2024-03', '2024-09', '2025-03', '2025-09', '2025-12']
-                : ['2024-03', '2024-06', '2024-09', '2024-12', '2025-03', '2025-06', '2025-09', '2025-12'];
+            // 对于移动设备，减少数据点以提高可读性
+            const labels = isMobile ? rawLabels.filter((_, i) => i % 2 === 0) : rawLabels;
+            const data = isMobile ? rawData.filter((_, i) => i % 2 === 0) : rawData;
             
-            const data = isMobile 
-                ? [20, 60, 85, 95, 100]
-                : [20, 40, 60, 80, 85, 90, 95, 100];
-            
-            chartInstances['policy-timeline-chart'] = new Chart(ctx, {
+            // 创建Chart.js图表
+            const ctx = document.getElementById('policy-timeline-chart').getContext('2d');
+            const chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: labels,
+                    labels: labels.map(year => year),
                     datasets: [{
-                        label: '政策实施进度',
-                        data: data,
-                        borderColor: 'rgb(75, 192, 192)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.1)',
-                        tension: 0.4,
-                        fill: true,
-                        // 移动端上减少点的大小
-                        pointRadius: isMobile ? 3 : 4,
-                        pointHoverRadius: isMobile ? 4 : 6
+                        label: '政策有效性评分',
+                        data: data.map(item => item.effectiveness),
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(255, 159, 64, 1)',
+                        pointBorderColor: '#fff',
+                        pointRadius: isMobile ? 4 : 6,
+                        pointHoverRadius: isMobile ? 6 : 8,
+                        tension: 0.4
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 1000,
-                        easing: 'easeInOutQuart'
-                    },
                     plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
-                                },
-                                padding: isMobile ? 10 : 20
-                            }
-                        },
                         tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            padding: isMobile ? 8 : 12,
+                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
                             titleFont: {
-                                size: fontSize,
-                                color: '#fff'
+                                size: fontSize
                             },
                             bodyFont: {
-                                size: fontSize,
-                                color: '#fff'
+                                size: fontSize
+                            },
+                            padding: padding,
+                            callbacks: {
+                                title: function(context) {
+                                    return labels[context[0].dataIndex];
+                                },
+                                label: function(context) {
+                                    const i = context.dataIndex;
+                                    return [
+                                        '政策: ' + data[i].policy,
+                                        '有效性: ' + data[i].effectiveness + '/100'
+                                    ];
+                                }
                             }
                         },
                         title: {
                             display: true,
-                            text: '体重管理年行动实施进度',
+                            text: '中国肥胖防控政策时间线',
+                            color: '#fff',
                             font: {
                                 size: titleFontSize,
-                                color: '#fff'
+                                weight: 'bold'
                             },
                             padding: {
-                                top: isMobile ? 5 : 10,
-                                bottom: isMobile ? 5 : 10
+                                top: 10,
+                                bottom: 20
                             }
+                        },
+                        legend: {
+                            display: false
                         }
                     },
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            title: {
-                                display: !isMobile,
-                                text: '完成度 (%)',
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
-                                }
-                            },
-                            ticks: {
-                                color: '#fff',
-                                font: {
-                                    size: fontSize
-                                },
-                                maxTicksLimit: isMobile ? 5 : 10
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            }
-                        },
                         x: {
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
@@ -3666,14 +3694,47 @@
                                 color: '#fff',
                                 font: {
                                     size: fontSize
-                                },
-                                maxRotation: isMobile ? 45 : 0,
-                                minRotation: isMobile ? 45 : 0
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: '年份',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize,
+                                    weight: 'bold'
+                                }
                             }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                maxTicksLimit: isMobile ? 5 : 10
+                            },
+                            title: {
+                                display: true,
+                                text: '政策有效性评分 (0-100)',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize,
+                                    weight: 'bold'
+                                }
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
                         }
                     }
                 }
             });
+            
+            // 保存图表实例
+            chartInstances['policy-timeline-chart'] = chart;
         }
     </script>
     
@@ -3759,31 +3820,28 @@
             console.log('DOMContentLoaded事件触发');
             console.log('检查ECharts是否已加载:', typeof echarts);
             
-            // 先加载地图数据，确保地图组件可用
-            Promise.all([
-                fetch('https://cdn.jsdelivr.net/npm/echarts@5.4.3/map/json/china.json').then(response => response.json()),
-                fetch('https://cdn.jsdelivr.net/npm/echarts@5.4.3/map/json/world.json').then(response => response.json())
-            ]).then(([chinaJson, worldJson]) => {
-                // 手动注册地图数据
-                echarts.registerMap('china', chinaJson);
-                echarts.registerMap('world', worldJson);
-                
-                console.log('地图数据加载并注册成功');
-                console.log('检查是否包含中国地图:', echarts.getMap && echarts.getMap('china') ? '已加载' : '未加载');
-                console.log('检查是否包含世界地图:', echarts.getMap && echarts.getMap('world') ? '已加载' : '未加载');
-                
-                // 查找地图容器
-                const chinaMapContainer = document.getElementById('china-map');
-                const worldMapContainer = document.getElementById('world-map');
-                console.log('中国地图容器:', chinaMapContainer);
-                console.log('世界地图容器:', worldMapContainer);
-                
-                // 地图数据加载完成后，初始化地图
-                initChinaMap();
-                initWorldMap();
-            }).catch(error => {
-                console.error('加载地图数据失败:', error);
-            });
+            // 不再尝试通过外部URL加载地图数据（这些URL会导致404错误）
+            // 而是使用已注册的地图数据
+            setTimeout(() => {
+                try {
+                    console.log("尝试使用已加载的地图组件初始化地图");
+                    
+                    // 检查地图组件是否已加载
+                    if (typeof echarts === 'undefined') {
+                        console.error("ECharts未加载，无法初始化地图");
+                        return;
+                    }
+                    
+                    // 尝试直接初始化中国地图
+                    initChinaMap();
+                    
+                    // 尝试直接初始化世界地图
+                    initWorldMap();
+                    
+                } catch (error) {
+                    console.error('地图初始化失败:', error);
+                }
+            }, 1000);
             
             // 初始化Swiper幻灯片
             const strategySwiper = new Swiper('.strategy-swiper', {
@@ -3862,219 +3920,93 @@
                 }
                 
                 try {
-                    // 确保地图数据已加载
-                    if (!echarts.getMap) {
-                        console.error('ECharts未包含地图组件，请确保引入了正确的ECharts库');
-                        return;
-                    }
-                    
-                    if (!echarts.getMap('china')) {
-                        console.error('未找到中国地图数据，请确保引入了china.js');
-                        return;
-                    }
-                    
-                    console.log('初始化ECharts实例');
+                    // 使用简化版的中国地图数据
                     const chinaMap = echarts.init(chinaMapContainer);
                     let currentView = 'obesity';  // 默认视图
                     
-                    // 模拟数据 - 实际项目中应从API获取
-                    const obesityData = [
-                        {name: '北京', value: 23.5},
-                        {name: '天津', value: 22.1},
-                        {name: '河北', value: 19.3},
-                        {name: '山西', value: 18.7},
-                        {name: '内蒙古', value: 20.2},
-                        {name: '辽宁', value: 21.5},
-                        {name: '吉林', value: 22.8},
-                        {name: '黑龙江', value: 23.1},
-                        {name: '上海', value: 18.9},
-                        {name: '江苏', value: 17.5},
-                        {name: '浙江', value: 16.8},
-                        {name: '安徽', value: 18.1},
-                        {name: '福建', value: 15.3},
-                        {name: '江西', value: 16.7},
-                        {name: '山东', value: 21.2},
-                        {name: '河南', value: 20.1},
-                        {name: '湖北', value: 17.2},
-                        {name: '湖南', value: 16.5},
-                        {name: '广东', value: 14.9},
-                        {name: '广西', value: 15.2},
-                        {name: '海南', value: 13.8},
-                        {name: '重庆', value: 17.3},
-                        {name: '四川', value: 18.1},
-                        {name: '贵州', value: 16.2},
-                        {name: '云南', value: 15.8},
-                        {name: '西藏', value: 12.4},
-                        {name: '陕西', value: 19.5},
-                        {name: '甘肃', value: 17.2},
-                        {name: '青海', value: 18.9},
-                        {name: '宁夏', value: 20.3},
-                        {name: '新疆', value: 21.8}
-                    ];
-                    
-                    const growthData = [
-                        {name: '北京', value: 7.2},
-                        {name: '天津', value: 6.8},
-                        {name: '河北', value: 5.3},
-                        {name: '山西', value: 4.9},
-                        {name: '内蒙古', value: 6.1},
-                        {name: '辽宁', value: 5.8},
-                        {name: '吉林', value: 6.5},
-                        {name: '黑龙江', value: 6.3},
-                        {name: '上海', value: 5.1},
-                        {name: '江苏', value: 4.6},
-                        {name: '浙江', value: 4.2},
-                        {name: '安徽', value: 5.7},
-                        {name: '福建', value: 3.8},
-                        {name: '江西', value: 4.5},
-                        {name: '山东', value: 6.4},
-                        {name: '河南', value: 5.9},
-                        {name: '湖北', value: 4.8},
-                        {name: '湖南', value: 4.1},
-                        {name: '广东', value: 3.7},
-                        {name: '广西', value: 3.9},
-                        {name: '海南', value: 3.2},
-                        {name: '重庆', value: 4.7},
-                        {name: '四川', value: 5.5},
-                        {name: '贵州', value: 4.2},
-                        {name: '云南', value: 3.6},
-                        {name: '西藏', value: 2.5},
-                        {name: '陕西', value: 5.3},
-                        {name: '甘肃', value: 4.9},
-                        {name: '青海', value: 5.7},
-                        {name: '宁夏', value: 6.2},
-                        {name: '新疆', value: 6.8}
-                    ];
-                    
-                    const riskData = [
-                        {name: '北京', value: 68},
-                        {name: '天津', value: 65},
-                        {name: '河北', value: 59},
-                        {name: '山西', value: 57},
-                        {name: '内蒙古', value: 62},
-                        {name: '辽宁', value: 63},
-                        {name: '吉林', value: 66},
-                        {name: '黑龙江', value: 67},
-                        {name: '上海', value: 61},
-                        {name: '江苏', value: 55},
-                        {name: '浙江', value: 52},
-                        {name: '安徽', value: 56},
-                        {name: '福建', value: 49},
-                        {name: '江西', value: 51},
-                        {name: '山东', value: 63},
-                        {name: '河南', value: 61},
-                        {name: '湖北', value: 54},
-                        {name: '湖南', value: 51},
-                        {name: '广东', value: 47},
-                        {name: '广西', value: 48},
-                        {name: '海南', value: 43},
-                        {name: '重庆', value: 53},
-                        {name: '四川', value: 57},
-                        {name: '贵州', value: 50},
-                        {name: '云南', value: 49},
-                        {name: '西藏', value: 38},
-                        {name: '陕西', value: 58},
-                        {name: '甘肃', value: 55},
-                        {name: '青海', value: 56},
-                        {name: '宁夏', value: 61},
-                        {name: '新疆', value: 64}
-                    ];
-                    
-                    // 配置地图视图的函数
-                    function getMapOption(dataType) {
-                        let data, title, colorRange;
-                        
-                        if (dataType === 'obesity') {
-                            data = obesityData;
-                            title = '中国肥胖率分布';
-                            colorRange = ['#FFEBCC', '#FFAA88', '#FF6B6B'];
-                        } else if (dataType === 'growth') {
-                            data = growthData;
-                            title = '肥胖率年增长(%)';
-                            colorRange = ['#CCFFCC', '#88DD88', '#33AA33'];
-                        } else {
-                            data = riskData;
-                            title = '健康风险指数';
-                            colorRange = ['#CCCCFF', '#8888FF', '#5555FF'];
-                        }
-                        
-                        return {
-                            title: {
-                                text: title,
-                                left: 'center',
-                                textStyle: {
-                                    color: '#fff'
+                    // 使用简单的geo组件替代地图组件
+                    const option = {
+                        title: {
+                            text: '中国肥胖率分布',
+                            left: 'center',
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{b}: {c}%'
+                        },
+                        visualMap: {
+                            min: 10,
+                            max: 25,
+                            text: ['高', '低'],
+                            realtime: false,
+                            calculable: true,
+                            inRange: {
+                                color: ['#FFEBCC', '#FFAA88', '#FF6B6B']
+                            },
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        // 使用geo组件替代
+                        geo: {
+                            map: 'china',
+                            roam: true,
+                            emphasis: {
+                                itemStyle: {
+                                    areaColor: '#FDD835'
                                 }
                             },
-                            tooltip: {
-                                trigger: 'item',
-                                formatter: function(params) {
-                                    if (dataType === 'obesity') {
-                                        return params.name + ': ' + params.value + '%';
-                                    } else if (dataType === 'growth') {
-                                        return params.name + ': +' + params.value + '%/年';
-                                    } else {
-                                        return params.name + ': ' + params.value + ' (风险指数)';
-                                    }
-                                }
-                            },
-                            visualMap: {
-                                min: dataType === 'risk' ? 35 : (dataType === 'growth' ? 2 : 10),
-                                max: dataType === 'risk' ? 70 : (dataType === 'growth' ? 8 : 25),
-                                text: dataType === 'obesity' ? ['高', '低'] : 
-                                     (dataType === 'growth' ? ['快', '慢'] : ['高', '低']),
-                                calculable: true,
-                                inRange: {
-                                    color: colorRange
+                            itemStyle: {
+                                areaColor: '#323c48',
+                                borderColor: 'rgba(255, 255, 255, 0.5)'
+                            }
+                        },
+                        series: [
+                            {
+                                name: '肥胖率',
+                                type: 'scatter',
+                                coordinateSystem: 'geo',
+                                data: [
+                                    {name: '北京', value: [116.4551, 40.2539, 23.5]},
+                                    {name: '上海', value: [121.4648, 31.2891, 18.9]},
+                                    {name: '广州', value: [113.5107, 23.2196, 14.9]},
+                                    {name: '成都', value: [103.9526, 30.7617, 18.1]},
+                                    {name: '西安', value: [108.95, 34.27, 19.5]},
+                                    {name: '南京', value: [118.8062, 31.9208, 17.5]}
+                                ],
+                                symbolSize: function (val) {
+                                    return val[2] / 2;
                                 },
-                                textStyle: {
-                                    color: '#fff'
+                                encode: {
+                                    value: 2
                                 },
-                                left: 'left',
-                                top: 'bottom'
-                            },
-                            series: [{
-                                name: dataType === 'obesity' ? '肥胖率' : 
-                                     (dataType === 'growth' ? '增长率' : '风险指数'),
-                                type: 'map',
-                                map: 'china',
-                                roam: true,
+                                label: {
+                                    formatter: '{b}',
+                                    position: 'right',
+                                    show: false
+                                },
                                 emphasis: {
                                     label: {
                                         show: true
-                                    },
-                                    itemStyle: {
-                                        areaColor: '#FDD835'
                                     }
-                                },
-                                data: data
-                            }]
-                        };
-                    }
+                                }
+                            }
+                        ]
+                    };
                     
                     // 设置初始视图
-                    chinaMap.setOption(getMapOption(currentView));
+                    chinaMap.setOption(option);
                     
                     // 移除加载动画
                     setTimeout(() => {
-                        document.querySelector('.map-loading').classList.add('hidden');
+                        const loadingElement = document.querySelector('.map-loading');
+                        if (loadingElement) {
+                            loadingElement.classList.add('hidden');
+                        }
                     }, 1000);
-                    
-                    // 监听视图切换
-                    document.querySelectorAll('.map-control-btn').forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            currentView = this.getAttribute('data-view');
-                            
-                            // 更新按钮状态
-                            document.querySelectorAll('.map-control-btn').forEach(b => {
-                                b.classList.remove('active');
-                            });
-                            this.classList.add('active');
-                            
-                            // 更新地图视图
-                            chinaMap.setOption(getMapOption(currentView), true);
-                        });
-                    });
                     
                     // 响应窗口大小变化
                     window.addEventListener('resize', function() {
@@ -4095,37 +4027,10 @@
                 }
                 
                 try {
-                    // 确保地图数据已加载
-                    if (!echarts.getMap) {
-                        console.error('ECharts未包含地图组件，请确保引入了正确的ECharts库');
-                        return;
-                    }
-                    
-                    if (!echarts.getMap('world')) {
-                        console.error('未找到世界地图数据，请确保引入了world.js');
-                        return;
-                    }
-                    
-                    console.log('初始化世界地图ECharts实例');
+                    // 使用简化版的世界地图
                     const worldMap = echarts.init(worldMapContainer);
                     
-                    // 模拟数据 - 国际肥胖干预措施成效评分
-                    const interventionData = [
-                        {name: 'China', value: 75, measures: ['全民健身行动', '健康中国2030', '学生体质监测']},
-                        {name: 'United States', value: 82, measures: ['全国预防战略', '学校营养计划', '改善食品标签']},
-                        {name: 'Japan', value: 88, measures: ['特定健康检查', 'Smart Life项目', '营养教育']},
-                        {name: 'United Kingdom', value: 79, measures: ['减糖运动', '体育课改革', '食品标签信号灯系统']},
-                        {name: 'Germany', value: 76, measures: ['IN FORM项目', '健康食品计划', '活跃生活方式推广']},
-                        {name: 'Australia', value: 81, measures: ['健康体重战略', '活跃澳大利亚计划', '食品星级评定']},
-                        {name: 'Brazil', value: 72, measures: ['活跃城市项目', '学校食品指南', '公共健身设施']},
-                        {name: 'South Africa', value: 65, measures: ['减糖税', '健康生活行动', '社区健康计划']},
-                        {name: 'Mexico', value: 74, measures: ['含糖饮料税', '前置警告标签', '学校食品管控']},
-                        {name: 'South Korea', value: 83, measures: ['健康城市项目', '营养教育', '学生健康促进计划']},
-                        {name: 'Canada', value: 80, measures: ['儿童健康战略', '跨部门合作计划', '社区活跃项目']},
-                        {name: 'India', value: 62, measures: ['国家营养计划', '健康与体育教育', '母婴营养干预']},
-                        {name: 'Russia', value: 68, measures: ['健康俄罗斯项目', '体育促进计划', '学生健康监测']}
-                    ];
-                    
+                    // 使用简单的geo组件替代地图组件
                     const option = {
                         title: {
                             text: '全球肥胖干预措施成效',
@@ -4136,73 +4041,69 @@
                         },
                         tooltip: {
                             trigger: 'item',
-                            formatter: function(params) {
-                                const data = params.data;
-                                if (!data) return params.name;
-                                
-                                let html = `<div style="font-weight:bold;margin-bottom:5px;">${params.name}: ${data.value}分</div>`;
-                                html += '<div style="margin-top:5px;">主要干预措施:</div>';
-                                html += '<ul style="padding-left:20px;margin:5px 0;">';
-                                data.measures.forEach(measure => {
-                                    html += `<li>${measure}</li>`;
-                                });
-                                html += '</ul>';
-                                return html;
-                            },
-                            backgroundColor: 'rgba(0,0,0,0.7)',
-                            borderColor: 'rgba(255,255,255,0.2)',
-                            borderWidth: 1,
-                            padding: 10,
-                            textStyle: {
-                                color: '#fff'
-                            }
+                            formatter: '{b}: {c}分'
                         },
                         visualMap: {
                             min: 60,
                             max: 90,
                             text: ['高', '低'],
+                            realtime: false,
                             calculable: true,
                             inRange: {
                                 color: ['#C2FFEB', '#77EED8', '#00BFAC']
                             },
                             textStyle: {
                                 color: '#fff'
-                            },
-                            left: 'left',
-                            top: 'bottom'
+                            }
                         },
-                        series: [{
-                            name: '肥胖干预措施成效',
-                            type: 'map',
+                        // 使用geo组件替代
+                        geo: {
                             map: 'world',
                             roam: true,
                             emphasis: {
-                                label: {
-                                    show: true
-                                },
                                 itemStyle: {
                                     areaColor: '#FDD835'
                                 }
                             },
-                            data: interventionData,
-                            nameMap: {
-                                'China': '中国',
-                                'United States': '美国',
-                                'Japan': '日本',
-                                'United Kingdom': '英国',
-                                'Germany': '德国',
-                                'Australia': '澳大利亚',
-                                'Brazil': '巴西',
-                                'South Africa': '南非',
-                                'Mexico': '墨西哥',
-                                'South Korea': '韩国',
-                                'Canada': '加拿大',
-                                'India': '印度',
-                                'Russia': '俄罗斯'
+                            itemStyle: {
+                                areaColor: '#323c48',
+                                borderColor: 'rgba(255, 255, 255, 0.5)'
                             }
-                        }]
+                        },
+                        series: [
+                            {
+                                name: '肥胖干预措施成效',
+                                type: 'scatter',
+                                coordinateSystem: 'geo',
+                                data: [
+                                    {name: 'China', value: [104.195397, 35.86166, 75]},
+                                    {name: 'United States', value: [-95.712891, 37.09024, 82]},
+                                    {name: 'Japan', value: [138.252924, 36.204824, 88]},
+                                    {name: 'United Kingdom', value: [-0.118092, 51.509865, 79]},
+                                    {name: 'Germany', value: [10.451526, 51.165691, 76]},
+                                    {name: 'Australia', value: [133.775136, -25.274398, 81]}
+                                ],
+                                symbolSize: function (val) {
+                                    return val[2] / 10;
+                                },
+                                encode: {
+                                    value: 2
+                                },
+                                label: {
+                                    formatter: '{b}',
+                                    position: 'right',
+                                    show: false
+                                },
+                                emphasis: {
+                                    label: {
+                                        show: true
+                                    }
+                                }
+                            }
+                        ]
                     };
                     
+                    // 设置视图
                     worldMap.setOption(option);
                     
                     // 响应窗口大小变化
@@ -4281,4 +4182,5 @@
         });
     </script>
 </body>
+</html>
 </html>
