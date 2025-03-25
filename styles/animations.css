@@ -1,0 +1,503 @@
+/* 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 向上滑入动画 */
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 缩放动画 */
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 应用动画的类 */
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.6s ease forwards;
+}
+
+.scale-in {
+    animation: scaleIn 0.6s ease forwards;
+}
+
+/* 动画延迟类 */
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.delay-3 {
+    animation-delay: 0.6s;
+}
+
+/* 悬停效果 */
+.hover-lift {
+    transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* 加载动画 */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+/* 滚动指示器动画 */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    cursor: pointer;
+}
+
+.scroll-indicator::before {
+    content: "↓";
+    font-size: 2rem;
+    color: white;
+}
+
+/* 视差滚动效果 */
+.parallax-section {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* 滚动显示动画 */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 页面切换动画 */
+@keyframes pageTransition {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-transition {
+    animation: pageTransition 0.5s ease-out forwards;
+}
+
+/* 响应式动画调整 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* 基础动画关键帧 */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideLeft {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 方向性淡入动画 */
+.fade-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-down {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-left-active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-right-active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-up-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-down-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 缩放动画 */
+.zoom-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s ease-out;
+}
+
+.zoom-in-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 滑动动画 */
+.slide-up-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 3D倾斜效果 */
+.tilt-effect {
+    transition: transform 0.3s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* 内容层叠效果 */
+.stacking-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.stack-element {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 滚动进度条 */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, #4CAF50, #8BC34A);
+    z-index: 1000;
+    transition: width 0.1s ease-out;
+}
+
+/* 部分指示器 */
+.section-indicator {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.section-dot:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.section-dot.active {
+    background-color: #fff;
+    transform: scale(1.2);
+}
+
+/* 视差滚动效果 */
+.parallax-section {
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.parallax-element {
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+}
+
+/* 内容区域过渡效果 */
+.content-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.content-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .section-indicator {
+        right: 10px;
+    }
+    
+    .section-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .scroll-reveal {
+        transition: all 0.4s ease-out;
+    }
+}
+
+/* 社交媒体内容动画 */
+.social-post {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease-out;
+}
+
+.social-post.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.social-article {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease-out;
+}
+
+.social-article.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 分享按钮动画 */
+.share-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.share-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.share-btn:hover::after {
+    width: 200%;
+    height: 200%;
+}
+
+/* 图表动画 */
+.chart-container {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.6s ease-out;
+}
+
+.chart-container.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 地图容器动画 */
+.map-container {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.map-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 引用框动画 */
+.quote-box {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s ease-out;
+}
+
+.quote-box.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 策略卡片动画 */
+.strategy-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease-out;
+}
+
+.strategy-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 服务列表项动画 */
+.service-list li {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease-out;
+}
+
+.service-list li.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 延迟动画 */
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; } 

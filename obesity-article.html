@@ -1,0 +1,4284 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国家体重：失控的增长与全民的战役 - 新闻滚动</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- ECharts核心库和地图扩展 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+    <script>
+    // 检查ECharts是否加载成功
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('ECharts加载状态:', typeof echarts !== 'undefined' ? '成功' : '失败');
+    });
+    </script>
+
+    <!-- 确保地图组件正确加载，先加载核心库后加载地图扩展 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/map/js/china.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/map/js/world.js"></script>
+    
+    <!-- 加载地图数据和初始化脚本 -->
+    <script src="scripts/china-map-data.js"></script>
+    <script src="scripts/map-loader.js"></script>
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- 视频懒加载库 -->
+    <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+    <style>
+        /* 确保内容初始可见 */
+        .content-section {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        /* 添加滚动进度指示器样式 */
+        .scroll-progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            z-index: 2000;
+        }
+        
+        .scroll-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        /* 章节导航样式 */
+        .chapter-navigation {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1500;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .chapter-navigation ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 15px 10px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+        }
+        
+        .chapter-navigation.active ul {
+            max-height: 400px;
+            opacity: 1;
+            padding: 15px 10px;
+        }
+        
+        .chapter-navigation li {
+            margin: 10px 0;
+        }
+        
+        .chapter-navigation a {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .chapter-navigation a:before {
+            content: attr(href);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .chapter-navigation a:hover:before {
+            opacity: 1;
+        }
+        
+        .chapter-navigation a.active {
+            background: #ff6b6b;
+            transform: scale(1.3);
+        }
+        
+        .chapter-nav-toggle {
+            width: 30px;
+            height: 30px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+            z-index: 2;
+        }
+        
+        .chapter-nav-toggle span {
+            display: block;
+            width: 15px;
+            height: 2px;
+            background: white;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-navigation.active .chapter-nav-toggle span:first-child {
+            transform: rotate(45deg) translate(3px, 3px);
+        }
+        
+        .chapter-navigation.active .chapter-nav-toggle span:last-child {
+            transform: rotate(-45deg) translate(3px, -3px);
+        }
+        
+        @media (max-width: 768px) {
+            .chapter-navigation {
+                right: 10px;
+            }
+            
+            .chapter-navigation a {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .chapter-nav-toggle {
+                width: 25px;
+                height: 25px;
+                min-width: 44px; /* 确保至少44px的点击区域 */
+                min-height: 44px;
+            }
+            
+            .chapter-nav-toggle span {
+                width: 12px;
+            }
+        }
+        
+        /* Swiper滑块样式 */
+        .swiper {
+            width: 100%;
+            height: 100%;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .swiper-slide {
+            text-align: center;
+            background: rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: auto;
+        }
+        
+        .swiper-slide img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .swiper-slide-content {
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+        }
+        
+        .swiper-slide h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .swiper-slide p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+        
+        .swiper-button-next, .swiper-button-prev {
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 18px;
+        }
+        
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .swiper-pagination-bullet {
+            background: #fff;
+            opacity: 0.5;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: #ff6b6b;
+            opacity: 1;
+        }
+        
+        /* 增强移动端触摸体验 */
+        @media (hover: hover) {
+            .swiper-slide:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            .chart-container:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            }
+        }
+        
+        /* 优化触摸反馈 */
+        a, button, .swiper-slide, .data-card, .strategy-card, .chapter-nav-toggle {
+            -webkit-tap-highlight-color: transparent; /* 移除移动端点击高亮 */
+            touch-action: manipulation; /* 优化触摸操作 */
+        }
+        
+        /* 视频容器优化 */
+        .video-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: #000; /* 视频加载前的背景色 */
+        }
+        
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9宽高比 */
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .video-placeholder:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .video-placeholder:after {
+            content: '\25B6';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background: rgba(255, 107, 107, 0.8);
+            color: white;
+            border-radius: 50%;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .video-placeholder:hover:before {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .video-placeholder:hover:after {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(255, 107, 107, 1);
+        }
+        
+        .video-container.active .video-placeholder {
+            display: none;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .video-container.active video {
+            display: block;
+        }
+        
+        /* 地图样式优化 */
+        .map-container {
+            position: relative;
+            height: 500px;
+            background: #0e1621; /* 深色背景，符合数据可视化趋势 */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .map-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(14, 22, 33, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .map-loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .map-loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ff6b6b;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .map-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .map-control-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .map-control-btn:hover {
+            background: rgba(255, 107, 107, 0.8);
+        }
+        
+        .map-control-btn.active {
+            background: rgba(255, 107, 107, 0.8);
+        }
+        
+        /* 针对移动设备优化的触摸区域 */
+        @media (max-width: 768px) {
+            .map-control-btn, 
+            .chapter-nav-toggle, 
+            .swiper-button-next, 
+            .swiper-button-prev {
+                min-width: 44px; /* 确保至少44px的点击区域，符合移动触摸标准 */
+                min-height: 44px;
+            }
+            
+            .map-controls {
+                bottom: 10px;
+                left: 10px;
+            }
+            
+            .video-placeholder:after {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 18px;
+            }
+            
+            .swiper-slide img {
+                height: 200px;
+            }
+        }
+        
+        /* 增强滚动提示样式 */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            opacity: 0.7;
+            transition: opacity 0.3s ease-out;
+            cursor: pointer;
+            z-index: 5;
+        }
+        
+        /* 确保内容初始可见 */
+        .content-section {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 文本淡入动画 - 更快的过渡 */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+        }
+
+        /* 图片滑动动画 - 更平滑的过渡 */
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .slide-in-left.visible,
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 高亮效果动画 - 更快的强调 */
+        .highlight-content {
+            position: relative;
+            padding: 2rem;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            transform: translateX(-10px);
+            opacity: 0;
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+        }
+
+        .highlight-content.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* 部分过渡动画 - 更快的切换 */
+        .section-transition {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-transition::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            transform: translateY(100%);
+            transition: transform 0.6s ease-out;
+            z-index: 1;
+        }
+
+        .section-transition.visible::before {
+            transform: translateY(0);
+        }
+
+        /* 图表容器动画 - 更快的显示 */
+        .chart-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .chart-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+
+        /* 视频容器动画 - 更快的显示 */
+        .video-container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .video-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 社交媒体内容动画 - 更快的显示 */
+        .social-post {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .social-post.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 优化延迟动画时间 */
+        .delay-1 { transition-delay: 0.15s; }
+        .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.45s; }
+
+        /* 重要内容强调动画 */
+        .highlight {
+            position: relative;
+            display: inline-block;
+            padding: 0.2em 0.4em;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+        }
+
+        .highlight:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* 引用框动画 */
+        .quote-box {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .quote-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 列表项动画 */
+        .service-list li {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .service-list li.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 视差滚动背景样式 */
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transform: translateZ(-1px) scale(1.5);
+            will-change: transform;
+            transition: transform 0.3s ease-out;
+        }
+
+        .parallax-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            z-index: -1;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .parallax-section {
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            padding: 6rem 0;
+            transition: transform 0.5s ease-out;
+        }
+
+        /* 调整不同速度的视差效果 */
+        .parallax-section.slow {
+            background-attachment: fixed;
+            transform: translateZ(0);
+        }
+
+        .parallax-section.medium {
+            background-attachment: scroll;
+            transform: translateZ(0);
+        }
+
+        .parallax-section.fast {
+            background-attachment: scroll;
+            transform: translateZ(0);
+        }
+
+        /* 内容区域样式 */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            transition: transform 0.5s ease-out;
+        }
+
+        /* 添加视觉提示 */
+        .section-break {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+            opacity: 0.5;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .section-break.top {
+            top: 0;
+        }
+
+        .section-break.bottom {
+            bottom: 0;
+        }
+
+        /* 滚动提示 */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            opacity: 0.7;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .scroll-indicator:hover {
+            opacity: 1;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 2px;
+            height: 60px;
+            background: white;
+            margin-top: 1rem;
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0% { transform: scaleY(1); opacity: 1; }
+            50% { transform: scaleY(0.5); opacity: 0.5; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+
+        .quote-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+
+        .map-container {
+            height: 500px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .social-feed {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .social-section {
+            margin-bottom: 2rem;
+        }
+
+        .social-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        .author {
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .timestamp {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .post-content {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .share-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .share-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .share-btn.wechat {
+            background-color: #07C160;
+            color: white;
+        }
+
+        .share-btn.weibo {
+            background-color: #E6162D;
+            color: white;
+        }
+
+        .share-btn.qq {
+            background-color: #12B7F5;
+            color: white;
+        }
+
+        .share-btn:hover {
+            opacity: 0.9;
+        }
+
+        .article-meta {
+            text-align: center;
+            margin: 1rem 0;
+            color: #666;
+        }
+
+        .article-meta span {
+            margin: 0 1rem;
+        }
+
+        /* 图片样式 */
+        .visual-content {
+            margin: 2rem 0;
+        }
+
+        .visual-content img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-out;
+        }
+
+        .visual-content img:hover {
+            transform: scale(1.02);
+        }
+
+        .right-column img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            object-fit: cover;
+        }
+
+        .video-container .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 响应式布局 - 桌面 (1920px+) */
+        @media (min-width: 1921px) {
+            .content-wrapper {
+                max-width: 1600px;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            .chart-wrapper {
+                height: 500px;
+            }
+
+            .map-container {
+                height: 600px;
+            }
+        }
+
+        /* 响应式布局 - 笔记本 (1024px - 1920px) */
+        @media (max-width: 1920px) {
+            .content-wrapper {
+                max-width: 1200px;
+            }
+        }
+
+        /* 响应式布局 - 平板 (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                max-width: 900px;
+                padding: 0 1.5rem;
+            }
+
+            .parallax-section {
+                padding: 4rem 0;
+                min-height: auto;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .chart-wrapper {
+                height: 350px;
+            }
+
+            .map-container {
+                height: 400px;
+            }
+
+            .visual-content img {
+                max-height: 400px;
+            }
+
+            .right-column img {
+                height: 250px;
+            }
+
+            .video-container video {
+                max-height: 500px;
+            }
+
+            .scroll-indicator {
+                bottom: 1rem;
+            }
+
+            .scroll-indicator::after {
+                height: 40px;
+            }
+        }
+
+        /* 响应式布局 - 平板 (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .nav-container {
+                padding: 0.8rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .content-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 响应式布局 - 平板 (768px) */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 0 1rem;
+            }
+
+            .parallax-section {
+                padding: 3rem 0;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .chart-wrapper {
+                height: 300px;
+            }
+
+            .map-container {
+                height: 350px;
+            }
+
+            .social-feed {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .highlight-content {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .quote-box {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .visual-content img {
+                max-height: 300px;
+            }
+
+            .right-column img {
+                height: 200px;
+            }
+
+            .video-container video {
+                max-height: 400px;
+            }
+
+            .share-options {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .article-meta span {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            .hero-content h1 {
+                margin-top: 3rem;
+            }
+        }
+
+        /* 响应式布局 - 手机 (375px) */
+        @media (max-width: 480px) {
+            .content-wrapper {
+                padding: 0 0.8rem;
+            }
+
+            .parallax-section {
+                padding: 2rem 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+
+            .chart-wrapper {
+                height: 250px;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+
+            .highlight-content {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+
+            .quote-box {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+
+            .nav-container {
+                padding: 0.6rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .visual-content img {
+                max-height: 200px;
+            }
+
+            .video-container video {
+                max-height: 240px;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+
+            .service-list li {
+                margin-bottom: 0.8rem;
+            }
+
+            .strategy-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .strategy-card {
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .conclusion {
+                margin-top: 1.5rem;
+            }
+
+            .call-to-action {
+                font-size: 1.1rem;
+                padding: 0.8rem;
+            }
+        }
+
+        /* 增强文本可读性 */
+        body {
+            font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            color: #f0f0f0;
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+        }
+        
+        /* 优化标题样式 */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin: 1.5em 0 1em;
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ff6b6b, #3a1c71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid rgba(255,255,255,0.15);
+            padding-bottom: 0.5rem;
+        }
+        
+        /* 强调引用和信息框 */
+        .highlight-content, .quote-box {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border-left: 5px solid #ff6b6b;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 2.5rem 0;
+            padding: 2rem;
+            transform: none;
+            opacity: 1;
+            transition: all 0.4s ease;
+        }
+        
+        .highlight-content:hover, .quote-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-left-color: #ff8e8e;
+        }
+        
+        .highlight-content blockquote, .quote-box blockquote {
+            margin: 0 0 1rem;
+            font-size: 1.1em;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        
+        .highlight-content cite, .quote-box cite {
+            display: block;
+            text-align: right;
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* 优化图片展示 */
+        .visual-content {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+            margin: 2.5rem auto;
+            transition: all 0.5s ease;
+        }
+        
+        .visual-content img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.7s ease;
+            max-height: 500px;
+            object-fit: cover;
+        }
+        
+        .visual-content:hover img {
+            transform: scale(1.05);
+        }
+        
+        .visual-content .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        /* 优化文章布局 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        
+        /* 优化图表样式 */
+        .chart-container {
+            background: rgba(10,10,30,0.4);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            margin: 3rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .chart-wrapper {
+            height: 450px;
+        }
+        
+        /* 优化卡片展示 */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .strategy-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 1.8rem;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            height: 100%;
+        }
+        
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.12);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .strategy-card h3 {
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #ff6b6b;
+        }
+        
+        /* 改善段落样式 */
+        p {
+            margin: 1em 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        p.large {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.95);
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+        
+        p.highlight {
+            background: rgba(255,107,107,0.15);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        /* 视差背景优化 */
+        .parallax-section {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .parallax-bg {
+            background-position: center;
+            background-size: cover;
+            position: absolute;
+            width: 100%;
+            height: 120%;
+            top: -10%;
+            transform: translateZ(-1px) scale(1.5);
+            z-index: -1;
+            filter: grayscale(20%);
+        }
+        
+        .parallax-overlay {
+            background: linear-gradient(to bottom, 
+                rgba(20,20,40,0.9), 
+                rgba(40,40,80,0.8));
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            z-index: -1;
+        }
+
+        /* 两列布局优化 */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 2.5rem;
+            margin: 2.5rem 0;
+            align-items: center;
+        }
+        
+        /* 南北分化部分的特殊样式 */
+        #section-2 {
+            background-color: rgba(20,30,60,0.8);
+        }
+        
+        #section-2 .parallax-overlay {
+            background: linear-gradient(135deg,
+                rgba(20,20,40,0.85),
+                rgba(60,30,90,0.75));
+        }
+        
+        #section-2 .map-container {
+            height: 500px;
+            margin: 3rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        #section-2 .highlight {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: white;
+            margin: 2rem auto;
+            max-width: 90%;
+            text-align: center;
+            background: rgba(255,107,107,0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,107,107,0.6);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,107,107,0.8);
+        }
+
+        /* 标题装饰效果 */
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, transparent);
+            vertical-align: middle;
+            margin-right: 15px;
+            border-radius: 2px;
+        }
+        
+        /* 图片浮动效果 */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .visual-content {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* 卡片悬停效果增强 */
+        .strategy-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .strategy-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 80%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: transform 0.6s, opacity 0.6s;
+        }
+        
+        .strategy-card:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* 数据指标卡片 */
+        .data-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+        
+        .data-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.8rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+        
+        .data-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .data-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .data-card .number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ff6b6b, #3a1c71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .data-card .label {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* 引用框的强化效果 */
+        .quote-box {
+            position: relative;
+        }
+        
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 20px;
+            font-size: 120px;
+            font-family: serif;
+            color: rgba(255,255,255,0.1);
+            line-height: 1;
+        }
+        
+        /* 动态下划线效果 */
+        .underline-animation {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ff6b6b;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        
+        .underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        
+        /* 按钮美化 */
+        .custom-btn {
+            padding: 0.8rem 1.6rem;
+            background: linear-gradient(135deg, #ff6b6b, #3a1c71);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: inline-block;
+            text-decoration: none;
+            margin: 1rem 0;
+        }
+        
+        .custom-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+        }
+        
+        .custom-btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* 标签样式 */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tag {
+            background: rgba(255,255,255,0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: rgba(255,107,107,0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* 改善导航栏样式 */
+        .navbar {
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-links a {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff6b6b;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        
+        /* 改善移动导航体验 */
+        @media (max-width: 768px) {
+            .nav-links {
+                padding: 0;
+            }
+            
+            .nav-links.active {
+                animation: slideDown 0.4s ease-out forwards;
+            }
+            
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .nav-links a {
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            .mobile-nav-toggle {
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-nav-toggle.active {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* 图片滤镜和处理效果 */
+        .visual-content img {
+            filter: brightness(1.05) contrast(1.1);
+            transition: filter 0.4s ease, transform 0.7s ease;
+        }
+
+        .visual-content:hover img {
+            filter: brightness(1.1) contrast(1.15) saturate(1.1);
+            transform: scale(1.05);
+        }
+
+        /* 图片阴影和边框效果 */
+        .visual-content {
+            box-shadow: 0 15px 25px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05);
+        }
+
+        /* 高对比度背景渐变 */
+        .parallax-overlay {
+            background: linear-gradient(135deg, 
+                rgba(20,20,40,0.85), 
+                rgba(60,30,90,0.75),
+                rgba(30,10,40,0.8));
+        }
+
+        /* 增强图表容器的视觉效果 */
+        .chart-container {
+            background: linear-gradient(to bottom right, 
+                rgba(20,20,50,0.6), 
+                rgba(10,10,30,0.4));
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.05);
+        }
+
+        /* 为标题添加阴影效果 */
+        h1, h2 {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* 为黄金数据点添加强调 */
+        .data-card:nth-child(2) .number {
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.9; }
+            50% { opacity: 1; }
+            100% { opacity: 0.9; }
+        }
+
+        /* 图片叠加效果 */
+        .visual-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,107,107,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .visual-content:hover::after {
+            opacity: 1;
+        }
+
+        /* 调整主字体可读性 */
+        body {
+            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        }
+
+        p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        p.large {
+            color: rgba(255,255,255,0.92);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* 优化数据卡片的视觉效果 */
+        .data-cards {
+            margin: 3rem 0;
+        }
+
+        .data-card {
+            background: linear-gradient(to bottom right, 
+                rgba(30,20,40,0.4), 
+                rgba(20,10,30,0.2));
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            top: -25%;
+            left: -25%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .data-card:hover::before {
+            opacity: 1;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 增强标签外观 */
+        .tag {
+            background: linear-gradient(to right, rgba(255,107,107,0.15), rgba(255,107,107,0.05));
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tag:hover {
+            background: linear-gradient(to right, rgba(255,107,107,0.3), rgba(255,107,107,0.15));
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 优化按钮外观 */
+        .custom-btn {
+            background: linear-gradient(135deg, #ff6b6b, #833ab4);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .custom-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .custom-btn:hover::before {
+            left: 100%;
+        }
+
+        /* 为地图容器添加边框和阴影 */
+        .map-container {
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* 改善移动导航体验 */
+        @media (max-width: 768px) {
+            .nav-links.active {
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+            
+            .data-cards {
+                gap: 1rem;
+            }
+            
+            .data-card {
+                padding: 1.5rem;
+            }
+            
+            .data-card .number {
+                font-size: 2.2rem;
+            }
+            
+            .visual-content {
+                margin: 1.5rem auto;
+            }
+        }
+
+        /* 添加这些新的视觉元素样式 */
+
+        /* 警告图标 */
+        .alert-icon {
+            display: inline-block;
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        /* 趋势指示器 */
+        .trend-indicator {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #ff6b6b;
+        }
+
+        .trend-indicator .arrow {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .trend-text {
+            font-weight: 500;
+        }
+
+        /* 数据图标 */
+        .data-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+
+        .data-card:hover .data-icon {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* 地图图例 */
+        .map-overlay {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .map-legend {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .legend-title {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .legend-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        /* 高亮信息点 */
+        .highlight-point {
+            display: flex;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .point-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgba(255,107,107,0.3);
+            margin-right: 15px;
+            line-height: 1;
+        }
+
+        .highlight-point p {
+            margin: 0;
+        }
+
+        /* 信息小贴士 */
+        .fact-snippet {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-left: 3px solid #ff6b6b;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .fact-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: #ff6b6b;
+        }
+
+        .fact-snippet p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* 按钮组 */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .alt-btn {
+            padding: 0.8rem 1.6rem;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .alt-btn:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.2);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .highlight-point {
+                flex-direction: column;
+            }
+            
+            .point-number {
+                margin-bottom: 0.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .map-overlay {
+                bottom: 10px;
+                right: 10px;
+                padding: 10px;
+            }
+        }
+        
+        /* 增强视差效果 */
+        .parallax-section {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            perspective: 1px;
+        }
+        
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            transform-origin: center center;
+            will-change: transform;
+            transform: translateZ(-1px) scale(2);
+            z-index: -1;
+            transition: transform 0.5s ease-out;
+        }
+        
+        .parallax-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(20,20,40,0.85), 
+                rgba(60,30,90,0.75),
+                rgba(30,10,40,0.8));
+            z-index: -1;
+            opacity: 0.8;
+            transition: opacity 0.5s ease;
+        }
+        
+        /* 增强滚动触发动画 */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1), 
+                        transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+            will-change: opacity, transform;
+        }
+        
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 滚动时图片缩放效果 */
+        .visual-content img {
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
+                        filter 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            will-change: transform, filter;
+        }
+        
+        /* 平滑的背景色变化 */
+        body {
+            transition: background-color 1s ease;
+        }
+        
+        /* 增强图表容器动画 */
+        .chart-container {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), 
+                        transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+            will-change: opacity, transform;
+        }
+        
+        .chart-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 增强章节过渡效果 */
+        .section-transition::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1;
+        }
+        
+        .section-transition.visible::before {
+            transform: scaleX(1);
+        }
+        
+        /* 增强标题动画效果 */
+        h1, h2 {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1::after, h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease-out 0.2s;
+        }
+        
+        h1.visible::after, h2.visible::after {
+            transform: scaleX(1);
+        }
+        
+        /* 动态文字出现效果 */
+        .fade-in-text {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition-delay: calc(var(--item-index, 0) * 0.1s);
+        }
+        
+        .fade-in-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 增强卡片动画效果 */
+        .strategy-card {
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1), 
+                        opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1),
+                        box-shadow 0.3s ease;
+            transition-delay: calc(var(--card-index, 0) * 0.15s);
+            will-change: transform, opacity;
+        }
+        
+        .strategy-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* 移动端触摸反馈 */
+        .touch-active {
+            opacity: 0.8;
+            transform: scale(0.98);
+            transition: all 0.1s ease;
+        }
+        
+        /* 横屏模式优化 */
+        body.landscape .chart-container {
+            max-height: 70vh;
+        }
+        
+        body.landscape .swiper {
+            max-height: 60vh;
+        }
+        
+        /* 触摸优化样式 */
+        @supports (-webkit-touch-callout: none) {
+            /* iOS设备专用样式 */
+            .map-container, .chart-container {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .swiper-slide {
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 添加滚动进度指示器在body之后，navbar之前 -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar"></div>
+    </div>
+    
+    <!-- 添加章节导航 -->
+    <div class="chapter-navigation">
+        <div class="chapter-nav-toggle">
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li><a href="#hero" class="active">引言</a></li>
+            <li><a href="#section-1">警钟长鸣</a></li>
+            <li><a href="#section-2">南北分化</a></li>
+            <li><a href="#section-3">健康危机</a></li>
+            <li><a href="#section-4">全民动员</a></li>
+            <li><a href="#section-5">社区前线</a></li>
+            <li><a href="#section-6">媒体之声</a></li>
+            <li><a href="#section-7">国际经验</a></li>
+            <li><a href="#section-8">迈向未来</a></li>
+        </ul>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">新闻滚动</a>
+            <button class="mobile-nav-toggle" aria-label="切换导航菜单">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header id="hero" class="parallax-section">
+        <div class="parallax-bg" style="background-image: url('assets/images/pexels-pavel-danilyuk-7801313.jpg')"></div>
+        <div class="parallax-overlay"></div>
+        <div class="content-wrapper">
+            <div class="hero-content scroll-reveal">
+                <h1 class="fade-in">国家体重：失控的增长与全民的战役</h1>
+                <p class="fade-in delay-1">中国"体重管理年"行动深度解析</p>
+                <div class="article-meta fade-in delay-2">
+                    <span>作者：你的名字/团队名称</span>
+                    <span>发布时间：2024-07-29</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">向下滚动</div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main>
+        <!-- 警钟长鸣部分 -->
+        <section id="section-1" class="parallax-section slow section-transition">
+            <div class="section-break top"></div>
+            <div class="parallax-bg" style="background-image: url('assets/images/pexels-cheng-shi-song-427082720-31194556.jpg')"></div>
+            <div class="parallax-overlay"></div>
+            <div class="content-wrapper">
+                <div class="content-grid">
+                    <div class="text-content">
+                        <h2 class="fade-in">警钟长鸣：失控的体重</h2>
+                        <p class="large fade-in delay-1">近年来，随着经济的快速发展和生活方式的转变，肥胖问题在中国日益突出，已成为一个不容忽视的公共卫生挑战。一个曾经以精瘦著称的国家，如今正面临着一场前所未有的"体重危机"。</p>
+                        <div class="highlight-content">
+                            <blockquote>目前中国成年人中约有半数体重超重或肥胖，并且这一趋势仍在加剧。</blockquote>
+                            <cite>——中国疾病预防控制中心</cite>
+                        </div>
+                        <p class="fade-in delay-2">令人警醒的数据，无情地揭示了这场危机的严重性。如果不采取有效干预措施...</p>
+                        <div class="chart-container">
+                            <div class="chart-wrapper">
+                                <canvas id="obesity-rate-chart"></canvas>
+                            </div>
+                        </div>
+                        <p class="fade-in delay-2">这不仅仅是对个体健康的威胁，更是对中国劳动力和社会经济发展的潜在威胁。糖尿病、高血压...200余种疾病的患病风险显著增加，医疗系统不堪重负，经济发展面临严峻挑战。</p>
+                        <p class="highlight fade-in delay-2">面对这场危机，中国政府果断行动，一场全国性的"体重管理年"行动正式打响。</p>
+                    </div>
+                    <div class="visual-content">
+                        <img src="assets/images/pexels-pavel-danilyuk-7801526.jpg" alt="中国城市人群" class="slide-in-right">
+                    </div>
+                </div>
+            </div>
+            <div class="section-break bottom"></div>
+        </section>
+
+        <!-- 南北分化部分 -->
+        <section id="section-2" class="parallax-section medium">
+            <div class="parallax-bg" style="background-image: url('assets/images/pexels-yating-yang-426041335-20445475.jpg')"></div>
+            <div class="parallax-overlay"></div>
+            <div class="content-wrapper">
+                <h2>南北分化：体重地图的秘密</h2>
+                <p class="large">肥胖率的攀升并非全国性的"齐步走"，而呈现出复杂的地域、性别和城乡差异。深入剖析这些差异，才能找到精准干预的<span class="underline-animation">突破口</span>。</p>
+                
+                <div class="highlight">
+                    <div class="alert-icon">&#9888;</div>
+                    一项基于2004年至2018年数据的研究表明，中国成年肥胖人口数量在此期间增加了两倍多，达到约8500万。
+                    <div class="trend-indicator">
+                        <div class="arrow">&#8593;</div>
+                        <div class="trend-text">持续增长趋势</div>
+                    </div>
+                </div>
+                
+                <div class="data-cards">
+                    <div class="data-card">
+                        <div class="number">2倍+</div>
+                        <div class="label">肥胖人口增长率</div>
+                        <div class="data-icon">&#128200;</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="number">8500万</div>
+                        <div class="label">肥胖人口总数</div>
+                        <div class="data-icon">&#128202;</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="number">28%</div>
+                        <div class="label">青少年肥胖发生率</div>
+                        <div class="data-icon">&#128201;</div>
+                    </div>
+                </div>
+                
+                <div class="map-container" id="china-map">
+                    <!-- 地图将通过JavaScript加载 -->
+                    <div class="map-loading">
+                        <div class="map-loading-spinner"></div>
+                    </div>
+                    <div class="map-controls">
+                        <button class="map-control-btn active" data-view="obesity">肥胖率</button>
+                        <button class="map-control-btn" data-view="growth">增长率</button>
+                        <button class="map-control-btn" data-view="risk">健康风险</button>
+                    </div>
+                    <div class="map-overlay">
+                        <div class="map-legend">
+                            <div class="legend-title">肥胖率(%)</div>
+                            <div class="legend-scale">
+                                <div class="legend-item">
+                                    <div class="color-box" style="background: rgba(255,235,132,0.8);"></div>
+                                    <span>10-15</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="color-box" style="background: rgba(255,170,120,0.8);"></div>
+                                    <span>15-20</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="color-box" style="background: rgba(255,107,107,0.8);"></div>
+                                    <span>20+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="two-columns">
+                    <div class="left-column">
+                        <div class="highlight-point">
+                            <div class="point-number">01</div>
+                            <p>男性肥胖率的增长速度快于女性，尤其是在2010年之后，男性的平均BMI、超重率和肥胖率均高于女性，扭转了之前的局面。</p>
+                        </div>
+                        
+                        <div class="highlight-point">
+                            <div class="point-number">02</div>
+                            <p>城乡差异同样显著。农村地区女性的肥胖率持续上升，甚至超过了城市女性。而教育程度与肥胖的关联也呈现出性别差异：女性教育程度越高，肥胖率越低；男性则恰恰相反。</p>
+                        </div>
+                        
+                        <div class="tags">
+                            <span class="tag">地域差异</span>
+                            <span class="tag">性别差异</span>
+                            <span class="tag">城乡差异</span>
+                            <span class="tag">教育相关性</span>
+                        </div>
+                    </div>
+                    <div class="right-column">
+                        <div class="visual-content">
+                            <img src="assets/images/pexels-shvets-production-6975488.jpg" alt="不健康生活方式">
+                            <p class="caption">不健康饮食是男性体重增长的重要原因</p>
+                        </div>
+                        <div class="fact-snippet">
+                            <div class="fact-icon">&#128161;</div>
+                            <p>研究表明，中国北方居民平均BMI高出南方居民1.2点，这与饮食习惯和气候差异密切相关。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p>这些复杂的数据背后，隐藏着怎样的社会变迁和生活方式的改变？深入了解这些模式，对制定针对性的干预策略至关重要。</p>
+                
+                <div class="action-buttons">
+                    <a href="#section-3" class="custom-btn">探索干预措施</a>
+                    <a href="#" class="alt-btn">查看详细数据</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 生命不能承受之重部分 -->
+        <section id="section-3" class="parallax-section fast">
+            <div class="parallax-bg" style="background-image: url('assets/images/pexels-alleksana-4114114.jpg')"></div>
+            <div class="parallax-overlay"></div>
+            <div class="content-wrapper">
+                <div class="content-grid scroll-reveal">
+                    <div class="text-content">
+                        <h2>生命不能承受之重</h2>
+                        <p class="large">肥胖，绝不仅仅是体型的改变，更是一场悄无声息的健康危机。它如同一颗定时炸弹，潜伏在身体内部，随时可能引爆一系列的健康问题。</p>
+                        <div class="quote-box">
+                            <blockquote>肥胖儿童患高血压的风险是正常体重儿童的2.6至8倍，患血脂异常的风险高达50%。</blockquote>
+                            <cite>——《中国儿童肥胖报告》</cite>
+                        </div>
+                        <div class="video-container">
+                            <div class="video-placeholder" style="background-image: url('assets/images/pexels-alleksana-4114114.jpg');" data-src="assets/videos/18028967-uhd_3840_2160_30fps.mp4"></div>
+                            <video class="lozad-video" data-src="assets/videos/18028967-uhd_3840_2160_30fps.mp4" controls preload="none" style="display:none;"></video>
+                            <p class="caption">肥胖：健康的隐形杀手</p>
+                        </div>
+                        <p>除了生理上的疾病，肥胖还会对心理健康造成影响。肥胖者更容易遭受歧视和排斥，导致自卑、焦虑、抑郁等心理问题。</p>
+                        <p>沉重的负担，不仅压在个体身上，更压在了整个社会。医疗支出不断攀升，劳动力效率下降，经济发展面临挑战...</p>
+                        <div class="chart-container">
+                            <div class="chart-wrapper">
+                                <canvas id="economic-impact-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 全民动员部分 -->
+        <section id="section-4" class="parallax-section slow">
+            <div class="parallax-bg" style="background-image: url('assets/images/pexels-julia-larson-6455784.jpg')"></div>
+            <div class="parallax-overlay"></div>
+            <div class="content-wrapper">
+                <div class="content-grid scroll-reveal">
+                    <div class="text-content">
+                        <h2>全民动员：国家的决心</h2>
+                        <p class="large">面对肥胖危机，中国政府以前所未有的力度，打响了一场全民参与的"体重保卫战"。</p>
+                        <p class="highlight">2024年3月，国家卫生健康委员会等16个部门联合启动了为期三年的"体重管理年"行动。这不仅仅是一项政策，更是一次全民动员，一次对健康生活方式的倡导，一次对未来的承诺。</p>
+                        <p>这项行动的目标清晰而坚定：</p>
+                        <div class="quote-box">
+                            <blockquote>力争在未来三年内有效遏制中国成人和儿童肥胖率的上升趋势，降低因肥胖引发的慢性疾病的患病率，最终提升国民整体健康水平。</blockquote>
+                            <cite>——国家卫生健康委员会</cite>
+                        </div>
+                        <p>具体措施涵盖了生活的方方面面：</p>
+                        
+                        <!-- Swiper幻灯片 -->
+                        <div class="swiper strategy-swiper">
+                            <div class="swiper-wrapper">
+                                <!-- 幻灯片1 -->
+                                <div class="swiper-slide">
+                                    <img src="assets/images/pexels-julia-larson-6455784.jpg" alt="政策引导">
+                                    <div class="swiper-slide-content">
+                                        <h3>政策引导</h3>
+                                        <p>出台相关政策，支持健康生活方式推广和肥胖防治工作，从国家层面实现全方位协同。</p>
+                                    </div>
+                                </div>
+                                <!-- 幻灯片2 -->
+                                <div class="swiper-slide">
+                                    <img src="assets/images/pexels-andres-ayrton-6550823.jpg" alt="健康食堂">
+                                    <div class="swiper-slide-content">
+                                        <h3>健康食堂</h3>
+                                        <p>建设健康食堂，提供营养均衡的餐饮服务，减少高热量、高脂肪食品摄入。</p>
+                                    </div>
+                                </div>
+                                <!-- 幻灯片3 -->
+                                <div class="swiper-slide">
+                                    <img src="assets/images/pexels-liliana-drew-8497660.jpg" alt="全民健身">
+                                    <div class="swiper-slide-content">
+                                        <h3>全民健身</h3>
+                                        <p>推广全民健身活动，鼓励运动锻炼，建设社区健身设施，组织群众性体育活动。</p>
+                                    </div>
+                                </div>
+                                <!-- 幻灯片4 -->
+                                <div class="swiper-slide">
+                                    <img src="assets/images/pexels-shvets-production-6975488.jpg" alt="健康教育">
+                                    <div class="swiper-slide-content">
+                                        <h3>健康教育</h3>
+                                        <p>开展健康教育，提高公众健康意识，普及科学减重知识，鼓励健康生活方式。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社区前线部分 -->
+        <section id="section-5" class="parallax-section medium">
+            <div class="parallax-bg" style="background-image: url('assets/images/pexels-liliana-drew-8497660.jpg')"></div>
+            <div class="parallax-overlay"></div>
+            <div class="content-wrapper">
+                <div class="content-grid scroll-reveal">
+                    <div class="text-content">
+                        <h2>社区前线：科学减重的堡垒</h2>
+                        <p class="large">为了更直接地服务社区居民，全国各地纷纷设立科学减重门诊，将专业的体重管理服务送到百姓身边。</p>
+                        <p>这些门诊不仅仅是提供减肥建议的地方，更是健康的加油站，是改变生活方式的起点。</p>
+                        <div class="video-container">
+                            <div class="video-placeholder" style="background-image: url('assets/images/pexels-liliana-drew-8497660.jpg');" data-src="assets/videos/6691588-uhd_2160_3840_24fps.mp4"></div>
+                            <video class="lozad-video" data-src="assets/videos/6691588-uhd_2160_3840_24fps.mp4" controls preload="none" style="display:none;"></video>
+                            <p class="caption">走进科学减重门诊</p>
+                        </div>
+                        <p>在这里，你可以得到：</p>
+                        <ul class="service-list">
+                            <li>全面的医学评估，了解你的身体状况和潜在风险。</li>
+                            <li>个性化的减重方案，为你量身定制饮食、运动计划。</li>
+                            <li>专业的营养咨询，帮助你养成健康的饮食习惯。</li>
+                            <li>运动指导和训练，让你安全有效地动起来。</li>
+                            <li>心理支持和行为干预，帮助你克服减重过程中的困难。</li>
+                        </ul>
+                        <p>从上海到北京，从浙江到新疆，越来越多的社区加入到这场行动中来，为居民提供触手可及的健康服务。</p>
+                        <div class="chart-container">
+                            <div class="chart-wrapper">
+                                <canvas id="demographic-analysis-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 媒体之声部分 -->
+        <section id="section-6" class="parallax-section fast">
+            <div class="parallax-bg" style="background-image: url('assets/images/pexels-julia-larson-6455664.jpg')"></div>
+            <div class="parallax-overlay"></div>
+            <div class="content-wrapper">
+                <div class="content-grid scroll-reveal">
+                    <div class="text-content">
+                        <h2>媒体之声：健康的共鸣</h2>
+                        <p class="large">官方媒体在"体重管理年"行动中扮演着重要的角色，它们的声音，传递着国家的决心，引导着公众的认知。</p>
+                        <div class="quote-box">
+                            <blockquote>体重管理是健康工程，而非外貌歧视。</blockquote>
+                            <cite>——《人民日报》</cite>
+                        </div>
+                        <p>《人民日报》、《新华社》、《中国日报》...主流媒体纷纷发声，强调肥胖是严重的公共卫生问题，体重管理关乎全民健康。</p>
+                        <p>它们反复强调，体重管理的首要任务是预防慢性疾病，倡导科学健康的减重方式，呼吁全社会共同参与。</p>
+                        <p>除了传统媒体，社交媒体也加入到这场宣传中，利用其强大的传播力，将健康理念传递到每一个角落。</p>
+                        <div class="social-feed" id="social-feed">
+                            <!-- 社交媒体内容将通过JavaScript动态加载 -->
+                        </div>
+                        <div class="chart-container">
+                            <div class="chart-wrapper">
+                                <canvas id="policy-timeline-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 他山之石部分 -->
+        <section id="section-7" class="parallax-section slow">
+            <div class="parallax-bg" style="background-image: url('assets/images/pexels-pavel-danilyuk-7801340.jpg')"></div>
+            <div class="parallax-overlay"></div>
+            <div class="content-wrapper">
+                <div class="content-grid scroll-reveal">
+                    <div class="text-content">
+                        <h2>他山之石：国际经验的启示</h2>
+                        <p class="large">在全球肥胖防控的前沿，各国都在积极探索和实践，为彼此提供了宝贵的经验和启示。</p>
+                        <p>国际经验告诉我们，控制肥胖需要一个多层面、综合性的策略，需要政府、社会、个人的共同努力。</p>
+                        
+                        <!-- 世界地图容器 -->
+                        <div class="map-container" id="world-map">
+                            <!-- 地图将通过JavaScript加载 -->
+                            <div class="map-loading">
+                                <div class="map-loading-spinner"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="quote-box">
+                            <blockquote>日本通过"特定健康检查"计划，针对40-74岁人群进行常规体检，特别关注腰围和BMI指标，对发现问题的人群提供健康指导。</blockquote>
+                            <cite>——《日本健康战略研究》</cite>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 迈向未来部分 -->
+        <section id="section-8" class="parallax-section medium">
+            <div class="parallax-bg" style="background-image: url('assets/images/pexels-annushka-ahuja-7991936.jpg')"></div>
+            <div class="parallax-overlay"></div>
+            <div class="content-wrapper">
+                <div class="content-grid scroll-reveal">
+                    <div class="text-content">
+                        <h2>迈向未来：健康的承诺</h2>
+                        <p class="large">"体重管理年"行动，是中国应对肥胖挑战迈出的重要一步，也是对全民健康的一份庄严承诺。</p>
+                        <p>这不仅仅是一场短期的行动，更是一场持久的战役，需要我们每个人的参与，需要全社会的共同努力。</p>
+                        <p>未来，我们需要持续监测、完善政策、加强教育、鼓励科研、加强国际合作...不断探索，不断前进。</p>
+                        <div class="quote-box">
+                            <blockquote>让我们携手并肩，为更健康的中国，为更美好的未来，共同努力！</blockquote>
+                        </div>
+                        <div class="conclusion">
+                            <p>肥胖，是一场没有硝烟的战争。在这场战争中，没有旁观者，每个人都是参与者。只有当我们每个人都行动起来，关注自己的体重，改变自己的生活方式，才能赢得这场战争的胜利。让我们一起，迈向更健康的未来！</p>
+                            <p class="call-to-action">从今天起，关注体重，改变生活，一起加入"体重管理年"行动！</p>
+                        </div>
+                        <div class="share-options">
+                            <button class="share-btn wechat">分享到微信</button>
+                            <button class="share-btn weibo">分享到微博</button>
+                            <button class="share-btn qq">分享到QQ</button>
+                        </div>
+                    </div>
+                    <div class="visual-content">
+                        <img src="assets/images/pexels-andres-ayrton-6550823.jpg" alt="健康未来">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 新闻滚动. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <!-- 加载数据文件和脚本 -->
+    <script type="module" src="scripts/map-init.js"></script>
+    <script type="module" src="scripts/social-data.js"></script>
+    <script type="module" src="scripts/scroll-effects.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+    <script>
+        // 全局变量和函数
+        // 存储图表实例的对象，用于跟踪和销毁
+        const chartInstances = {};
+        
+        // 检查并销毁已存在的图表
+        function destroyChartIfExists(chartId) {
+            if (chartInstances[chartId]) {
+                console.log(`Destroying existing chart: ${chartId}`);
+                chartInstances[chartId].destroy();
+                chartInstances[chartId] = null;
+            }
+        }
+        
+        // 优化滚动触发动画
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM Content Loaded");
+            const observerOptions = {
+                root: null,
+                rootMargin: '50px',
+                threshold: 0.1
+            };
+
+            // 跟踪已初始化的图表
+            const initializedCharts = new Set();
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // 为列表项添加延迟动画
+                        if (entry.target.classList.contains('service-list')) {
+                            const items = entry.target.querySelectorAll('li');
+                            items.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add('visible');
+                                }, index * 100);
+                            });
+                        }
+
+                        // 当图表容器可见时初始化图表，但确保每个图表只初始化一次
+                        if (entry.target.classList.contains('chart-container')) {
+                            console.log("Chart container visible:", entry.target);
+                            const chartCanvas = entry.target.querySelector('canvas');
+                            if (chartCanvas) {
+                                const chartId = chartCanvas.id;
+                                console.log("Found chart canvas:", chartId);
+                                
+                                if (!initializedCharts.has(chartId)) {
+                                    console.log("Initializing chart for first time:", chartId);
+                                    
+                                    switch(chartId) {
+                                        case 'obesity-rate-chart':
+                                            createObesityRateChart();
+                                            initializedCharts.add(chartId);
+                                            break;
+                                        case 'economic-impact-chart':
+                                            createEconomicImpactChart();
+                                            initializedCharts.add(chartId);
+                                            break;
+                                        case 'health-risks-chart':
+                                            createHealthRisksChart();
+                                            initializedCharts.add(chartId);
+                                            break;
+                                        case 'demographic-analysis-chart':
+                                            createDemographicAnalysisChart();
+                                            initializedCharts.add(chartId);
+                                            break;
+                                        case 'policy-timeline-chart':
+                                            createPolicyTimelineChart();
+                                            initializedCharts.add(chartId);
+                                            break;
+                                        default:
+                                            console.log("Unknown chart ID:", chartId);
+                                    }
+                                } else {
+                                    console.log("Chart already initialized:", chartId);
+                                }
+                            } else {
+                                console.error("Chart canvas not found in container:", entry.target);
+                            }
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // 观察所有需要动画的元素
+            document.querySelectorAll('.scroll-reveal, .fade-in, .slide-in-left, .slide-in-right, .highlight-content, .section-transition, .video-container, .social-post, .quote-box, .service-list li, .chart-container').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // 初始化所有图表 - 备选方案，确保图表能够显示
+            setTimeout(() => {
+                console.log("Fallback: Checking if charts need initialization after timeout");
+                
+                if (!initializedCharts.has('obesity-rate-chart')) {
+                    console.log("Fallback initializing: obesity-rate-chart");
+                    createObesityRateChart();
+                }
+                
+                if (!initializedCharts.has('economic-impact-chart')) {
+                    console.log("Fallback initializing: economic-impact-chart");
+                    createEconomicImpactChart();
+                }
+                
+                if (!initializedCharts.has('health-risks-chart')) {
+                    console.log("Fallback initializing: health-risks-chart");
+                    createHealthRisksChart();
+                }
+                
+                if (!initializedCharts.has('demographic-analysis-chart')) {
+                    console.log("Fallback initializing: demographic-analysis-chart");
+                    createDemographicAnalysisChart();
+                }
+                
+                if (!initializedCharts.has('policy-timeline-chart')) {
+                    console.log("Fallback initializing: policy-timeline-chart");
+                    createPolicyTimelineChart();
+                }
+            }, 2000);
+
+            // 移动导航菜单切换
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileNavToggle && navLinks) {
+                mobileNavToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    mobileNavToggle.classList.toggle('active');
+                    mobileNavToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+                });
+
+                // 点击导航链接后自动关闭菜单
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        mobileNavToggle.classList.remove('active');
+                        mobileNavToggle.textContent = '☰';
+                    });
+                });
+            }
+
+            // 监听滚动事件，调整导航栏样式
+            let lastScrollTop = 0;
+            const navbar = document.querySelector('.navbar');
+            
+            if (navbar) {
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    // 向下滚动时略微缩小导航栏
+                    if (scrollTop > lastScrollTop && scrollTop > 100) {
+                        navbar.style.transform = 'translateY(-100%)';
+                    } else {
+                        navbar.style.transform = 'translateY(0)';
+                        
+                        // 给导航栏添加更多背景色
+                        if (scrollTop > 50) {
+                            navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                        } else {
+                            navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                        }
+                    }
+                    
+                    lastScrollTop = scrollTop;
+                });
+            }
+            
+            // 添加滚动动画效果
+            const animateOnScroll = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('data-card')) {
+                            entry.target.style.opacity = 1;
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                        if (entry.target.classList.contains('tag')) {
+                            entry.target.style.opacity = 1;
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // 为数据卡片和标签添加初始样式并观察
+            document.querySelectorAll('.data-card, .tag').forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                animateOnScroll.observe(el);
+            });
+            
+            // 实现滚动进度指示器
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollProgress = (scrollTop / scrollHeight) * 100;
+                document.querySelector('.scroll-progress-bar').style.width = scrollProgress + '%';
+            });
+            
+            // 实现章节导航功能
+            const chapterNav = document.querySelector('.chapter-navigation');
+            const chapterNavToggle = document.querySelector('.chapter-nav-toggle');
+            const chapterLinks = document.querySelectorAll('.chapter-navigation a');
+            
+            // 点击切换章节导航显示状态
+            chapterNavToggle.addEventListener('click', () => {
+                chapterNav.classList.toggle('active');
+            });
+            
+            // 滚动时更新当前章节高亮
+            function updateActiveChapter() {
+                const scrollPosition = window.scrollY;
+                
+                document.querySelectorAll('section[id], header[id]').forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop - 200 && scrollPosition < sectionTop + sectionHeight - 200) {
+                        // 移除所有活动类
+                        chapterLinks.forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        
+                        // 添加活动类到当前部分
+                        const activeLink = document.querySelector(`.chapter-navigation a[href="#${sectionId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveChapter);
+            
+            // 点击滚动指示器滚动到第一节
+            document.querySelector('.scroll-indicator').addEventListener('click', () => {
+                document.querySelector('#section-1').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // 章节导航链接平滑滚动
+            chapterLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                    chapterNav.classList.remove('active');
+                });
+            });
+        });
+
+        // Chart.js configurations and utility functions
+        function createObesityRateChart() {
+            const ctx = document.getElementById('obesity-rate-chart');
+            if (!ctx) {
+                console.error("Cannot find obesity-rate-chart element");
+                return;
+            }
+            
+            console.log("Creating obesity rate chart");
+            
+            // 检查并销毁已存在的图表
+            destroyChartIfExists('obesity-rate-chart');
+            
+            // 根据屏幕宽度调整字体大小
+            const isMobile = window.innerWidth < 768;
+            const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+            
+            const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
+            const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            
+            // 创建渐进式动画配置
+            const animationOptions = {
+                tension: {
+                    duration: 1000,
+                    easing: 'easeOutQuart',
+                    from: 0,
+                    to: 0.4,
+                    loop: false
+                },
+                opacity: {
+                    duration: 1000,
+                    easing: 'easeOutQuart',
+                    from: 0.2,
+                    to: 1,
+                    loop: false
+                }
+            };
+            
+            chartInstances['obesity-rate-chart'] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2010', '2015', '2020', '2025', '2030'],
+                    datasets: [{
+                        label: '肥胖率 (%)',
+                        data: [40, 45, 52, 60, 70.5],
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        // 移动端上减少点的大小
+                        pointRadius: isMobile ? 3 : 4,
+                        pointHoverRadius: isMobile ? 4 : 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    },
+                    animations: {
+                        colors: {
+                            type: 'color',
+                            duration: 1000,
+                            easing: 'easeOutQuart',
+                        },
+                        progress: {
+                            duration: 1500,
+                            easing: 'easeOutQuart',
+                            delay: 500
+                        }
+                    },
+                    transitions: {
+                        show: {
+                            animations: {
+                                x: {
+                                    from: 0
+                                },
+                                y: {
+                                    from: 0
+                                }
+                            }
+                        },
+                        hide: {
+                            animations: {
+                                x: {
+                                    to: 0
+                                },
+                                y: {
+                                    to: 0
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                // 移动端上减少内边距
+                                padding: isMobile ? 10 : 20,
+                                usePointStyle: true,
+                                generateLabels: function(chart) {
+                                    const datasets = chart.data.datasets;
+                                    const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                    labels.forEach((label, i) => {
+                                        label.lineWidth = 2;
+                                        label.borderRadius = 2;
+                                    });
+                                    return labels;
+                                }
+                            },
+                            onClick: function(e, legendItem, legend) {
+                                Chart.defaults.plugins.legend.onClick.call(this, e, legendItem, legend);
+                                
+                                setTimeout(() => {
+                                    const chart = legend.chart;
+                                    chart.update();
+                                }, 10);
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: isMobile ? 8 : 12,
+                            titleFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            },
+                            bodyFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            },
+                            animation: {
+                                duration: 150
+                            },
+                            displayColors: true,
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1,
+                            cornerRadius: 4,
+                            caretSize: 5
+                        },
+                        title: {
+                            display: true,
+                            text: '中国肥胖率趋势预测',
+                            font: {
+                                size: titleFontSize,
+                                color: '#fff'
+                            },
+                            padding: {
+                                top: isMobile ? 5 : 10,
+                                bottom: isMobile ? 5 : 10
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: !isMobile, // 在移动设备上隐藏轴标题
+                                text: '肥胖率 (%)',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                }
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                // 移动端上减少刻度数量
+                                maxTicksLimit: isMobile ? 5 : 10
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createEconomicImpactChart() {
+            const ctx = document.getElementById('economic-impact-chart');
+            if (!ctx) {
+                console.error("Cannot find economic-impact-chart element");
+                return;
+            }
+            
+            console.log("Creating economic impact chart");
+            
+            // 检查并销毁已存在的图表
+            destroyChartIfExists('economic-impact-chart');
+            
+            // 根据屏幕宽度调整字体大小
+            const isMobile = window.innerWidth < 768;
+            const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+            
+            const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
+            const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            
+            chartInstances['economic-impact-chart'] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2019', '2030', '2060'],
+                    datasets: [{
+                        label: '经济损失 (十亿美元)',
+                        data: [2595.1, 2766.35, 10108.34],
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                        borderColor: 'rgb(54, 162, 235)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeInOutQuart'
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                padding: isMobile ? 10 : 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: isMobile ? 8 : 12,
+                            titleFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            },
+                            bodyFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '中国因超重和肥胖造成的经济影响预测',
+                            font: {
+                                size: titleFontSize,
+                                color: '#fff'
+                            },
+                            padding: {
+                                top: isMobile ? 5 : 10,
+                                bottom: isMobile ? 5 : 10
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: !isMobile,
+                                text: '经济损失 (十亿美元)',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                }
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                maxTicksLimit: isMobile ? 5 : 10
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createHealthRisksChart() {
+            const ctx = document.getElementById('health-risks-chart');
+            if (!ctx) {
+                console.error("Cannot find health-risks-chart element");
+                return;
+            }
+            
+            console.log("Creating health risks chart");
+            
+            // 检查并销毁已存在的图表
+            destroyChartIfExists('health-risks-chart');
+            
+            // 根据屏幕宽度调整字体大小
+            const isMobile = window.innerWidth < 768;
+            const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+            
+            const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
+            const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            
+            chartInstances['health-risks-chart'] = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['心血管疾病', '糖尿病', '高血压', '关节问题', '呼吸系统', '心理健康'],
+                    datasets: [{
+                        label: '健康风险指数',
+                        data: [85, 75, 70, 65, 60, 55],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        pointBackgroundColor: 'rgb(255, 99, 132)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(255, 99, 132)',
+                        // 移动端上减少点的大小
+                        pointRadius: isMobile ? 2 : 3,
+                        pointHoverRadius: isMobile ? 3 : 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeInOutQuart'
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                padding: isMobile ? 10 : 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: isMobile ? 8 : 12,
+                            titleFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            },
+                            bodyFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '肥胖相关健康风险',
+                            font: {
+                                size: titleFontSize,
+                                color: '#fff'
+                            },
+                            padding: {
+                                top: isMobile ? 5 : 10,
+                                bottom: isMobile ? 5 : 10
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#fff',
+                                stepSize: isMobile ? 25 : 20,
+                                font: {
+                                    size: isMobile ? 8 : fontSize
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: '#fff',
+                                font: {
+                                    size: isMobile ? 8 : fontSize
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createDemographicAnalysisChart() {
+            const ctx = document.getElementById('demographic-analysis-chart');
+            if (!ctx) {
+                console.error("Cannot find demographic-analysis-chart element");
+                return;
+            }
+            
+            console.log("Creating demographic analysis chart");
+            
+            // 检查并销毁已存在的图表
+            destroyChartIfExists('demographic-analysis-chart');
+            
+            // 根据屏幕宽度调整字体大小
+            const isMobile = window.innerWidth < 768;
+            const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+            
+            const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
+            const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            
+            chartInstances['demographic-analysis-chart'] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['男性', '女性'],
+                    datasets: [{
+                        label: '2010年前',
+                        data: [45, 50],
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)'
+                    }, {
+                        label: '2010年后',
+                        data: [10, -2],
+                        backgroundColor: 'rgba(255, 99, 132, 0.8)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeInOutQuart'
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                padding: isMobile ? 10 : 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: isMobile ? 8 : 12,
+                            titleFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            },
+                            bodyFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '肥胖率的人口统计学分析',
+                            font: {
+                                size: titleFontSize,
+                                color: '#fff'
+                            },
+                            padding: {
+                                top: isMobile ? 5 : 10,
+                                bottom: isMobile ? 5 : 10
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: !isMobile,
+                                text: '变化率 (%)',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                }
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                maxTicksLimit: isMobile ? 5 : 10
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createPolicyTimelineChart() {
+            const ctx = document.getElementById('policy-timeline-chart');
+            if (!ctx) {
+                console.error("Cannot find policy-timeline-chart element");
+                return;
+            }
+            
+            console.log("Creating policy timeline chart");
+            
+            // 检查并销毁已存在的图表
+            destroyChartIfExists('policy-timeline-chart');
+            
+            // 根据屏幕宽度调整字体大小
+            const isMobile = window.innerWidth < 768;
+            const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+            
+            const fontSize = isMobile ? 10 : (isTablet ? 12 : 14);
+            const titleFontSize = isMobile ? 14 : (isTablet ? 16 : 18);
+            
+            // 针对移动设备减少标签数量
+            const labels = isMobile 
+                ? ['2024-03', '2024-09', '2025-03', '2025-09', '2025-12']
+                : ['2024-03', '2024-06', '2024-09', '2024-12', '2025-03', '2025-06', '2025-09', '2025-12'];
+            
+            const data = isMobile 
+                ? [20, 60, 85, 95, 100]
+                : [20, 40, 60, 80, 85, 90, 95, 100];
+            
+            chartInstances['policy-timeline-chart'] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '政策实施进度',
+                        data: data,
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        // 移动端上减少点的大小
+                        pointRadius: isMobile ? 3 : 4,
+                        pointHoverRadius: isMobile ? 4 : 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeInOutQuart'
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                padding: isMobile ? 10 : 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: isMobile ? 8 : 12,
+                            titleFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            },
+                            bodyFont: {
+                                size: fontSize,
+                                color: '#fff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '体重管理年行动实施进度',
+                            font: {
+                                size: titleFontSize,
+                                color: '#fff'
+                            },
+                            padding: {
+                                top: isMobile ? 5 : 10,
+                                bottom: isMobile ? 5 : 10
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: !isMobile,
+                                text: '完成度 (%)',
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                }
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                maxTicksLimit: isMobile ? 5 : 10
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#fff',
+                                font: {
+                                    size: fontSize
+                                },
+                                maxRotation: isMobile ? 45 : 0,
+                                minRotation: isMobile ? 45 : 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+    
+    <!-- 添加视差滚动增强脚本 -->
+    <script>
+        // 增强视差滚动效果
+        document.addEventListener('DOMContentLoaded', () => {
+            const parallaxSections = document.querySelectorAll('.parallax-section');
+            
+            function handleParallax() {
+                parallaxSections.forEach(section => {
+                    const distance = window.pageYOffset - section.offsetTop;
+                    const parallaxBg = section.querySelector('.parallax-bg');
+                    const parallaxOverlay = section.querySelector('.parallax-overlay');
+                    
+                    // 仅在视口内或接近视口的部分应用视差
+                    if (Math.abs(distance) < window.innerHeight * 1.5) {
+                        if (parallaxBg) {
+                            parallaxBg.style.transform = `translateZ(-1px) scale(2) translateY(${distance * 0.15}px)`;
+                        }
+                        
+                        if (parallaxOverlay) {
+                            // 根据滚动位置调整覆盖层透明度，创造动态效果
+                            const opacity = 0.8 - Math.min(0.3, Math.abs(distance) / (window.innerHeight * 2));
+                            parallaxOverlay.style.opacity = opacity;
+                        }
+                    }
+                });
+            }
+            
+            // 以较高的频率应用视差效果，提供更流畅的体验
+            window.addEventListener('scroll', () => {
+                requestAnimationFrame(handleParallax);
+            });
+            
+            // 在调整大小时重新计算
+            window.addEventListener('resize', () => {
+                requestAnimationFrame(handleParallax);
+            });
+            
+            // 初始处理
+            handleParallax();
+            
+            // 提升图表容器的动画
+            const chartContainers = document.querySelectorAll('.chart-container');
+            
+            // 应用序列化动画索引到策略卡片
+            const strategyCards = document.querySelectorAll('.strategy-card');
+            strategyCards.forEach((card, index) => {
+                card.style.setProperty('--card-index', index);
+            });
+            
+            // 应用序列化动画索引到文本元素
+            const fadeTexts = document.querySelectorAll('p:not(.large)');
+            fadeTexts.forEach((text, index) => {
+                text.classList.add('fade-in-text');
+                text.style.setProperty('--item-index', index % 5); // 将动画分组，避免延迟过长
+            });
+            
+            // 为标题添加可见性检测
+            const headings = document.querySelectorAll('h1, h2');
+            
+            // 创建观察者，当元素进入视口时添加visible类
+            const visibilityObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            // 观察标题和文本元素
+            headings.forEach(heading => visibilityObserver.observe(heading));
+            fadeTexts.forEach(text => visibilityObserver.observe(text));
+            strategyCards.forEach(card => visibilityObserver.observe(card));
+        });
+    </script>
+    
+    <!-- 添加ECharts地图和Swiper增强脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 添加调试信息
+            console.log('DOMContentLoaded事件触发');
+            console.log('检查ECharts是否已加载:', typeof echarts);
+            
+            // 先加载地图数据，确保地图组件可用
+            Promise.all([
+                fetch('https://cdn.jsdelivr.net/npm/echarts@5.4.3/map/json/china.json').then(response => response.json()),
+                fetch('https://cdn.jsdelivr.net/npm/echarts@5.4.3/map/json/world.json').then(response => response.json())
+            ]).then(([chinaJson, worldJson]) => {
+                // 手动注册地图数据
+                echarts.registerMap('china', chinaJson);
+                echarts.registerMap('world', worldJson);
+                
+                console.log('地图数据加载并注册成功');
+                console.log('检查是否包含中国地图:', echarts.getMap && echarts.getMap('china') ? '已加载' : '未加载');
+                console.log('检查是否包含世界地图:', echarts.getMap && echarts.getMap('world') ? '已加载' : '未加载');
+                
+                // 查找地图容器
+                const chinaMapContainer = document.getElementById('china-map');
+                const worldMapContainer = document.getElementById('world-map');
+                console.log('中国地图容器:', chinaMapContainer);
+                console.log('世界地图容器:', worldMapContainer);
+                
+                // 地图数据加载完成后，初始化地图
+                initChinaMap();
+                initWorldMap();
+            }).catch(error => {
+                console.error('加载地图数据失败:', error);
+            });
+            
+            // 初始化Swiper幻灯片
+            const strategySwiper = new Swiper('.strategy-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                },
+                on: {
+                    init: function() {
+                        // 初始化完成后触发
+                    },
+                },
+                // 触摸优化
+                touchEventsTarget: 'container',
+                touchRatio: 1,
+                touchAngle: 45,
+                simulateTouch: true,
+            });
+            
+            // 初始化视频懒加载
+            const videoPlaceholders = document.querySelectorAll('.video-placeholder');
+            videoPlaceholders.forEach(placeholder => {
+                placeholder.addEventListener('click', function() {
+                    const container = this.closest('.video-container');
+                    const video = container.querySelector('video');
+                    const videoSrc = this.getAttribute('data-src');
+                    
+                    if (video && videoSrc) {
+                        video.src = videoSrc;
+                        video.style.display = 'block';
+                        video.load();
+                        video.play();
+                        container.classList.add('active');
+                        this.style.display = 'none';
+                    }
+                });
+            });
+            
+            // 初始化一般懒加载（图片等）
+            const observer = lozad('.lozad', {
+                loaded: function(el) {
+                    el.classList.add('loaded');
+                }
+            });
+            observer.observe();
+            
+            // 初始化中国地图
+            function initChinaMap() {
+                console.log('开始初始化中国地图');
+                const chinaMapContainer = document.getElementById('china-map');
+                if (!chinaMapContainer) {
+                    console.error('找不到中国地图容器元素');
+                    return;
+                }
+                
+                try {
+                    // 确保地图数据已加载
+                    if (!echarts.getMap) {
+                        console.error('ECharts未包含地图组件，请确保引入了正确的ECharts库');
+                        return;
+                    }
+                    
+                    if (!echarts.getMap('china')) {
+                        console.error('未找到中国地图数据，请确保引入了china.js');
+                        return;
+                    }
+                    
+                    console.log('初始化ECharts实例');
+                    const chinaMap = echarts.init(chinaMapContainer);
+                    let currentView = 'obesity';  // 默认视图
+                    
+                    // 模拟数据 - 实际项目中应从API获取
+                    const obesityData = [
+                        {name: '北京', value: 23.5},
+                        {name: '天津', value: 22.1},
+                        {name: '河北', value: 19.3},
+                        {name: '山西', value: 18.7},
+                        {name: '内蒙古', value: 20.2},
+                        {name: '辽宁', value: 21.5},
+                        {name: '吉林', value: 22.8},
+                        {name: '黑龙江', value: 23.1},
+                        {name: '上海', value: 18.9},
+                        {name: '江苏', value: 17.5},
+                        {name: '浙江', value: 16.8},
+                        {name: '安徽', value: 18.1},
+                        {name: '福建', value: 15.3},
+                        {name: '江西', value: 16.7},
+                        {name: '山东', value: 21.2},
+                        {name: '河南', value: 20.1},
+                        {name: '湖北', value: 17.2},
+                        {name: '湖南', value: 16.5},
+                        {name: '广东', value: 14.9},
+                        {name: '广西', value: 15.2},
+                        {name: '海南', value: 13.8},
+                        {name: '重庆', value: 17.3},
+                        {name: '四川', value: 18.1},
+                        {name: '贵州', value: 16.2},
+                        {name: '云南', value: 15.8},
+                        {name: '西藏', value: 12.4},
+                        {name: '陕西', value: 19.5},
+                        {name: '甘肃', value: 17.2},
+                        {name: '青海', value: 18.9},
+                        {name: '宁夏', value: 20.3},
+                        {name: '新疆', value: 21.8}
+                    ];
+                    
+                    const growthData = [
+                        {name: '北京', value: 7.2},
+                        {name: '天津', value: 6.8},
+                        {name: '河北', value: 5.3},
+                        {name: '山西', value: 4.9},
+                        {name: '内蒙古', value: 6.1},
+                        {name: '辽宁', value: 5.8},
+                        {name: '吉林', value: 6.5},
+                        {name: '黑龙江', value: 6.3},
+                        {name: '上海', value: 5.1},
+                        {name: '江苏', value: 4.6},
+                        {name: '浙江', value: 4.2},
+                        {name: '安徽', value: 5.7},
+                        {name: '福建', value: 3.8},
+                        {name: '江西', value: 4.5},
+                        {name: '山东', value: 6.4},
+                        {name: '河南', value: 5.9},
+                        {name: '湖北', value: 4.8},
+                        {name: '湖南', value: 4.1},
+                        {name: '广东', value: 3.7},
+                        {name: '广西', value: 3.9},
+                        {name: '海南', value: 3.2},
+                        {name: '重庆', value: 4.7},
+                        {name: '四川', value: 5.5},
+                        {name: '贵州', value: 4.2},
+                        {name: '云南', value: 3.6},
+                        {name: '西藏', value: 2.5},
+                        {name: '陕西', value: 5.3},
+                        {name: '甘肃', value: 4.9},
+                        {name: '青海', value: 5.7},
+                        {name: '宁夏', value: 6.2},
+                        {name: '新疆', value: 6.8}
+                    ];
+                    
+                    const riskData = [
+                        {name: '北京', value: 68},
+                        {name: '天津', value: 65},
+                        {name: '河北', value: 59},
+                        {name: '山西', value: 57},
+                        {name: '内蒙古', value: 62},
+                        {name: '辽宁', value: 63},
+                        {name: '吉林', value: 66},
+                        {name: '黑龙江', value: 67},
+                        {name: '上海', value: 61},
+                        {name: '江苏', value: 55},
+                        {name: '浙江', value: 52},
+                        {name: '安徽', value: 56},
+                        {name: '福建', value: 49},
+                        {name: '江西', value: 51},
+                        {name: '山东', value: 63},
+                        {name: '河南', value: 61},
+                        {name: '湖北', value: 54},
+                        {name: '湖南', value: 51},
+                        {name: '广东', value: 47},
+                        {name: '广西', value: 48},
+                        {name: '海南', value: 43},
+                        {name: '重庆', value: 53},
+                        {name: '四川', value: 57},
+                        {name: '贵州', value: 50},
+                        {name: '云南', value: 49},
+                        {name: '西藏', value: 38},
+                        {name: '陕西', value: 58},
+                        {name: '甘肃', value: 55},
+                        {name: '青海', value: 56},
+                        {name: '宁夏', value: 61},
+                        {name: '新疆', value: 64}
+                    ];
+                    
+                    // 配置地图视图的函数
+                    function getMapOption(dataType) {
+                        let data, title, colorRange;
+                        
+                        if (dataType === 'obesity') {
+                            data = obesityData;
+                            title = '中国肥胖率分布';
+                            colorRange = ['#FFEBCC', '#FFAA88', '#FF6B6B'];
+                        } else if (dataType === 'growth') {
+                            data = growthData;
+                            title = '肥胖率年增长(%)';
+                            colorRange = ['#CCFFCC', '#88DD88', '#33AA33'];
+                        } else {
+                            data = riskData;
+                            title = '健康风险指数';
+                            colorRange = ['#CCCCFF', '#8888FF', '#5555FF'];
+                        }
+                        
+                        return {
+                            title: {
+                                text: title,
+                                left: 'center',
+                                textStyle: {
+                                    color: '#fff'
+                                }
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: function(params) {
+                                    if (dataType === 'obesity') {
+                                        return params.name + ': ' + params.value + '%';
+                                    } else if (dataType === 'growth') {
+                                        return params.name + ': +' + params.value + '%/年';
+                                    } else {
+                                        return params.name + ': ' + params.value + ' (风险指数)';
+                                    }
+                                }
+                            },
+                            visualMap: {
+                                min: dataType === 'risk' ? 35 : (dataType === 'growth' ? 2 : 10),
+                                max: dataType === 'risk' ? 70 : (dataType === 'growth' ? 8 : 25),
+                                text: dataType === 'obesity' ? ['高', '低'] : 
+                                     (dataType === 'growth' ? ['快', '慢'] : ['高', '低']),
+                                calculable: true,
+                                inRange: {
+                                    color: colorRange
+                                },
+                                textStyle: {
+                                    color: '#fff'
+                                },
+                                left: 'left',
+                                top: 'bottom'
+                            },
+                            series: [{
+                                name: dataType === 'obesity' ? '肥胖率' : 
+                                     (dataType === 'growth' ? '增长率' : '风险指数'),
+                                type: 'map',
+                                map: 'china',
+                                roam: true,
+                                emphasis: {
+                                    label: {
+                                        show: true
+                                    },
+                                    itemStyle: {
+                                        areaColor: '#FDD835'
+                                    }
+                                },
+                                data: data
+                            }]
+                        };
+                    }
+                    
+                    // 设置初始视图
+                    chinaMap.setOption(getMapOption(currentView));
+                    
+                    // 移除加载动画
+                    setTimeout(() => {
+                        document.querySelector('.map-loading').classList.add('hidden');
+                    }, 1000);
+                    
+                    // 监听视图切换
+                    document.querySelectorAll('.map-control-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            currentView = this.getAttribute('data-view');
+                            
+                            // 更新按钮状态
+                            document.querySelectorAll('.map-control-btn').forEach(b => {
+                                b.classList.remove('active');
+                            });
+                            this.classList.add('active');
+                            
+                            // 更新地图视图
+                            chinaMap.setOption(getMapOption(currentView), true);
+                        });
+                    });
+                    
+                    // 响应窗口大小变化
+                    window.addEventListener('resize', function() {
+                        chinaMap.resize();
+                    });
+                } catch (error) {
+                    console.error('初始化中国地图时出错:', error);
+                }
+            }
+            
+            // 初始化世界地图
+            function initWorldMap() {
+                console.log('开始初始化世界地图');
+                const worldMapContainer = document.getElementById('world-map');
+                if (!worldMapContainer) {
+                    console.error('找不到世界地图容器元素');
+                    return;
+                }
+                
+                try {
+                    // 确保地图数据已加载
+                    if (!echarts.getMap) {
+                        console.error('ECharts未包含地图组件，请确保引入了正确的ECharts库');
+                        return;
+                    }
+                    
+                    if (!echarts.getMap('world')) {
+                        console.error('未找到世界地图数据，请确保引入了world.js');
+                        return;
+                    }
+                    
+                    console.log('初始化世界地图ECharts实例');
+                    const worldMap = echarts.init(worldMapContainer);
+                    
+                    // 模拟数据 - 国际肥胖干预措施成效评分
+                    const interventionData = [
+                        {name: 'China', value: 75, measures: ['全民健身行动', '健康中国2030', '学生体质监测']},
+                        {name: 'United States', value: 82, measures: ['全国预防战略', '学校营养计划', '改善食品标签']},
+                        {name: 'Japan', value: 88, measures: ['特定健康检查', 'Smart Life项目', '营养教育']},
+                        {name: 'United Kingdom', value: 79, measures: ['减糖运动', '体育课改革', '食品标签信号灯系统']},
+                        {name: 'Germany', value: 76, measures: ['IN FORM项目', '健康食品计划', '活跃生活方式推广']},
+                        {name: 'Australia', value: 81, measures: ['健康体重战略', '活跃澳大利亚计划', '食品星级评定']},
+                        {name: 'Brazil', value: 72, measures: ['活跃城市项目', '学校食品指南', '公共健身设施']},
+                        {name: 'South Africa', value: 65, measures: ['减糖税', '健康生活行动', '社区健康计划']},
+                        {name: 'Mexico', value: 74, measures: ['含糖饮料税', '前置警告标签', '学校食品管控']},
+                        {name: 'South Korea', value: 83, measures: ['健康城市项目', '营养教育', '学生健康促进计划']},
+                        {name: 'Canada', value: 80, measures: ['儿童健康战略', '跨部门合作计划', '社区活跃项目']},
+                        {name: 'India', value: 62, measures: ['国家营养计划', '健康与体育教育', '母婴营养干预']},
+                        {name: 'Russia', value: 68, measures: ['健康俄罗斯项目', '体育促进计划', '学生健康监测']}
+                    ];
+                    
+                    const option = {
+                        title: {
+                            text: '全球肥胖干预措施成效',
+                            left: 'center',
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: function(params) {
+                                const data = params.data;
+                                if (!data) return params.name;
+                                
+                                let html = `<div style="font-weight:bold;margin-bottom:5px;">${params.name}: ${data.value}分</div>`;
+                                html += '<div style="margin-top:5px;">主要干预措施:</div>';
+                                html += '<ul style="padding-left:20px;margin:5px 0;">';
+                                data.measures.forEach(measure => {
+                                    html += `<li>${measure}</li>`;
+                                });
+                                html += '</ul>';
+                                return html;
+                            },
+                            backgroundColor: 'rgba(0,0,0,0.7)',
+                            borderColor: 'rgba(255,255,255,0.2)',
+                            borderWidth: 1,
+                            padding: 10,
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        visualMap: {
+                            min: 60,
+                            max: 90,
+                            text: ['高', '低'],
+                            calculable: true,
+                            inRange: {
+                                color: ['#C2FFEB', '#77EED8', '#00BFAC']
+                            },
+                            textStyle: {
+                                color: '#fff'
+                            },
+                            left: 'left',
+                            top: 'bottom'
+                        },
+                        series: [{
+                            name: '肥胖干预措施成效',
+                            type: 'map',
+                            map: 'world',
+                            roam: true,
+                            emphasis: {
+                                label: {
+                                    show: true
+                                },
+                                itemStyle: {
+                                    areaColor: '#FDD835'
+                                }
+                            },
+                            data: interventionData,
+                            nameMap: {
+                                'China': '中国',
+                                'United States': '美国',
+                                'Japan': '日本',
+                                'United Kingdom': '英国',
+                                'Germany': '德国',
+                                'Australia': '澳大利亚',
+                                'Brazil': '巴西',
+                                'South Africa': '南非',
+                                'Mexico': '墨西哥',
+                                'South Korea': '韩国',
+                                'Canada': '加拿大',
+                                'India': '印度',
+                                'Russia': '俄罗斯'
+                            }
+                        }]
+                    };
+                    
+                    worldMap.setOption(option);
+                    
+                    // 响应窗口大小变化
+                    window.addEventListener('resize', function() {
+                        worldMap.resize();
+                    });
+                } catch (error) {
+                    console.error('初始化世界地图时出错:', error);
+                }
+            }
+            
+            // 移动端触摸体验优化
+            function enhanceTouchExperience() {
+                // 添加触摸反馈效果
+                const touchableElements = document.querySelectorAll('a, button, .swiper-slide, .data-card, .strategy-card, .chapter-nav-toggle, .map-control-btn');
+                
+                touchableElements.forEach(el => {
+                    // 触摸开始时添加active状态
+                    el.addEventListener('touchstart', function() {
+                        this.classList.add('touch-active');
+                    }, {passive: true});
+                    
+                    // 触摸结束或取消时移除active状态
+                    ['touchend', 'touchcancel'].forEach(eventType => {
+                        el.addEventListener(eventType, function() {
+                            this.classList.remove('touch-active');
+                        }, {passive: true});
+                    });
+                });
+                
+                // 针对iOS Safari的回弹滚动优化
+                document.documentElement.style.overscrollBehavior = 'none';
+                
+                // 优化双指缩放行为
+                const mapContainers = document.querySelectorAll('.map-container');
+                mapContainers.forEach(container => {
+                    container.addEventListener('gesturestart', function(e) {
+                        e.preventDefault(); // 允许ECharts自己处理缩放
+                    }, {passive: false});
+                });
+                
+                // 添加横屏检测和优化
+                function checkOrientation() {
+                    if (window.innerWidth > window.innerHeight) {
+                        // 横屏模式
+                        document.body.classList.add('landscape');
+                        // 调整地图高度以适应横屏
+                        document.querySelectorAll('.map-container').forEach(el => {
+                            el.style.height = '70vh';
+                        });
+                    } else {
+                        // 竖屏模式
+                        document.body.classList.remove('landscape');
+                        // 恢复地图默认高度
+                        document.querySelectorAll('.map-container').forEach(el => {
+                            el.style.height = '500px';
+                        });
+                    }
+                }
+                
+                // 初始检查和监听方向变化
+                checkOrientation();
+                window.addEventListener('resize', checkOrientation);
+                window.addEventListener('orientationchange', checkOrientation);
+            }
+            
+            // 初始化地图
+            setTimeout(() => {
+                console.log('检查地图数据是否已注册:');
+                console.log('中国地图:', echarts.getMap && echarts.getMap('china') ? '已注册' : '未注册');
+                console.log('世界地图:', echarts.getMap && echarts.getMap('world') ? '已注册' : '未注册');
+            }, 2000);
+            
+            // 优化移动端触摸体验
+            enhanceTouchExperience();
+        });
+    </script>
+</body>
+</html>
