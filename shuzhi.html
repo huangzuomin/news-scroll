@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数智赋能未来 - 温州教育名师圆桌论坛</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1d4ed8 100%);
+        }
+        
+        .section-gradient-1 {
+            background: linear-gradient(to bottom, #E0F0FF, #FFFFFF);
+        }
+        
+        .section-gradient-2 {
+            background: linear-gradient(45deg, #FFF3E0, #FFF9C4);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: scale(1.05);
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .dark .dark\:bg-gray-900 {
+            background-color: #111827;
+        }
+        
+        .dark .dark\:text-white {
+            color: #f3f4f6;
+        }
+        
+        .dark .dark\:bg-gray-800 {
+            background-color: #1f2937;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-white">
+    <!-- 深色/浅色模式切换按钮 -->
+    <button id="theme-toggle" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gray-200 dark:bg-gray-700 shadow-lg">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:block"></i>
+    </button>
+
+    <!-- 主视觉区域 -->
+    <section class="hero-gradient min-h-screen flex flex-col justify-center items-center text-center text-white px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="relative z-10 max-w-4xl mx-auto fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 slide-up">数智赋能未来</h1>
+            <h2 class="text-xl md:text-2xl font-medium mb-8 slide-up">温州教育名师圆桌论坛：如何培养不可替代的下一代？</h2>
+            <div class="w-24 h-1 bg-yellow-300 mx-auto mb-8 slide-up"></div>
+            <p class="text-lg md:text-xl mb-8 slide-up">数智时代初中生素养培育的新路径</p>
+            <a href="#section-details" class="btn-hover inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full transition-all duration-300 slide-up">
+                立即报名
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-0 right-0 text-center animate-bounce">
+            <a href="#section-intro" class="text-white">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 时代浪潮：拥抱教育的数字蝶变 -->
+    <section id="section-intro" class="section-gradient-1 py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">时代浪潮：拥抱教育的数字蝶变</h2>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-8 fade-in">
+                <p class="text-lg leading-relaxed mb-6">
+                    在教育数字化的浪潮中，我们迎来了全新的挑战与机遇。一场备受瞩目的<strong class="text-blue-600 dark:text-blue-400">"数智时代初中生素养培育圆桌论坛"</strong>即将于4月13日拉开帷幕，诚邀关注未来教育的您，共同探索新知！
+                </p>
+                <p class="text-lg leading-relaxed">
+                    届时，来自温州的教育名师、一线教师将齐聚一堂，与您深度对话，共同擘画"数智时代"下青少年核心素养培育的实践策略与创新蓝图。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心议题：培育面向未来的关键素养 -->
+    <section id="section-theme" class="py-20 px-4 bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80')] bg-cover bg-center opacity-20 dark:opacity-10 parallax"></div>
+        <div class="max-w-4xl mx-auto relative">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">核心议题：培育面向未来的关键素养</h2>
+            
+            <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8 mb-8 fade-in">
+                <blockquote class="text-2xl md:text-3xl font-serif italic text-center text-blue-600 dark:text-blue-400 mb-8">
+                    "数智时代初中生素养培育的新路径"
+                </blockquote>
+                <p class="text-lg leading-relaxed text-center">
+                    本次论坛将聚焦如何在智能时代背景下，有效培养初中生具备<strong class="text-blue-600 dark:text-blue-400">批判性思维、数字创造力、情感共情力</strong>等核心素养，使其不仅能熟练驾驭日新月异的数字工具，更能坚守人文价值，成为真正"不可替代"的人才。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 名师荟萃：领航教育的智慧之声 -->
+    <section id="section-speakers" class="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">名师荟萃：领航教育的智慧之声</h2>
+            <p class="text-lg text-center mb-12 max-w-3xl mx-auto fade-in">
+                本次论坛汇聚温州教育界的众多资深专家与一线名师，他们将带来前沿的教育理念和实践经验：
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 讲师卡片 -->
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">张寰宇</h3>
+                        <p class="text-gray-600 dark:text-gray-300">温州市教研院副院长、特级教师、正高教授级高级教师</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">吴步旭</h3>
+                        <p class="text-gray-600 dark:text-gray-300">瑾瑜教育集团副总裁、温州市鹿城区白鹿外国语学校书记、校长，温州市名校长，华东师大理解教育所研究员</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">金文军</h3>
+                        <p class="text-gray-600 dark:text-gray-300">白鹿外国语学校政教主任、市名班主任、市"优秀班主任"、第二十一届"园丁奖"获得者</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">孟振</h3>
+                        <p class="text-gray-600 dark:text-gray-300">白鹿外国语学校教务主任、省优质课一等奖获得者、省级优秀班主任、市级名师</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">袁文平</h3>
+                        <p class="text-gray-600 dark:text-gray-300">市教师技能大赛一等奖获得者、市优秀教师、区优秀班主任</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">尚利萍</h3>
+                        <p class="text-gray-600 dark:text-gray-300">优秀教师、市优秀班主任、市优秀教育工作者</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">林茹</h3>
+                        <p class="text-gray-600 dark:text-gray-300">市英语优质课比赛一等奖获得者、市中小学幼儿园教师学科素养比赛一等奖获得者</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">王心慧</h3>
+                        <p class="text-gray-600 dark:text-gray-300">区新锐班主任、区少先队中队辅导员</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">任钊成</h3>
+                        <p class="text-gray-600 dark:text-gray-300">市民办教育优秀教师，区2022年中小学"学习新常规"案例征文评比一等奖获得者</p>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-all duration-300 fade-in">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">张秋菊</h3>
+                        <p class="text-gray-600 dark:text-gray-300">南京大学教育硕士，区语文中考解题能力比赛一等奖获得者，区优秀班主任</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 亮点纷呈：解码未来教育图景 -->
+    <section id="section-highlights" class="py-20 px-4 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center opacity-10 dark:opacity-5 parallax"></div>
+        <div class="max-w-6xl mx-auto relative">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">亮点纷呈：解码未来教育图景</h2>
+            <p class="text-lg text-center mb-12 max-w-3xl mx-auto fade-in">
+                在本次论坛中，您将有机会：
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card-hover bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 fade-in">
+                    <div class="text-blue-500 dark:text-blue-400 text-3xl mb-4">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">触摸未来教育</h3>
+                    <p class="text-gray-600 dark:text-gray-300">洞悉数智时代教育演进新方向</p>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 fade-in">
+                    <div class="text-blue-500 dark:text-blue-400 text-3xl mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">探索自主学习</h3>
+                    <p class="text-gray-600 dark:text-gray-300">解锁激发内在驱动力、培养自主发展能力的秘钥</p>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 fade-in">
+                    <div class="text-blue-500 dark:text-blue-400 text-3xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">揭秘AI学情诊断</h3>
+                    <p class="text-gray-600 dark:text-gray-300">了解人工智能如何赋能个性化学习路径</p>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 fade-in">
+                    <div class="text-blue-500 dark:text-blue-400 text-3xl mb-4">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">了解智能作业设计</h3>
+                    <p class="text-gray-600 dark:text-gray-300">见证创新作业模式如何提升学习效能</p>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 fade-in">
+                    <div class="text-blue-500 dark:text-blue-400 text-3xl mb-4">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">规划"拔尖创新人才"之路</h3>
+                    <p class="text-gray-600 dark:text-gray-300">获取覆盖小初高一体化的升学指导策略</p>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 fade-in">
+                    <div class="text-blue-500 dark:text-blue-400 text-3xl mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">觉醒数字伦理</h3>
+                    <p class="text-gray-600 dark:text-gray-300">探讨如何引导青少年做"手机的主人"，而非奴隶</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 独家福利：深度互动与个性咨询 -->
+    <section id="section-benefits" class="section-gradient-2 py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">独家福利：深度互动与个性咨询</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center transition-all duration-300 fade-in">
+                    <div class="text-blue-500 dark:text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">现场答疑</h3>
+                    <p class="text-gray-600 dark:text-gray-300">与教育大咖面对面，您的困惑将有机会得到现场解答</p>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center transition-all duration-300 fade-in">
+                    <div class="text-blue-500 dark:text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-poll"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">投票选话题</h3>
+                    <p class="text-gray-600 dark:text-gray-300">选出您最关心的话题，TOP 5 问题将在圆桌环节深入探讨</p>
+                </div>
+                
+                <div class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center transition-all duration-300 fade-in">
+                    <div class="text-blue-500 dark:text-blue-400 text-4xl mb-4">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">一对一咨询</h3>
+                    <p class="text-gray-600 dark:text-gray-300">提问最具价值者，可获与嘉宾一对一深入交流的宝贵机会</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 活动信息 & 报名通道 -->
+    <section id="section-details" class="py-20 px-4 bg-white dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">活动信息 & 报名通道</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+                        <h3 class="text-xl font-bold mb-6 text-blue-600 dark:text-blue-400">活动详情</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-building text-blue-500 dark:text-blue-400 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>主办单位：</strong> 温州新闻网、温州市鹿城区白鹿外国语学校
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-newspaper text-blue-500 dark:text-blue-400 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>媒体支持：</strong> 浙江日报、温度新闻、温州都市报、温州晚报
+                                </div>
+                            </li>
+                            <li class="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4"></li>
+                            <li class="flex items-start">
+                                <i class="fas fa-calendar-day text-blue-500 dark:text-blue-400 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>时间：</strong> 4月13日（周六）
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-blue-500 dark:text-blue-400 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>地点：</strong> 温州市白鹿外国语学校 白鹿厅
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 text-center">
+                        <h3 class="text-xl font-bold mb-6 text-blue-600 dark:text-blue-400">报名方式</h3>
+                        <p class="mb-6">扫描下方二维码即可报名。席位限定 <strong class="text-red-500">150席</strong>，先到先得！</p>
+                        
+                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg inline-block shadow-lg mb-6">
+                            <img src="https://via.placeholder.com/200x200.png?text=扫码报名" alt="论坛报名二维码" class="w-48 h-48 mx-auto">
+                            <p class="mt-2 text-sm">扫码立即报名</p>
+                        </div>
+                        
+                        <div class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-lg p-4 inline-block pulse">
+                            <i class="fas fa-gift mr-2"></i> 成功报名即有机会获得丰厚 <strong>"数智"伴手礼</strong>！
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 诚挚邀请：共赴教育盛宴 -->
+    <section id="section-invitation" class="py-20 px-4 bg-blue-600 dark:bg-blue-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center opacity-20 parallax"></div>
+        <div class="max-w-4xl mx-auto relative text-center">
+            <h2 class="text-3xl font-bold mb-8 fade-in">诚挚邀请：共赴教育盛宴</h2>
+            
+            <div class="bg-white dark:bg-gray-800 bg-opacity-20 backdrop-blur-sm rounded-xl p-8 mb-8 fade-in">
+                <p class="text-lg leading-relaxed mb-6">
+                    "数智时代初中生素养培育圆桌论坛"将为您提供一个与教育专家面对面交流的宝贵平台。让我们共同探讨数智时代的教育核心素养，为孩子们的未来赋能。
+                </p>
+                <p class="text-lg leading-relaxed">
+                    诚邀 <strong>三年级以上学生及家长</strong> 扫码报名，与我们同启这场关乎未来的教育盛宴！
+                </p>
+            </div>
+            
+            <a href="#section-details" class="btn-hover inline-block bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-8 rounded-full transition-all duration-300 slide-up">
+                立即报名
+            </a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-100 dark:bg-gray-800 py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <p class="text-gray-600 dark:text-gray-300">© 2024 温州新闻网 & 温州市鹿城区白鹿外国语学校 版权所有</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300">
+                        <i class="fab fa-weixin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-400 transition-colors duration-300">
+                        <i class="fab fa-weibo text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300">
+                        <i class="fas fa-link text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    作者: 温州新闻网 & 温州市鹿城区白鹿外国语学校 | 
+                    <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400">GitHub</a> | 
+                    <a href="#" class="hover:text-blue-500 dark:hover:text-blue-400">Twitter/X</a> | 
+                    <a href="#" class="hover:text-blue-700 dark:hover:text-blue-500">LinkedIn</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 深色/浅色模式切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+        
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        // 滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
