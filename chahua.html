@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>千年守候 - 温州古山茶抢救记</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['"Noto Serif SC"', 'serif'],
+                        'sans': ['"Noto Sans SC"', 'sans-serif'],
+                    },
+                    colors: {
+                        tea: {
+                            50: '#f7f7f2',
+                            100: '#e8e6d9',
+                            200: '#d2ccb7',
+                            300: '#b3a88a',
+                            400: '#9a8b69',
+                            500: '#7d6e4e',
+                            600: '#5d513a',
+                            700: '#433a2d',
+                            800: '#2b261f',
+                            900: '#171614',
+                        },
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-up-subtle': 'slideUpSubtle 1s ease-out',
+                        'zoom-in': 'zoomIn 1.5s ease',
+                        'zoom-in-subtle': 'zoomInSubtle 1.3s ease',
+                        'ken-burns': 'kenBurns 20s ease infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        slideUpSubtle: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        zoomIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        zoomInSubtle: {
+                            '0%': { transform: 'scale(0.97)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        kenBurns: {
+                            '0%': { transform: 'scale(1.05)' },
+                            '100%': { transform: 'scale(1.15)' }
+                        }
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom CSS beyond Tailwind */
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Dark mode scrollbar */
+        .dark ::-webkit-scrollbar-track {
+            background: #2d3748;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb {
+            background: #4a5568;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #718096;
+        }
+        
+        /* Animation classes - complementing Tailwind animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+        }
+        
+        .fade-in-on-scroll {
+            transform: translateY(0);
+        }
+        
+        .slide-up-on-scroll {
+            transform: translateY(30px);
+        }
+        
+        .slide-up-subtle-on-scroll {
+            transform: translateY(15px);
+        }
+        
+        .zoom-in-on-scroll {
+            transform: scale(0.9);
+        }
+        
+        .zoom-in-subtle-on-scroll {
+            transform: scale(0.97);
+        }
+        
+        /* Quote styling */
+        .pull-quote-left {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        
+        .pull-quote-left::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            font-size: 5rem;
+            font-weight: 700;
+            color: rgba(122, 95, 68, 0.2);
+            font-family: 'Noto Serif SC', serif;
+            line-height: 1;
+        }
+        
+        .large-centered {
+            position: relative;
+            font-size: 1.5rem;
+            padding: 1.5rem 0;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .large-centered::before,
+        .large-centered::after {
+            content: "";
+            display: block;
+            width: 40%;
+            height: 1px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .large-centered::before,
+        .dark .large-centered::after {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .large-centered::before {
+            margin-bottom: 1.5rem;
+        }
+        
+        .large-centered::after {
+            margin-top: 1.5rem;
+        }
+        
+        .boxed {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        .dark .boxed {
+            border-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Hero Ken Burns effect */
+        .ken-burns-container {
+            overflow: hidden;
+        }
+        
+        .ken-burns-image {
+            animation: kenBurns 20s ease infinite alternate;
+            transform-origin: center;
+        }
+        
+        /* Utility for image rendering */
+        .img-rendering-crisp {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        
+        /* Timeline styling */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                rgba(122, 95, 68, 0.1) 0%, 
+                rgba(122, 95, 68, 0.5) 50%, 
+                rgba(122, 95, 68, 0.1) 100%);
+            z-index: 1;
+        }
+        
+        .timeline-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        
+        .timeline-node {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: rgb(122, 95, 68);
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .timeline-node:hover, 
+        .timeline-node.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 4px rgba(122, 95, 68, 0.2);
+        }
+        
+        .timeline-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+            text-align: center;
+            width: 150px;
+        }
+        
+        .timeline-content.active {
+            max-height: 200px;
+            opacity: 1;
+        }
+        
+        /* Infographic elements */
+        .infographic-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .dark .infographic-item {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .infographic-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .infographic-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(122, 95, 68, 0.1);
+            color: rgb(122, 95, 68);
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        
+        .dark .infographic-icon {
+            background-color: rgba(122, 95, 68, 0.2);
+        }
+        
+        /* Toggle buttons */
+        .toggle-btn {
+            padding: 0.5rem 1rem;
+            background-color: rgba(122, 95, 68, 0.1);
+            color: rgb(122, 95, 68);
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .toggle-btn:hover {
+            background-color: rgb(122, 95, 68);
+            color: white;
+        }
+        
+        .dark .toggle-btn {
+            background-color: rgba(122, 95, 68, 0.2);
+        }
+        
+        .dark .toggle-btn:hover {
+            background-color: rgb(122, 95, 68);
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- ThemeToggle Button -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 shadow-md hover:shadow-lg transition-all">
+        <i class="fas fa-sun dark:hidden"></i>
+        <i class="fas fa-moon hidden dark:block"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="relative w-full h-screen overflow-hidden">
+        <div class="ken-burns-container absolute inset-0 z-0">
+            <!-- Placeholder for hero image with Ken Burns effect -->
+            <div class="w-full h-full bg-tea-700 opacity-60 absolute inset-0 z-10 ken-burns-image">
+                <!-- Replacing with actual image from images folder -->
+                <img src="images/Mostra-antiche-camelie-della-Lucchesia-30-1.jpg" alt="盛开着红色花朵的千年古山茶树，部分枝干遒劲，背景是山岩。" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-30 z-20"></div>
+        </div>
+        
+        <div class="relative h-full flex flex-col justify-end items-center text-white z-30 pb-16 px-4 md:px-0">
+            <div class="container mx-auto max-w-4xl text-center animate-fade-in">
+                <h1 class="font-serif text-5xl md:text-7xl font-bold mb-4 tracking-tight">千年守候</h1>
+                <h2 class="text-xl md:text-2xl font-light max-w-2xl mx-auto leading-relaxed">
+                    温州古山茶抢救记：它从唐朝来，开出"重生花"
+                </h2>
+                <div class="mt-8 text-sm opacity-75">
+                    <span>温州网 / 温州日报</span>
+                    <span class="mx-2">|</span>
+                    <time>2025-03-26</time>
+                </div>
+                <div class="mt-12">
+                    <a href="#section-miracle" class="inline-block animate-bounce">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-4 right-4 text-white text-sm opacity-75 z-30">
+            苏巧将 摄 (示意)
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative">
+        <!-- Section 1: Miracle -->
+        <section id="section-miracle" class="relative py-20 min-h-screen">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <!-- Replacing with actual image from images folder -->
+                <img src="images/00301264386_a397447b.jpg" alt="大罗山春景" class="w-full h-full object-cover fixed">
+                <div class="absolute inset-0 bg-white bg-opacity-10"></div>
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-4 md:px-6 max-w-5xl">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-center">跨越千年的生命奇迹</h2>
+                
+                <div class="space-y-12">
+                    <!-- Lead paragraph -->
+                    <p class="text-xl md:text-2xl leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        春分过后，温州大罗山深处，一棵跨越千年的古老山茶，再次绽放出生命的绚烂。人们闻讯而来，不仅为一睹这抹来自唐朝的殷红，更为这"活着的文物"所展现的顽强生命力而赞叹。
+                    </p>
+                    
+                    <!-- Image with text, right positioned -->
+                    <div class="md:flex md:items-center md:space-x-8 animate-on-scroll slide-up-subtle-on-scroll">
+                        <div class="md:w-3/5 mb-6 md:mb-0">
+                            <p class="leading-relaxed">
+                                这棵金心山茶（红山茶），静静伫立于仙岩街道派岩村的宝岩寺旁，化成洞内。它的根系深扎岩石缝隙，树干在幽暗逼仄中奋力向上，冲出洞顶，撑起一片华盖。它不仅是世界三大山茶品系的重要种源，更是历经1200余载风霜的生命见证。
+                            </p>
+                        </div>
+                        <div class="md:w-2/5">
+                            <figure class="rounded-lg overflow-hidden shadow-lg">
+                                <!-- Replacing with actual image from images folder -->
+                                <img src="images/images (2).jpg" alt="王家云在观察古山茶" class="w-full h-auto">
+                                <figcaption class="bg-white bg-opacity-90 dark:bg-gray-800 dark:bg-opacity-90 p-3 text-sm">
+                                    <p>守护人王家云为"世界山茶花大王"监测生长数据。</p>
+                                    <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">苏巧将 摄</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    
+                    <!-- Quote -->
+                    <blockquote class="pull-quote-left text-lg md:text-xl font-serif my-12 animate-on-scroll fade-in-on-scroll">
+                        <p>能在这样的环境里生长是个奇迹，更何况它已经长寿千年。</p>
+                        <cite class="block mt-4 text-sm text-gray-600 dark:text-gray-400">— 郑坚, 浙江省亚热带作物研究所研究员</cite>
+                    </blockquote>
+                    
+                    <!-- Highlighted paragraph -->
+                    <p class="text-lg border-l-4 border-tea-500 pl-4 py-2 bg-tea-50 dark:bg-tea-900 dark:bg-opacity-20 animate-on-scroll fade-in-on-scroll">
+                        据浙江省第二次古树名木普查测定，这棵树高12米，树龄超1200年，属国家一级保护古树。它与白居易、柳宗元同时代，花开单瓣，色泽大红，花蕊金黄，仿佛携带着盛唐的历史芬芳。
+                    </p>
+                    
+                    <!-- Center small image -->
+                    <div class="max-w-md mx-auto my-12 animate-on-scroll fade-in-on-scroll">
+                        <figure class="shadow-md rounded overflow-hidden">
+                            <!-- Replacing with actual image from images folder -->
+                            <img src="images/1200px-1963-01_1963年_山茶花.jpg" alt="千年古山茶花朵特写，红瓣金蕊。" class="w-full h-auto">
+                        </figure>
+                    </div>
+                    
+                    <!-- Footnote -->
+                    <p class="text-sm text-gray-600 dark:text-gray-400 animate-on-scroll fade-in-on-scroll">
+                        早在1981年，著名园艺家汪亦萍便对其进行考证。同年，美国《山茶花》杂志称其为当时"保存下来最古老的山茶原生品种"。国内外专家学者纷至沓来，赞誉其为"世界山茶花大王"。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Crisis -->
+        <section id="section-crisis" class="relative py-20 min-h-screen">
+            <!-- Background Gradient -->
+            <div class="absolute inset-0 z-0 bg-gradient-to-b from-[#606c88] to-[#3f4c6b]">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-4 md:px-6 max-w-5xl text-white">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-center">命悬一线：古茶濒危之劫</h2>
+                
+                <div class="space-y-12">
+                    <!-- Regular text -->
+                    <p class="leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        然而，这株千年生命的背后，是一场持续四十余年的艰难救援。上世纪八十年代初，温州掀起"茶花热"，古树也未能幸免于干扰。虽有铁栅栏保护，但岁月的侵蚀、病虫害的蔓延，加之恶劣的生存环境，让它步履维艰。
+                    </p>
+                    
+                    <!-- Bleed image (full width with minimal padding) -->
+                    <div class="mx-[-1rem] md:mx-[-4rem] animate-on-scroll fade-in-on-scroll">
+                        <figure class="relative">
+                            <!-- Replacing with actual image from images folder -->
+                            <img src="images/images.jpg" alt="示意图：处于困境中的千年古山茶" class="w-full h-auto filter grayscale-[30%]">
+                            <figcaption class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 p-3 text-sm">
+                                古树曾因多种因素濒临死亡。
+                            </figcaption>
+                        </figure>
+                    </div>
+                    
+                    <!-- Highlight text -->
+                    <p class="text-lg border-l-4 border-red-400 pl-4 py-2 bg-red-900 bg-opacity-20 animate-on-scroll fade-in-on-scroll">
+                        树干曾烂掉三分之二，根系亦多有腐烂。尤其在2010年至2011年冬春之交，古山茶大量落叶，花朵萎靡，生命之火奄奄一息。
+                    </p>
+                    
+                    <!-- Large centered quote -->
+                    <blockquote class="large-centered my-16 animate-on-scroll fade-in-on-scroll">
+                        <p>如何抢救这样一棵古树名木？'世界山茶花大王'的境况牵动了很多人的心。</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Rescue -->
+        <section id="section-rescue" class="relative py-20 min-h-screen">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <!-- Replacing with actual image from images folder -->
+                <img src="images/11248569093_97c28a9b24_b.jpg" alt="象征希望与新生的山林晨曦" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-white bg-opacity-20"></div>
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-4 md:px-6 max-w-5xl">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-center">抢救接力：四十载护"花王"</h2>
+                
+                <div class="space-y-12">
+                    <!-- Regular text -->
+                    <p class="leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        技术，是横亘在前的第一道难关。救治如此高龄且生境特殊的古树，并无成熟先例。2011年，已划归瓯海区管辖的仙岩街道及区政府，找到了拥有领先茶花技术的王家云，一场名为"千年古山茶树复壮技术"的工程正式启动。
+                    </p>
+                    
+                    <!-- Simple Timeline -->
+                    <div class="timeline my-16 animate-on-scroll slide-up-subtle-on-scroll">
+                        <div class="grid grid-cols-5 gap-4">
+                            <!-- Timeline Item 1 -->
+                            <div class="timeline-item">
+                                <div class="timeline-node" data-year="1980s"></div>
+                                <div class="timeline-year font-medium text-sm mb-2">1980s</div>
+                                <div class="timeline-content text-sm" id="content-1980s">
+                                    危机初现，温州茶花热兴起，古树开始受到干扰，实施初步保护措施。
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Item 2 -->
+                            <div class="timeline-item">
+                                <div class="timeline-node" data-year="2010-2011"></div>
+                                <div class="timeline-year font-medium text-sm mb-2">2010-2011</div>
+                                <div class="timeline-content text-sm" id="content-2010-2011">
+                                    古树状况急剧恶化，大量落叶，生命垂危，濒临死亡。
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Item 3 -->
+                            <div class="timeline-item">
+                                <div class="timeline-node active" data-year="2011"></div>
+                                <div class="timeline-year font-medium text-sm mb-2">2011</div>
+                                <div class="timeline-content active text-sm" id="content-2011">
+                                    王家云介入，"千年古山茶树复壮技术"工程正式启动，专家会诊。
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Item 4 -->
+                            <div class="timeline-item">
+                                <div class="timeline-node" data-year="2017"></div>
+                                <div class="timeline-year font-medium text-sm mb-2">2017</div>
+                                <div class="timeline-content text-sm" id="content-2017">
+                                    一期复壮工程成功验收，古树恢复生机，开始正常开花。
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Item 5 -->
+                            <div class="timeline-item">
+                                <div class="timeline-node" data-year="2020s"></div>
+                                <div class="timeline-year font-medium text-sm mb-2">2020s</div>
+                                <div class="timeline-content text-sm" id="content-2020s">
+                                    二期复壮工程持续推进，目标2032年恢复自然生存状态。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Regular text -->
+                    <p class="leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        市、区、街道多次召开专题会议，广邀国内外专家会诊。王家云的研究所与中国林科院亚林所紧密合作，历经近6年、2000多个日夜的精心照料与技术攻关，克服重重挑战，终使古树逆转颓势，重焕生机。
+                    </p>
+                    
+                    <!-- Two-column layout -->
+                    <div class="md:flex md:space-x-6 my-16">
+                        <!-- Left column (40%) -->
+                        <div class="md:w-2/5 mb-6 md:mb-0 animate-on-scroll fade-in-on-scroll">
+                            <figure class="rounded-lg overflow-hidden shadow-lg h-full">
+                                <!-- Replacing with actual image from images folder -->
+                                <img src="images/images (1).jpg" alt="专家团队研究救治方案或照料古树" class="w-full h-full object-cover">
+                            </figure>
+                        </div>
+                        
+                        <!-- Right column (60%) -->
+                        <div class="md:w-3/5 space-y-6">
+                            <!-- Text in right column -->
+                            <p class="leading-relaxed animate-on-scroll fade-in-on-scroll">
+                                但技术并非唯一难题。正高级工程师李建清指出，这是一项系统工程，考验着人与自然的和谐共生之道。公众保护意识、部门协作、科研支持、资金投入，环环相扣，缺一不可。
+                            </p>
+                            
+                            <!-- Infographic Element -->
+                            <div class="bg-white bg-opacity-90 dark:bg-gray-800 dark:bg-opacity-90 rounded-lg p-6 shadow-md animate-on-scroll fade-in-on-scroll">
+                                <h3 class="text-lg font-medium mb-4">古树救护的关键要素</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">成功救护离不开多方合力</p>
+                                
+                                <div class="space-y-3">
+                                    <!-- Infographic Item 1 -->
+                                    <div class="infographic-item" title="专家团队研究、实施古树救治方案，提供技术支持">
+                                        <div class="infographic-icon">
+                                            <i class="fas fa-brain"></i>
+                                        </div>
+                                        <div class="infographic-text">专家智慧</div>
+                                    </div>
+                                    
+                                    <!-- Infographic Item 2 -->
+                                    <div class="infographic-item" title="政府部门协调各方资源，提供政策保障">
+                                        <div class="infographic-icon">
+                                            <i class="fas fa-landmark"></i>
+                                        </div>
+                                        <div class="infographic-text">政策支持</div>
+                                    </div>
+                                    
+                                    <!-- Infographic Item 3 -->
+                                    <div class="infographic-item" title="科研机构提供专业知识和研究成果">
+                                        <div class="infographic-icon">
+                                            <i class="fas fa-flask"></i>
+                                        </div>
+                                        <div class="infographic-text">科学方案</div>
+                                    </div>
+                                    
+                                    <!-- Infographic Item 4 -->
+                                    <div class="infographic-item" title="项目经费保障工程顺利实施">
+                                        <div class="infographic-icon">
+                                            <i class="fas fa-coins"></i>
+                                        </div>
+                                        <div class="infographic-text">经费保障</div>
+                                    </div>
+                                    
+                                    <!-- Infographic Item 5 -->
+                                    <div class="infographic-item" title="社会公众关注和参与是保护古树的重要力量">
+                                        <div class="infographic-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="infographic-text">社会关注</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Spacer -->
+                    <div class="h-20"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Community -->
+        <section id="section-community" class="relative py-20 min-h-screen">
+            <!-- Background Image with slight blur -->
+            <div class="absolute inset-0 z-0">
+                <!-- Replacing with actual image from images folder - using repeated image as needed -->
+                <img src="images/00301264386_a397447b.jpg" alt="温州城市风貌或市民生活" class="w-full h-full object-cover fixed blur-[2px]">
+                <div class="absolute inset-0 bg-[#f5f5dc] bg-opacity-30"></div>
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-4 md:px-6 max-w-5xl">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-center">全城守护：根植温州文脉</h2>
+                
+                <div class="space-y-12">
+                    <!-- Regular text -->
+                    <p class="leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        保护千年古山茶的"接力跑"，在政府与民意的同频共振中，一棒接一棒地传递。瓯海区人大常委会连续三届提出11项建议，区政协通过"社情民意"紧急反映情况，市委主要领导迅速批示，市区两级政府及部门、属地街道全面参与……
+                    </p>
+                    
+                    <!-- Full-width grid collage -->
+                    <div class="my-16 animate-on-scroll fade-in-on-scroll">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+                            <!-- Replacing with actual images from images folder - repeating as needed -->
+                            <div class="aspect-square overflow-hidden">
+                                <img src="images/images (2).jpg" alt="会议照片" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="aspect-square overflow-hidden">
+                                <img src="images/images (1).jpg" alt="文件照片" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="aspect-square overflow-hidden">
+                                <img src="images/1200px-1963-01_1963年_山茶花.jpg" alt="新闻报道" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="aspect-square overflow-hidden">
+                                <img src="images/images.jpg" alt="政府部门" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            </div>
+                        </div>
+                        <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">政府和社会各界关注古山茶保护行动</p>
+                    </div>
+                    
+                    <!-- Regular text -->
+                    <p class="leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        这场"重生之战"不仅牵动全城，更引来国际目光。2014年，《国际山茶杂志》报道了救治进展。2017年，古山茶一期复壮成功验收，成为守护行动的重要里程碑。
+                    </p>
+                    
+                    <!-- Boxed quote -->
+                    <blockquote class="boxed my-12 animate-on-scroll slide-up-subtle-on-scroll">
+                        <p class="font-serif text-lg mb-4">永嘉地宜茶...玛瑙茶，红黄白粉为心，大红为盘，产温州...道人送我寒岁种，不是寻常儿女花。</p>
+                        <cite class="block text-sm text-gray-600 dark:text-gray-400">— 晋代陈祖缓《和种桑诗》、宋代陈景沂《全芳备祖》、南宋王十朋诗句 (节选)</cite>
+                    </blockquote>
+                    
+                    <!-- Regular text -->
+                    <p class="leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        正如黄卫东所言，守护古山茶，因为它已深深融入温州文化。从"永嘉地宜茶"的古韵，到宋代茶花盛景，再到南宋状元王十朋的诗篇，温州"山茶故里"的美誉源远流长。1985年，茶花更被选为温州市市花，成为这座城市的象征。
+                    </p>
+                    
+                    <!-- Center small image -->
+                    <div class="max-w-sm mx-auto my-12 animate-on-scroll fade-in-on-scroll">
+                        <figure class="border border-gray-200 dark:border-gray-700 rounded overflow-hidden">
+                            <!-- Replacing with actual image from images folder -->
+                            <img src="images/Mostra-antiche-camelie-della-Lucchesia-30-1.jpg" alt="温州市花茶花标志或相关城市元素" class="w-full h-auto">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Future -->
+        <section id="section-future" class="relative py-20 min-h-screen">
+            <!-- Video Background (simulated with image for placeholder) -->
+            <div class="absolute inset-0 z-0">
+                <!-- In production, replace with actual video -->
+                <!-- Video element would be preferable for this section -->
+                <div class="w-full h-full bg-black">
+                    <!-- Replacing with actual image from images folder -->
+                    <img src="images/11248569093_97c28a9b24_b.jpg" alt="阳光透过古山茶茂密的绿叶和鲜艳的花朵" class="w-full h-full object-cover fixed opacity-70">
+                </div>
+                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-4 md:px-6 max-w-5xl text-white">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-center">向光而生：重生与未来展望</h2>
+                
+                <div class="space-y-12">
+                    <!-- Lead white text -->
+                    <p class="text-xl md:text-2xl leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        如今，古老的山茶树已重焕生机，长势良好。第二期复壮保护工程正稳步推进至第三年，目标是到2032年底，让它恢复自然生存状态。守护人王家云仍需细心调控花量，避免生命透支。
+                    </p>
+                    
+                    <!-- Full-width image with strong shadow -->
+                    <div class="my-16 animate-on-scroll zoom-in-subtle-on-scroll">
+                        <figure class="shadow-2xl rounded-lg overflow-hidden">
+                            <!-- Replacing with actual image from images folder -->
+                            <img src="images/1200px-1963-01_1963年_山茶花.jpg" alt="健康生长的千年古山茶现状" class="w-full h-auto">
+                            <figcaption class="bg-black bg-opacity-70 p-4 text-center">
+                                <p>如今的"茶花王"，生机勃勃。</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    
+                    <!-- White text center aligned -->
+                    <p class="text-center leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        随着2023年3月15日《古树名木保护条例》的正式施行，保护古树名木已成为全社会的共识与法规要求。这场围绕"世界山茶花大王"的守护接力，正吸引着更多人加入，共同呵护这份珍贵的自然与文化遗产。
+                    </p>
+                    
+                    <!-- Toggle buttons -->
+                    <div class="flex justify-center mt-12 animate-on-scroll fade-in-on-scroll">
+                        <a href="https://www.gov.cn/zhengce/2023-01/30/content_5738970.htm" target="_blank" class="toggle-btn flex items-center">
+                            <i class="fas fa-book-open mr-2"></i> 条例解读
+                        </a>
+                        <a href="#" target="_blank" class="toggle-btn flex items-center">
+                            <i class="fas fa-tree mr-2"></i> 温州古树名录
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section id="conclusion" class="relative py-20">
+            <div class="container mx-auto px-4 md:px-6 max-w-4xl">
+                <div class="space-y-16">
+                    <!-- Final thoughts -->
+                    <p class="font-serif text-2xl md:text-3xl text-center leading-relaxed animate-on-scroll fade-in-on-scroll">
+                        从唐朝风霜到今日重生，温州这棵千年古山茶的故事，是生命的赞歌，是匠心的传承，更是人与自然和谐共生的动人篇章。它的每一次花开，都见证着守护的力量与希望的延续。
+                    </p>
+                    
+                    <!-- Center medium image -->
+                    <div class="max-w-2xl mx-auto my-12 opacity-90 hover:opacity-100 transition-opacity duration-700 animate-on-scroll fade-in-on-scroll">
+                        <figure class="rounded-lg overflow-hidden">
+                            <!-- Replacing with actual image from images folder -->
+                            <img src="images/Mostra-antiche-camelie-della-Lucchesia-30-1.jpg" alt="千年古山茶的意境图" class="w-full h-auto">
+                        </figure>
+                    </div>
+                    
+                    <!-- Call to action -->
+                    <div class="text-center animate-on-scroll fade-in-on-scroll">
+                        <a href="#comment-section" class="inline-block bg-tea-600 hover:bg-tea-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                            参与讨论：分享你身边的古树故事
+                        </a>
+                    </div>
+                    
+                    <!-- Share options -->
+                    <div class="flex justify-center space-x-4 animate-on-scroll fade-in-on-scroll">
+                        <button class="share-btn" data-platform="WeChat">
+                            <i class="fab fa-weixin text-2xl text-green-600 hover:text-green-700"></i>
+                            <span class="ml-2">分享到微信</span>
+                        </button>
+                        <button class="share-btn" data-platform="Weibo">
+                            <i class="fab fa-weibo text-2xl text-red-600 hover:text-red-700"></i>
+                            <span class="ml-2">分享到微博</span>
+                        </button>
+                        <button id="copyLink" class="share-btn" data-platform="Link">
+                            <i class="fas fa-link text-2xl text-blue-600 hover:text-blue-700"></i>
+                            <span class="ml-2">复制链接</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-tea-800 text-white py-12">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Author info -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-4">作者信息</h3>
+                        <p class="mb-2">温州网 / 温州日报</p>
+                        <div class="flex space-x-4 mt-4">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Related stories -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-4">相关报道</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">温州古树保护计划</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">探访大罗山生态区</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">温州市花茶花的历史渊源</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Footer notes -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-4">关于本站</h3>
+                        <p class="text-sm text-gray-300">内容来源：温州日报 | 图片来源：苏巧将 等</p>
+                        <p class="text-sm text-gray-300 mt-2">技术支持：Linear风格设计团队</p>
+                        <p class="text-sm text-gray-300 mt-2">© 2025 版权所有</p>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                    <p>本网站仅用于展示，所有图片均为占位图，实际使用时请替换为相关项目的真实图片。</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference or system preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+        
+        // Theme toggle button click handler
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // Scroll animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                    
+                    // Apply specific animation class based on element's animation type
+                    if (element.classList.contains('fade-in-on-scroll')) {
+                        element.style.transform = 'translateY(0)';
+                        element.style.opacity = '1';
+                    } else if (element.classList.contains('slide-up-on-scroll')) {
+                        element.style.transform = 'translateY(0)';
+                        element.style.opacity = '1';
+                    } else if (element.classList.contains('slide-up-subtle-on-scroll')) {
+                        element.style.transform = 'translateY(0)';
+                        element.style.opacity = '1';
+                    } else if (element.classList.contains('zoom-in-on-scroll')) {
+                        element.style.transform = 'scale(1)';
+                        element.style.opacity = '1';
+                    } else if (element.classList.contains('zoom-in-subtle-on-scroll')) {
+                        element.style.transform = 'scale(1)';
+                        element.style.opacity = '1';
+                    }
+                }
+            });
+        };
+        
+        // Run on page load and scroll
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+        
+        // Timeline functionality
+        const timelineNodes = document.querySelectorAll('.timeline-node');
+        
+        timelineNodes.forEach(node => {
+            node.addEventListener('click', () => {
+                // Remove active class from all nodes
+                timelineNodes.forEach(n => n.classList.remove('active'));
+                
+                // Add active class to clicked node
+                node.classList.add('active');
+                
+                // Hide all content
+                document.querySelectorAll('.timeline-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show corresponding content
+                const year = node.getAttribute('data-year');
+                const content = document.getElementById(`content-${year}`);
+                if (content) {
+                    content.classList.add('active');
+                }
+            });
+        });
+        
+        // Copy link functionality
+        const copyLink = document.getElementById('copyLink');
+        if (copyLink) {
+            copyLink.addEventListener('click', () => {
+                navigator.clipboard.writeText(window.location.href)
+                    .then(() => {
+                        const originalText = copyLink.innerHTML;
+                        copyLink.innerHTML = '<i class="fas fa-check text-2xl text-green-600"></i><span class="ml-2">链接已复制</span>';
+                        setTimeout(() => {
+                            copyLink.innerHTML = originalText;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('无法复制链接: ', err);
+                    });
+            });
+        }
+        
+        // Share buttons functionality (simplified)
+        const shareButtons = document.querySelectorAll('.share-btn');
+        shareButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const platform = button.getAttribute('data-platform');
+                if (platform === 'WeChat') {
+                    alert('请打开微信扫描二维码分享');
+                } else if (platform === 'Weibo') {
+                    window.open(`http://service.weibo.com/share/share.php?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(document.title)}`, '_blank');
+                }
+                // Link sharing is handled separately
+            });
+        });
+    </script>
+</body>
+</html> 
