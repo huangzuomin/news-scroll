@@ -286,6 +286,7 @@
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.2s, box-shadow 0.2s;
+            color: var(--text-color);
         }
         
         .allergen-item:hover {
@@ -315,6 +316,7 @@
             transition: all 0.3s ease;
             cursor: pointer;
             height: 100%;
+            color: var(--text-color);
         }
         
         .benefit-card:hover {
@@ -393,10 +395,10 @@
     <!-- 页面头部 -->
     <header class="relative h-screen flex items-center justify-center text-white overflow-hidden">
         <div class="absolute inset-0">
-            <!-- 将占位图片替换为content.js中指定的路径 -->
-            <img src="/images/hero-image.png" 
-                 alt="食品包装标签特写，象征食品安全新规。" 
-                 class="w-full h-full object-cover parallax">
+            <!-- 使用背景颜色代替缺失的图片 -->
+            <div class="w-full h-full bg-blue-900 flex items-center justify-center">
+                <div class="text-white text-6xl font-bold">食品安全新标解读</div>
+            </div>
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
         <div class="relative z-10 text-center px-4">
@@ -446,8 +448,8 @@
                     id: "section-1-context",
                     title: "时代的呼唤：为何需要这场『舌尖』变革？",
                     background: {
-                        type: "image",
-                        url: "/images/section1-image.png",
+                        type: "color",
+                        value: "bg-blue-800",
                         style: "fixed",
                         overlay: "bg-black bg-opacity-40"
                     },
@@ -490,8 +492,8 @@
                     id: "section-2-core-changes-1",
                     title: "告别模糊，亮明底牌：标签核心变革（上）",
                     background: {
-                        type: "image",
-                        url: "/images/section2-image.png",
+                        type: "color",
+                        value: "bg-indigo-800",
                         style: "parallax-slow",
                         overlay: "bg-black bg-opacity-30"
                     },
@@ -534,8 +536,8 @@
                     id: "section-3-core-changes-2",
                     title: "精细画像，数字赋能：标签核心变革（下）",
                     background: {
-                        type: "image",
-                        url: "/images/section3-image.png",
+                        type: "color",
+                        value: "bg-green-800",
                         style: "scroll",
                         overlay: "bg-black bg-opacity-20"
                     },
@@ -565,8 +567,8 @@
                     id: "section-4-impact",
                     title: "涟漪效应：新标如何重塑产业与餐桌？",
                     background: {
-                        type: "image",
-                        url: "/images/section4-image.png",
+                        type: "color",
+                        value: "bg-purple-800",
                         style: "parallax-slow",
                         overlay: "bg-black bg-opacity-40"
                     },
@@ -879,13 +881,17 @@
                 if (section.background.type === 'image') {
                     sectionElement.style.backgroundImage = `url(${section.background.url})`;
                     sectionElement.className += ' parallax';
-                    if (section.background.overlay) {
-                        const overlay = document.createElement('div');
-                        overlay.className = `absolute inset-0 ${section.background.overlay}`;
-                        sectionElement.appendChild(overlay);
-                    }
                 } else if (section.background.type === 'gradient') {
                     sectionElement.style.background = section.background.value;
+                } else if (section.background.type === 'color') {
+                    // 添加背景颜色类
+                    sectionElement.className += ` ${section.background.value}`;
+                }
+                
+                if (section.background.overlay) {
+                    const overlay = document.createElement('div');
+                    overlay.className = `absolute inset-0 ${section.background.overlay}`;
+                    sectionElement.appendChild(overlay);
                 }
             }
             
@@ -991,6 +997,7 @@
                     const iconDiv = document.createElement('div');
                     iconDiv.className = 'mb-4 text-3xl text-blue-600 dark:text-blue-400';
                     
+                    // 正确映射图标
                     let iconClass = 'fas fa-file-alt'; // 默认图标
                     if (item.icon === 'document-icon') iconClass = 'fas fa-file-alt';
                     if (item.icon === 'checklist-icon') iconClass = 'fas fa-tasks';
@@ -1020,7 +1027,7 @@
                 canvasContainer.className = 'w-full max-w-md mx-auto';
                 
                 const canvas = document.createElement('canvas');
-                canvas.id = 'standards-pie-chart';
+                canvas.id = `standards-pie-chart-${Math.floor(Math.random() * 1000)}`;  // 确保ID唯一
                 canvasContainer.appendChild(canvas);
                 
                 chartContent.appendChild(canvasContainer);
@@ -1028,48 +1035,68 @@
                 // 在创建元素后立即初始化图表
                 setTimeout(() => {
                     const ctx = canvas.getContext('2d');
-                    new Chart(ctx, {
-                        type: 'pie',
-                        data: {
-                            labels: content.dataStructure.map(item => item.category),
-                            datasets: [{
-                                data: content.dataStructure.map(item => item.count),
-                                backgroundColor: [
-                                    'rgba(54, 162, 235, 0.7)',
-                                    'rgba(255, 99, 132, 0.7)'
-                                ],
-                                borderColor: [
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 99, 132, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    position: 'top',
-                                    labels: {
-                                        font: {
-                                            family: "'Noto Sans SC', sans-serif"
+                    try {
+                        new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: content.dataStructure.map(item => item.category),
+                                datasets: [{
+                                    data: content.dataStructure.map(item => item.count),
+                                    backgroundColor: [
+                                        'rgba(54, 162, 235, 0.7)',
+                                        'rgba(255, 99, 132, 0.7)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 99, 132, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        position: 'top',
+                                        labels: {
+                                            font: {
+                                                family: "'Noto Sans SC', sans-serif"
+                                            }
                                         }
-                                    }
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        label: function(context) {
-                                            const label = context.label || '';
-                                            const value = context.parsed || 0;
-                                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                            const percentage = Math.round((value / total) * 100);
-                                            return `${label}: ${value} (${percentage}%)`;
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                const label = context.label || '';
+                                                const value = context.raw || 0;
+                                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                                const percentage = Math.round((value / total) * 100);
+                                                return `${label}: ${value} (${percentage}%)`;
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
-                    });
+                        });
+                    } catch (error) {
+                        console.error('Error initializing chart:', error);
+                        // 失败时显示备用内容
+                        canvasContainer.innerHTML = `
+                            <div class="bg-white p-6 rounded-lg shadow text-center">
+                                <div class="text-lg font-bold mb-4">新发布标准构成 (共59项)</div>
+                                <div class="flex justify-center space-x-8">
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 rounded-full bg-blue-500 mx-auto mb-2"></div>
+                                        <div>新制定标准: 50项 (85%)</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 rounded-full bg-red-500 mx-auto mb-2"></div>
+                                        <div>标准修改单: 9项 (15%)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
                 }, 100);
             } else if (content.chartType === 'allergens-grid') {
                 // 创建过敏原图标网格
@@ -1084,16 +1111,19 @@
                     const iconDiv = document.createElement('div');
                     iconDiv.className = 'allergen-icon';
                     
-                    // 设置适当的图标
-                    let iconClass = 'fas fa-exclamation-triangle'; // 默认图标
-                    if (item.icon === 'wheat-icon') iconClass = 'fas fa-seedling';
-                    if (item.icon === 'shrimp-icon') iconClass = 'fas fa-water';
-                    if (item.icon === 'fish-icon') iconClass = 'fas fa-fish';
-                    if (item.icon === 'egg-icon') iconClass = 'fas fa-egg';
-                    if (item.icon === 'peanut-icon') iconClass = 'fas fa-prescription-bottle';
-                    if (item.icon === 'soybean-icon') iconClass = 'fas fa-leaf';
-                    if (item.icon === 'milk-icon') iconClass = 'fas fa-coffee';
-                    if (item.icon === 'nut-icon') iconClass = 'fas fa-apple-alt';
+                    // 简化图标使用，确保使用基本图标
+                    let iconClass = '';
+                    switch(item.icon) {
+                        case 'wheat-icon': iconClass = 'fas fa-seedling'; break;
+                        case 'shrimp-icon': iconClass = 'fas fa-water'; break;
+                        case 'fish-icon': iconClass = 'fas fa-fish'; break;
+                        case 'egg-icon': iconClass = 'fas fa-egg'; break;
+                        case 'peanut-icon': iconClass = 'fas fa-seedling'; break;
+                        case 'soybean-icon': iconClass = 'fas fa-leaf'; break;
+                        case 'milk-icon': iconClass = 'fas fa-tint'; break;
+                        case 'nut-icon': iconClass = 'fas fa-apple-alt'; break;
+                        default: iconClass = 'fas fa-exclamation-circle';
+                    }
                     
                     iconDiv.innerHTML = `<i class="${iconClass}"></i>`;
                     
@@ -1126,12 +1156,15 @@
                     const iconDiv = document.createElement('div');
                     iconDiv.className = 'benefit-icon';
                     
-                    // 设置适当的图标
-                    let iconClass = 'fas fa-qrcode'; // 默认图标
-                    if (item.icon === 'database-icon') iconClass = 'fas fa-database';
-                    if (item.icon === 'user-cog-icon') iconClass = 'fas fa-user-cog';
-                    if (item.icon === 'accessibility-icon') iconClass = 'fas fa-universal-access';
-                    if (item.icon === 'chat-link-icon') iconClass = 'fas fa-comments';
+                    // 简化图标使用，确保使用基本图标
+                    let iconClass = '';
+                    switch(item.icon) {
+                        case 'database-icon': iconClass = 'fas fa-database'; break;
+                        case 'user-cog-icon': iconClass = 'fas fa-user-cog'; break;
+                        case 'accessibility-icon': iconClass = 'fas fa-universal-access'; break;
+                        case 'chat-link-icon': iconClass = 'fas fa-comments'; break;
+                        default: iconClass = 'fas fa-qrcode';
+                    }
                     
                     iconDiv.innerHTML = `<i class="${iconClass}"></i>`;
                     
@@ -1289,10 +1322,14 @@
                     container.innerHTML = `
                         <div class="comparison-slider">
                             <div class="before">
-                                <img src="/images/section3-image2.png" alt="旧版营养标签">
+                                <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                                    <div class="text-xl font-bold">旧版营养标签 (1+4)</div>
+                                </div>
                             </div>
                             <div class="after">
-                                <img src="/images/section3-image3.png" alt="新版营养标签">
+                                <div class="w-full h-full bg-blue-200 flex items-center justify-center">
+                                    <div class="text-xl font-bold">新版营养标签 (1+6)</div>
+                                </div>
                             </div>
                             <div class="handle"></div>
                         </div>
