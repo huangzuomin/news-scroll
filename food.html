@@ -393,8 +393,8 @@
     <!-- 页面头部 -->
     <header class="relative h-screen flex items-center justify-center text-white overflow-hidden">
         <div class="absolute inset-0">
-            <!-- 使用占位图片代替缺失的图片 -->
-            <img src="https://placehold.co/1920x1080/333333/FFFFFF?text=食品安全" 
+            <!-- 将占位图片替换为content.js中指定的路径 -->
+            <img src="/images/hero-image.png" 
                  alt="食品包装标签特写，象征食品安全新规。" 
                  class="w-full h-full object-cover parallax">
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -447,7 +447,7 @@
                     title: "时代的呼唤：为何需要这场『舌尖』变革？",
                     background: {
                         type: "image",
-                        url: "https://placehold.co/1920x1080/336699/FFFFFF?text=食品安全标准体系",
+                        url: "/images/section1-image.png",
                         style: "fixed",
                         overlay: "bg-black bg-opacity-40"
                     },
@@ -491,7 +491,7 @@
                     title: "告别模糊，亮明底牌：标签核心变革（上）",
                     background: {
                         type: "image",
-                        url: "https://placehold.co/1920x1080/993333/FFFFFF?text=标签核心变革",
+                        url: "/images/section2-image.png",
                         style: "parallax-slow",
                         overlay: "bg-black bg-opacity-30"
                     },
@@ -535,7 +535,7 @@
                     title: "精细画像，数字赋能：标签核心变革（下）",
                     background: {
                         type: "image",
-                        url: "https://placehold.co/1920x1080/339966/FFFFFF?text=营养标签与数字标签",
+                        url: "/images/section3-image.png",
                         style: "scroll",
                         overlay: "bg-black bg-opacity-20"
                     },
@@ -566,7 +566,7 @@
                     title: "涟漪效应：新标如何重塑产业与餐桌？",
                     background: {
                         type: "image",
-                        url: "https://placehold.co/1920x1080/996633/FFFFFF?text=影响分析",
+                        url: "/images/section4-image.png",
                         style: "parallax-slow",
                         overlay: "bg-black bg-opacity-40"
                     },
@@ -1289,10 +1289,10 @@
                     container.innerHTML = `
                         <div class="comparison-slider">
                             <div class="before">
-                                <img src="https://placehold.co/600x800/e5e7eb/a3a3a3?text=旧版标签1+4" alt="旧版营养标签">
+                                <img src="/images/section3-image2.png" alt="旧版营养标签">
                             </div>
                             <div class="after">
-                                <img src="https://placehold.co/600x800/e5e7eb/a3a3a3?text=新版标签1+6" alt="新版营养标签">
+                                <img src="/images/section3-image3.png" alt="新版营养标签">
                             </div>
                             <div class="handle"></div>
                         </div>
