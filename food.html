@@ -381,6 +381,57 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* 使开场引导内容随滚动而移动 */
+        .scroll-content {
+            transform: translateY(0);
+            transition: transform 0.3s ease-out;
+        }
+        
+        /* 当页面滚动时，应用此效果 */
+        .scrolled .scroll-content {
+            transform: translateY(-30px);
+            opacity: 0.9;
+        }
+        
+        /* 开场引导段落初始位置在屏幕下方 */
+        .opening-statement {
+            position: absolute;
+            top: 100vh; /* 初始位置在视窗高度之下 */
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            transform: translateY(0);
+            transition: transform 0.5s ease-out;
+            z-index: 20;
+        }
+        
+        /* 当滚动时，开场引导上移入屏幕 */
+        .opening-visible {
+            transform: translateY(-100vh);
+        }
+        
+        /* 标题区域的滚动效果 */
+        .title-content {
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+        
+        /* 当开场引导可见时，标题逐渐隐藏 */
+        .title-hiding {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        
+        /* 视差效果增强 */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -393,13 +444,14 @@
     <!-- 页面头部 -->
     <header class="relative h-screen flex items-center justify-center text-white overflow-hidden">
         <div class="absolute inset-0">
-            <!-- 将占位图片替换为content.js中指定的路径 -->
+            <!-- 将图片设置为fixed背景 -->
             <img src="/images/hero-image.png" 
                  alt="食品包装标签特写，象征食品安全新规。" 
-                 class="w-full h-full object-cover parallax">
+                 class="parallax-bg">
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
-        <div class="relative z-10 text-center px-4">
+        <!-- 标题内容区 -->
+        <div class="relative z-10 text-center px-4 title-content">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 fade-in">重塑"舌尖上的说明书"</h1>
             <p class="text-xl md:text-2xl mb-8 fade-in">中国59项食品安全新标深度解读</p>
             <p class="text-lg md:text-xl opacity-90 fade-in">从"零添加"禁令到数字标签，新规如何影响食品产业与市民餐桌？</p>
@@ -408,6 +460,13 @@
                 <span class="mx-2">·</span>
                 <span>2024-XX-XX</span>
             </div>
+        </div>
+        
+        <!-- 开场引导段落 - 初始位置在屏幕外 -->
+        <div class="opening-statement mx-auto max-w-3xl text-left p-6 bg-black bg-opacity-60 rounded-lg backdrop-blur-sm">
+            <p class="text-lg md:text-xl leading-relaxed text-white">
+                当"零添加"面临重新界定，当过敏原被强制"亮牌"，当营养成分表迎来"1+6"升级……一场深刻变革正随59项食品安全新标悄然展开。这不仅是监管的升级，更是对亿万消费者知情权与健康的有力回应。新标背后，是怎样的时代逻辑？又将如何搅动产业，触动你我的餐桌？
+            </p>
         </div>
     </header>
     
@@ -1388,6 +1447,48 @@
         document.addEventListener('DOMContentLoaded', () => {
             generateContent();
             initComparisonSlider();
+        });
+        
+        // 添加滚动监听脚本
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
+                const header = document.querySelector('header');
+                const titleContent = document.querySelector('.title-content');
+                const openingStatement = document.querySelector('.opening-statement');
+                const viewportHeight = window.innerHeight;
+                
+                // 调整标题和开场引导的显示效果
+                if (scrollPosition > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // 标题区域的移动和透明度
+                if (scrollPosition > viewportHeight * 0.3) {
+                    // 当滚动超过视窗高度的30%时，标题开始隐藏
+                    titleContent.classList.add('title-hiding');
+                } else {
+                    titleContent.classList.remove('title-hiding');
+                    // 在标题可见区域内，根据滚动调整标题位置
+                    titleContent.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+                }
+                
+                // 开场引导的显示
+                if (scrollPosition > viewportHeight * 0.5) {
+                    // 当滚动超过视窗高度的50%，开场引导逐渐显示
+                    openingStatement.classList.add('opening-visible');
+                    
+                    // 微调开场引导的位置，使其平滑入场
+                    const openingProgress = Math.min(1, (scrollPosition - viewportHeight * 0.5) / (viewportHeight * 0.3));
+                    const yOffset = -100 * openingProgress; // 额外的Y轴偏移
+                    openingStatement.style.transform = `translateY(calc(-100vh + ${yOffset}px))`;
+                } else {
+                    openingStatement.classList.remove('opening-visible');
+                    openingStatement.style.transform = 'translateY(0)';
+                }
+            });
         });
     </script>
 </body>
