@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重塑"舌尖上的说明书"：中国59项食品安全新标深度解读</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* 自定义样式 */
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2d3748;
+            --accent-color: #e53e3e;
+            --text-color: #2d3748;
+            --bg-color: #ffffff;
+        }
+        
+        [data-theme="dark"] {
+            --primary-color: #4299e1;
+            --secondary-color: #a0aec0;
+            --accent-color: #fc8181;
+            --text-color: #e2e8f0;
+            --bg-color: #1a202c;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 视差滚动效果 */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* 引用样式 */
+        .quote-box {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .quote-box.boxed {
+            border-left: none;
+            border-radius: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quote-box.highlight {
+            background-color: rgba(229, 62, 62, 0.1);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        
+        /* 图表容器 */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 内容样式 */
+        .lead {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        /* 呼吁行动按钮 */
+        .call-to-action {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .call-to-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .parallax {
+                background-attachment: scroll;
+            }
+            
+            .chart-container {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* 添加新的样式 */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--accent-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 50%;
+            padding-right: 2rem;
+        }
+        
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+            padding-right: 0;
+            padding-left: 2rem;
+        }
+        
+        .timeline-content {
+            background: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .comparison-slider {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: var(--bg-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .comparison-slider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--accent-color);
+            z-index: 2;
+        }
+        
+        .comparison-slider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            z-index: 3;
+            cursor: ew-resize;
+        }
+        
+        .comparison-slider img {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .comparison-slider img:last-child {
+            left: 50%;
+            clip-path: inset(0 50% 0 0);
+        }
+        
+        /* 深色模式适配 */
+        [data-theme="dark"] .timeline-content {
+            background: var(--bg-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        [data-theme="dark"] .comparison-slider {
+            background: var(--bg-color);
+        }
+        
+        /* 过敏原图标网格 */
+        .allergen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .allergen-item {
+            background-color: var(--bg-color);
+            border-radius: 0.5rem;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .allergen-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .allergen-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent-color);
+        }
+        
+        /* 数字标签潜力卡片 */
+        .digital-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .benefit-card {
+            background-color: var(--bg-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .benefit-card.active {
+            border: 2px solid var(--accent-color);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .benefit-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .benefit-card.active .benefit-details {
+            max-height: 200px;
+            margin-top: 1rem;
+        }
+        
+        /* 营养标签对比 */
+        .nutrition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background-color: var(--bg-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .nutrition-table th,
+        .nutrition-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .nutrition-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nutrition-table .highlight {
+            background-color: rgba(229, 62, 62, 0.1);
+            font-weight: bold;
+        }
+        
+        /* 响应式调整补充 */
+        @media (max-width: 768px) {
+            .allergen-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .digital-benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- 主题切换按钮 -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:block"></i>
+    </button>
+    
+    <!-- 页面头部 -->
+    <header class="relative h-screen flex items-center justify-center text-white overflow-hidden">
+        <div class="absolute inset-0">
+            <!-- 使用占位图片代替缺失的图片 -->
+            <img src="https://placehold.co/1920x1080/333333/FFFFFF?text=食品安全" 
+                 alt="食品包装标签特写，象征食品安全新规。" 
+                 class="w-full h-full object-cover parallax">
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 fade-in">重塑"舌尖上的说明书"</h1>
+            <p class="text-xl md:text-2xl mb-8 fade-in">中国59项食品安全新标深度解读</p>
+            <p class="text-lg md:text-xl opacity-90 fade-in">从"零添加"禁令到数字标签，新规如何影响食品产业与市民餐桌？</p>
+            <div class="mt-8 text-sm opacity-75 fade-in">
+                <span>温州新闻网AIGC实验室</span>
+                <span class="mx-2">·</span>
+                <span>2024-XX-XX</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 主要内容区域 -->
+    <main class="relative">
+        <!-- 章节内容将通过 JavaScript 动态生成 -->
+    </main>
+    
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="text-sm opacity-75">© 2024 温州新闻网AIGC实验室. All rights reserved.</p>
+                <div class="mt-4 space-x-4">
+                    <a href="#" class="hover:text-blue-400 transition-colors"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="hover:text-blue-400 transition-colors"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="hover:text-blue-400 transition-colors"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // 内容数据
+        const content = {
+            // 专题基本信息
+            title: "重塑\"舌尖上的说明书\"",
+            subtitle: "中国59项食品安全新标深度解读：从\"零添加\"禁令到数字标签，新规如何影响食品产业与市民餐桌？",
+            author: "温州新闻网AIGC实验室",
+            publishDate: "2024-XX-XX",
+
+            // 章节内容
+            sections: [
+                // Section 1: 背景与必要性
+                {
+                    id: "section-1-context",
+                    title: "时代的呼唤：为何需要这场『舌尖』变革？",
+                    background: {
+                        type: "image",
+                        url: "https://placehold.co/1920x1080/336699/FFFFFF?text=食品安全标准体系",
+                        style: "fixed",
+                        overlay: "bg-black bg-opacity-40"
+                    },
+                    content: [
+                        {
+                            type: "text",
+                            value: "民以食为天，食以安为先。中国已构建起庞大的食品安全标准体系，<strong>1660项</strong>标准、超<strong>20,000项</strong>指标，覆盖<strong>所有340余种</strong>食品类别，是守护国民『舌尖安全』的坚实屏障。",
+                            style: "text-lg leading-relaxed",
+                            animation: "slide-up"
+                        },
+                        {
+                            type: "chart",
+                            chartType: "infographic-key-numbers",
+                            title: "中国食品安全标准体系概览",
+                            description: "截至目前，我国已建立起覆盖广泛的食品安全标准体系。",
+                            dataStructure: [
+                                { label: "累计标准总数", value: "1660项", icon: "document-icon" },
+                                { label: "包含指标数", value: ">20,000项", icon: "checklist-icon" },
+                                { label: "覆盖食品类别", value: ">340种", icon: "food-category-icon" }
+                            ],
+                            animation: "fade-in"
+                        },
+                        {
+                            type: "text",
+                            value: "然而，消费升级、市场乱象、健康需求提升……新的挑战应运而生。标签模糊误导、过敏风险、营养信息不透明等问题，呼唤着监管体系的与时俱进。",
+                            style: "text-lg leading-relaxed mt-8",
+                            animation: "slide-up"
+                        },
+                        {
+                            type: "quote",
+                            value: "进一步提升食品安全保障水平，维护公众健康，促进食品产业高质量发展。",
+                            attribution: "国家卫健委与市场监管总局官方公告 (2025.3.27)",
+                            style: "boxed",
+                            animation: "fade-in"
+                        }
+                    ]
+                },
+                // Section 2: 核心变革 - 零添加与过敏原
+                {
+                    id: "section-2-core-changes-1",
+                    title: "告别模糊，亮明底牌：标签核心变革（上）",
+                    background: {
+                        type: "image",
+                        url: "https://placehold.co/1920x1080/993333/FFFFFF?text=标签核心变革",
+                        style: "parallax-slow",
+                        overlay: "bg-black bg-opacity-30"
+                    },
+                    content: [
+                        {
+                            type: "text",
+                            value: "新标中最引人瞩目的，是对预包装食品标签的四大革新，它们将重塑我们与食品信息沟通的方式。",
+                            style: "text-xl font-medium mb-8",
+                            animation: "fade-in"
+                        },
+                        {
+                            type: "h3",
+                            value: "1. 告别\"零添加\"模糊地带：规范宣传，回归本真",
+                            style: "text-2xl font-bold mb-6"
+                        },
+                        {
+                            type: "columns",
+                            columns: [
+                                {
+                                    content: "<strong>旧规 (模糊地带):</strong> 部分商家滥用\"零添加\"概念营销，易误导消费者（如\"不加蔗糖\"但含果葡糖浆）。",
+                                    style: "p-6 bg-gray-100 dark:bg-gray-800 rounded-lg"
+                                },
+                                {
+                                    content: "<strong>新规 (GB 7718-2025):</strong> 禁止使用\"不添加\"、\"零添加\"等字样强调未使用某成分。若名称提及特定配料（如燕窝月饼），需标示含量。",
+                                    style: "p-6 bg-blue-50 dark:bg-blue-900 rounded-lg"
+                                }
+                            ]
+                        },
+                        {
+                            type: "quote",
+                            value: "此举是规范行业乱象、引导消费者建立正确认知的关键一步...引导消费者跳出'零添加=绝对健康'的认知误区。",
+                            attribution: "钟凯, 科信食品与健康信息交流中心主任",
+                            style: "highlight",
+                            animation: "fade-in"
+                        }
+                    ]
+                },
+                // Section 3: 核心变革 - 营养标签与数字标签
+                {
+                    id: "section-3-core-changes-2",
+                    title: "精细画像，数字赋能：标签核心变革（下）",
+                    background: {
+                        type: "image",
+                        url: "https://placehold.co/1920x1080/339966/FFFFFF?text=营养标签与数字标签",
+                        style: "scroll",
+                        overlay: "bg-black bg-opacity-20"
+                    },
+                    content: [
+                        {
+                            type: "h3",
+                            value: "3. 营养成分\"精细画像\"：\"1+6\"助力健康选择",
+                            style: "text-2xl font-bold mb-6"
+                        },
+                        {
+                            type: "interactive",
+                            interactiveType: "comparison-slider",
+                            description: "拖动滑块，对比新旧营养标签强制标示内容的变化。",
+                            setupGuide: "实现一个左右布局，左侧展示旧\"1+4\"（能量+蛋白质、脂肪、碳水、钠）标签示例，右侧展示新\"1+6\"（增加糖、饱和脂肪）标签示例。",
+                            animation: "fade-in"
+                        },
+                        {
+                            type: "text",
+                            value: "新规 (GB 28050-2025) 将强制标示从\"1+4\"升级为 <strong>\"1+6\"</strong>，新增 <strong>\"糖\"</strong> 和 <strong>\"饱和脂肪（酸）\"</strong>，并细化格式与NRV%计算。",
+                            style: "text-lg leading-relaxed mt-8",
+                            animation: "slide-up"
+                        }
+                    ]
+                },
+                // Section 4: 影响分析
+                {
+                    id: "section-4-impact",
+                    title: "涟漪效应：新标如何重塑产业与餐桌？",
+                    background: {
+                        type: "image",
+                        url: "https://placehold.co/1920x1080/996633/FFFFFF?text=影响分析",
+                        style: "parallax-slow",
+                        overlay: "bg-black bg-opacity-40"
+                    },
+                    content: [
+                        {
+                            type: "text",
+                            value: "新标的实施，其影响将如涟漪般扩散至产业、市场乃至每个消费者的餐桌，温州等食品产业重镇亦身处其中。",
+                            style: "text-xl font-medium mb-8",
+                            animation: "fade-in"
+                        },
+                        {
+                            type: "h4",
+                            value: "产业层面：阵痛与升级并存",
+                            style: "text-xl font-bold mb-4"
+                        },
+                        {
+                            type: "text",
+                            value: "• <strong>合规成本</strong>：标签更新、包装换代、生产调整、员工培训，对企业（尤其<strong>中小企业</strong>）构成短期压力。\n• <strong>产品策略</strong>：告别\"营销光环\"，聚焦品质、营养，推动产品向健康化、科学化迭代。\n• <strong>管理强化</strong>：过敏原管控、数字标签应用，要求更严的供应链与生产控制，以及数字化能力。",
+                            style: "text-lg leading-relaxed space-y-4",
+                            animation: "slide-up"
+                        }
+                    ]
+                },
+                // Section 5: 多方声音与未来展望
+                {
+                    id: "section-5-voices-future",
+                    title: "前路展望：挑战、机遇与落地时间表",
+                    background: {
+                        type: "gradient",
+                        value: "linear-gradient(135deg, #f6f9fc 0%, #eef2f7 100%)"
+                    },
+                    content: [
+                        {
+                            type: "text",
+                            value: "新标发布引发各界关注，专家、行业、社会如何看待？未来落地之路又将如何铺展？",
+                            style: "text-xl font-medium mb-8",
+                            animation: "fade-in"
+                        },
+                        {
+                            type: "h4",
+                            value: "多方声音：期待、关切与初步反响",
+                            style: "text-xl font-bold mb-6"
+                        },
+                        {
+                            type: "quote",
+                            value: "禁止'零添加'等用语是规范市场、引导理性消费的重要举措。",
+                            attribution: "钟凯, 科信食品与健康信息交流中心主任",
+                            style: "boxed",
+                            animation: "fade-in-left"
+                        },
+                        {
+                            type: "quote",
+                            value: "强制标示过敏原对保护特定人群健康的价值（被高度肯定）。",
+                            attribution: "朱蕾, 国家食品安全风险评估中心标准中心主任",
+                            style: "boxed",
+                            animation: "fade-in-right"
+                        },
+                        {
+                            type: "chart",
+                            chartType: "timeline",
+                            title: "核心标签标准实施关键节点",
+                            description: "GB 7718 & GB 28050",
+                            dataStructure: [
+                                { date: "2025-03-27", event: "新标准发布", description: "国家卫健委与市场监管总局联合公告" },
+                                { date: "2025-03-27 至 2027-03-15", event: "过渡期 (2年)", description: "企业调整生产、消化库存、更新包装的时间窗口" },
+                                { date: "2027-03-16", event: "正式生效", description: "此日期后生产的食品必须符合新标签标准要求" }
+                            ],
+                            animation: "fade-in"
+                        }
+                    ]
+                },
+                // 在适当的位置添加新的可视化内容
+                {
+                    id: "section-standards-composition",
+                    title: "新标准构成：深度剖析59项标准",
+                    background: {
+                        type: "gradient",
+                        value: "linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)"
+                    },
+                    content: [
+                        {
+                            type: "text",
+                            value: "本次发布的59项食品安全新标，涵盖新制定和修订的标准，是食品安全标准体系的重要更新。",
+                            style: "text-lg leading-relaxed mb-4",
+                            animation: "fade-in"
+                        },
+                        {
+                            type: "chart",
+                            chartType: "standards-pie-chart",
+                            title: "新发布标准构成 (共59项)",
+                            description: "本次更新涵盖新制定与修订的标准。",
+                            dataStructure: [
+                                { category: "新制定标准", count: 50 },
+                                { category: "标准修改单", count: 9 }
+                            ],
+                            animation: "fade-in"
+                        }
+                    ]
+                },
+                
+                {
+                    id: "section-allergens",
+                    title: "过敏原强制标示：食品安全的新篇章",
+                    background: {
+                        type: "gradient",
+                        value: "linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%)"
+                    },
+                    content: [
+                        {
+                            type: "text",
+                            value: "新标准要求强制标示8大类食物过敏原，这是对特殊人群健康保护的重要举措。",
+                            style: "text-lg leading-relaxed mb-4",
+                            animation: "fade-in"
+                        },
+                        {
+                            type: "chart",
+                            chartType: "allergens-grid",
+                            title: "强制标示的八大类过敏原",
+                            description: "当食品使用以下类别及其制品作为配料时，必须醒目标示：",
+                            dataStructure: [
+                                { name: "含麸质的谷物", icon: "wheat-icon", examples: "小麦、大麦、燕麦等及其制品" },
+                                { name: "甲壳纲类", icon: "shrimp-icon", examples: "虾、蟹等及其制品" },
+                                { name: "鱼类", icon: "fish-icon", examples: "各种鱼类及其制品" },
+                                { name: "蛋类", icon: "egg-icon", examples: "鸡蛋、鸭蛋等禽蛋及其制品" },
+                                { name: "花生", icon: "peanut-icon", examples: "花生及其制品" },
+                                { name: "大豆", icon: "soybean-icon", examples: "大豆及其制品" },
+                                { name: "乳", icon: "milk-icon", examples: "牛奶、羊奶等及其制品" },
+                                { name: "坚果及其制品", icon: "nut-icon", examples: "杏仁、榛子、核桃等及其制品" }
+                            ],
+                            animation: "fade-in"
+                        }
+                    ]
+                },
+                
+                {
+                    id: "section-digital-label",
+                    title: "数字标签：食品信息的未来",
+                    background: {
+                        type: "gradient",
+                        value: "linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%)"
+                    },
+                    content: [
+                        {
+                            type: "text",
+                            value: "数字标签将彻底改变消费者获取食品信息的方式，突破传统包装标签的限制。",
+                            style: "text-lg leading-relaxed mb-4",
+                            animation: "fade-in"
+                        },
+                        {
+                            type: "chart",
+                            chartType: "digital-benefits",
+                            title: "数字标签的潜力",
+                            description: "一个小小的二维码，可以解锁前所未有的信息维度：",
+                            dataStructure: [
+                                { benefit: "海量信息", detail: "原料溯源、生产工艺、完整配料表、检测报告等", icon: "database-icon" },
+                                { benefit: "个性化服务", detail: "过敏原深度解读、营养计算器、食用建议视频", icon: "user-cog-icon" },
+                                { benefit: "辅助功能", detail: "字体放大、语音播报，惠及老年人等群体", icon: "accessibility-icon" },
+                                { benefit: "互动与追溯", detail: "消费者反馈、品牌故事、防伪查询", icon: "chat-link-icon" }
+                            ],
+                            animation: "fade-in"
+                        }
+                    ]
+                },
+                
+                {
+                    id: "section-nutrition-label",
+                    title: "营养标签升级：从\"1+4\"到\"1+6\"",
+                    background: {
+                        type: "gradient",
+                        value: "linear-gradient(135deg, #fff8f8 0%, #ffe2e2 100%)"
+                    },
+                    content: [
+                        {
+                            type: "text",
+                            value: "营养标签升级为\"1+6\"，新增\"糖\"和\"饱和脂肪（酸）\"两项强制标示内容，帮助消费者做出更健康的选择。",
+                            style: "text-lg leading-relaxed mb-4",
+                            animation: "fade-in"
+                        },
+                        {
+                            type: "chart",
+                            chartType: "nutrition-table",
+                            title: "营养标签强制标示内容对比",
+                            description: "GB 28050-2025 对比 GB 28050-2011",
+                            dataStructure: {
+                                oldStandard: ["能量", "蛋白质", "脂肪", "碳水化合物", "钠"],
+                                newStandard: ["能量", "蛋白质", "脂肪", "饱和脂肪（酸）", "碳水化合物", "糖", "钠"],
+                                newItems: ["饱和脂肪（酸）", "糖"]
+                            },
+                            animation: "fade-in"
+                        }
+                    ]
+                }
+            ],
+
+            // 结论内容
+            conclusion: {
+                content: "59项食品安全新标，是中国食品安全治理现代化的坚实一步。它指向一个更诚实、透明、负责任的食品未来，最终目标是护航公众健康。对行业是挑战亦是机遇，对温州等产业重镇意义重大。变革阵痛难免，但一个信息更对称、选择更智慧、消费更安心的食品新时代正迎面走来。未来两年的过渡期至关重要，确保新标有效实施、红利惠及国民，是全社会共同的期待与责任。",
+                callToAction: "您对食品标签新规有何看法？欢迎在评论区分享您的观点。"
+            }
+        };
+
+        // 主题切换功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        function setTheme(isDark) {
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            setTheme(!isDark);
+        });
+        
+        // 初始化主题
+        setTheme(prefersDarkScheme.matches);
+        
+        // 监听系统主题变化
+        prefersDarkScheme.addEventListener('change', (e) => {
+            setTheme(e.matches);
+        });
+        
+        // 滚动动画
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // 观察所有需要动画的元素
+        document.querySelectorAll('.fade-in, .slide-up, .fade-in-left, .fade-in-right').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // 内容生成函数
+        function generateContent() {
+            const main = document.querySelector('main');
+            
+            // 生成开场引导
+            const introSection = createSection('intro', {
+                id: 'section-intro',
+                title: '',
+                background: {
+                    type: 'gradient',
+                    value: 'linear-gradient(to bottom, #f7fafc, #edf2f7)'
+                },
+                content: [
+                    {
+                        type: 'text',
+                        value: "当\"零添加\"面临重新界定，当过敏原被强制\"亮牌\"，当营养成分表迎来\"1+6\"升级……一场深刻变革正随59项食品安全新标悄然展开。这不仅是监管的升级，更是对亿万消费者知情权与健康的有力回应。新标背后，是怎样的时代逻辑？又将如何搅动产业，触动你我的餐桌？",
+                        style: 'lead',
+                        animation: 'fade-in'
+                    }
+                ]
+            });
+            main.appendChild(introSection);
+            
+            // 生成各个章节
+            content.sections.forEach(section => {
+                const sectionElement = createSection(section.id, section);
+                main.appendChild(sectionElement);
+            });
+            
+            // 生成结论部分
+            const conclusionSection = createSection('conclusion', {
+                id: 'section-conclusion',
+                title: '结语',
+                background: {
+                    type: 'gradient',
+                    value: 'linear-gradient(to bottom, #edf2f7, #f7fafc)'
+                },
+                content: [
+                    {
+                        type: 'text',
+                        value: content.conclusion.content,
+                        style: 'lead',
+                        animation: 'fade-in'
+                    },
+                    {
+                        type: 'call-to-action',
+                        value: content.conclusion.callToAction,
+                        animation: 'slide-up'
+                    }
+                ]
+            });
+            main.appendChild(conclusionSection);
+            
+            // 重新观察新添加的动画元素
+            document.querySelectorAll('.fade-in, .slide-up, .fade-in-left, .fade-in-right').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // 创建章节
+        function createSection(id, section) {
+            const sectionElement = document.createElement('section');
+            sectionElement.id = id;
+            sectionElement.className = 'relative min-h-screen py-20';
+            
+            // 设置背景
+            if (section.background) {
+                if (section.background.type === 'image') {
+                    sectionElement.style.backgroundImage = `url(${section.background.url})`;
+                    sectionElement.className += ' parallax';
+                    if (section.background.overlay) {
+                        const overlay = document.createElement('div');
+                        overlay.className = `absolute inset-0 ${section.background.overlay}`;
+                        sectionElement.appendChild(overlay);
+                    }
+                } else if (section.background.type === 'gradient') {
+                    sectionElement.style.background = section.background.value;
+                }
+            }
+            
+            // 创建内容容器
+            const contentContainer = document.createElement('div');
+            contentContainer.className = 'container mx-auto px-4 relative z-10';
+            
+            // 添加标题
+            if (section.title) {
+                const title = document.createElement('h2');
+                title.className = 'text-3xl md:text-4xl font-bold text-center mb-12 fade-in';
+                title.textContent = section.title;
+                contentContainer.appendChild(title);
+            }
+            
+            // 添加内容
+            section.content.forEach(content => {
+                const contentElement = createContentElement(content);
+                if (contentElement) {
+                    contentContainer.appendChild(contentElement);
+                }
+            });
+            
+            sectionElement.appendChild(contentContainer);
+            return sectionElement;
+        }
+        
+        // 创建内容元素
+        function createContentElement(content) {
+            switch (content.type) {
+                case 'text':
+                    return createTextElement(content);
+                case 'quote':
+                    return createQuoteElement(content);
+                case 'chart':
+                    return createChartElement(content);
+                case 'interactive':
+                    return createInteractiveElement(content);
+                case 'image':
+                    return createImageElement(content);
+                case 'columns':
+                    return createColumnsElement(content);
+                case 'spacer':
+                    return createSpacerElement(content);
+                case 'call-to-action':
+                    return createCallToActionElement(content);
+                default:
+                    return null;
+            }
+        }
+        
+        // 创建文本元素
+        function createTextElement(content) {
+            const p = document.createElement('p');
+            p.className = `mb-6 ${content.style || ''} ${content.animation || ''}`;
+            p.innerHTML = content.value;
+            return p;
+        }
+        
+        // 创建引用元素
+        function createQuoteElement(content) {
+            const blockquote = document.createElement('blockquote');
+            blockquote.className = `quote-box ${content.style || ''} ${content.animation || ''}`;
+            
+            const quoteText = document.createElement('p');
+            quoteText.className = 'text-xl italic mb-4';
+            quoteText.textContent = content.value;
+            
+            const attribution = document.createElement('cite');
+            attribution.className = 'text-sm opacity-75';
+            attribution.textContent = content.attribution;
+            
+            blockquote.appendChild(quoteText);
+            blockquote.appendChild(attribution);
+            return blockquote;
+        }
+        
+        // 创建图表元素
+        function createChartElement(content) {
+            const container = document.createElement('div');
+            container.className = `chart-container ${content.animation || ''}`;
+            
+            const title = document.createElement('h3');
+            title.className = 'text-xl font-bold mb-4';
+            title.textContent = content.title;
+            
+            const description = document.createElement('p');
+            description.className = 'mb-6 opacity-75';
+            description.textContent = content.description;
+            
+            const chartContent = document.createElement('div');
+            chartContent.className = 'chart-content';
+            
+            // 根据图表类型创建不同的内容
+            if (content.chartType === 'infographic-key-numbers') {
+                chartContent.className = 'grid grid-cols-1 md:grid-cols-3 gap-6 mt-6';
+                
+                content.dataStructure.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'p-6 bg-white dark:bg-gray-800 rounded-lg shadow text-center transform hover:scale-105 transition-transform';
+                    
+                    // 添加图标
+                    const iconDiv = document.createElement('div');
+                    iconDiv.className = 'mb-4 text-3xl text-blue-600 dark:text-blue-400';
+                    
+                    let iconClass = 'fas fa-file-alt'; // 默认图标
+                    if (item.icon === 'document-icon') iconClass = 'fas fa-file-alt';
+                    if (item.icon === 'checklist-icon') iconClass = 'fas fa-tasks';
+                    if (item.icon === 'food-category-icon') iconClass = 'fas fa-utensils';
+                    
+                    iconDiv.innerHTML = `<i class="${iconClass}"></i>`;
+                    
+                    // 添加数值
+                    const valueDiv = document.createElement('div');
+                    valueDiv.className = 'text-2xl font-bold mb-2';
+                    valueDiv.textContent = item.value;
+                    
+                    // 添加标签
+                    const labelDiv = document.createElement('div');
+                    labelDiv.className = 'text-sm opacity-75';
+                    labelDiv.textContent = item.label;
+                    
+                    card.appendChild(iconDiv);
+                    card.appendChild(valueDiv);
+                    card.appendChild(labelDiv);
+                    
+                    chartContent.appendChild(card);
+                });
+            } else if (content.chartType === 'standards-pie-chart') {
+                // 创建饼图
+                const canvasContainer = document.createElement('div');
+                canvasContainer.className = 'w-full max-w-md mx-auto';
+                
+                const canvas = document.createElement('canvas');
+                canvas.id = 'standards-pie-chart';
+                canvasContainer.appendChild(canvas);
+                
+                chartContent.appendChild(canvasContainer);
+                
+                // 在创建元素后立即初始化图表
+                setTimeout(() => {
+                    const ctx = canvas.getContext('2d');
+                    new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: content.dataStructure.map(item => item.category),
+                            datasets: [{
+                                data: content.dataStructure.map(item => item.count),
+                                backgroundColor: [
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 99, 132, 0.7)'
+                                ],
+                                borderColor: [
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 99, 132, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                    labels: {
+                                        font: {
+                                            family: "'Noto Sans SC', sans-serif"
+                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            const label = context.label || '';
+                                            const value = context.parsed || 0;
+                                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                            const percentage = Math.round((value / total) * 100);
+                                            return `${label}: ${value} (${percentage}%)`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }, 100);
+            } else if (content.chartType === 'allergens-grid') {
+                // 创建过敏原图标网格
+                const grid = document.createElement('div');
+                grid.className = 'allergen-grid';
+                
+                content.dataStructure.forEach(item => {
+                    const allergenItem = document.createElement('div');
+                    allergenItem.className = 'allergen-item';
+                    allergenItem.setAttribute('data-tooltip', item.examples);
+                    
+                    const iconDiv = document.createElement('div');
+                    iconDiv.className = 'allergen-icon';
+                    
+                    // 设置适当的图标
+                    let iconClass = 'fas fa-exclamation-triangle'; // 默认图标
+                    if (item.icon === 'wheat-icon') iconClass = 'fas fa-seedling';
+                    if (item.icon === 'shrimp-icon') iconClass = 'fas fa-water';
+                    if (item.icon === 'fish-icon') iconClass = 'fas fa-fish';
+                    if (item.icon === 'egg-icon') iconClass = 'fas fa-egg';
+                    if (item.icon === 'peanut-icon') iconClass = 'fas fa-prescription-bottle';
+                    if (item.icon === 'soybean-icon') iconClass = 'fas fa-leaf';
+                    if (item.icon === 'milk-icon') iconClass = 'fas fa-coffee';
+                    if (item.icon === 'nut-icon') iconClass = 'fas fa-apple-alt';
+                    
+                    iconDiv.innerHTML = `<i class="${iconClass}"></i>`;
+                    
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'text-sm font-medium';
+                    nameDiv.textContent = item.name;
+                    
+                    const exampleDiv = document.createElement('div');
+                    exampleDiv.className = 'text-xs opacity-75 mt-2';
+                    exampleDiv.textContent = item.examples.split('，')[0] + '等';
+                    
+                    allergenItem.appendChild(iconDiv);
+                    allergenItem.appendChild(nameDiv);
+                    allergenItem.appendChild(exampleDiv);
+                    
+                    grid.appendChild(allergenItem);
+                });
+                
+                chartContent.appendChild(grid);
+            } else if (content.chartType === 'digital-benefits') {
+                // 创建数字标签潜力卡片
+                const benefitsContainer = document.createElement('div');
+                benefitsContainer.className = 'digital-benefits';
+                
+                content.dataStructure.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'benefit-card';
+                    card.setAttribute('data-index', index);
+                    
+                    const iconDiv = document.createElement('div');
+                    iconDiv.className = 'benefit-icon';
+                    
+                    // 设置适当的图标
+                    let iconClass = 'fas fa-qrcode'; // 默认图标
+                    if (item.icon === 'database-icon') iconClass = 'fas fa-database';
+                    if (item.icon === 'user-cog-icon') iconClass = 'fas fa-user-cog';
+                    if (item.icon === 'accessibility-icon') iconClass = 'fas fa-universal-access';
+                    if (item.icon === 'chat-link-icon') iconClass = 'fas fa-comments';
+                    
+                    iconDiv.innerHTML = `<i class="${iconClass}"></i>`;
+                    
+                    const titleDiv = document.createElement('div');
+                    titleDiv.className = 'text-lg font-bold';
+                    titleDiv.textContent = item.benefit;
+                    
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.className = 'benefit-details';
+                    detailsDiv.textContent = item.detail;
+                    
+                    card.appendChild(iconDiv);
+                    card.appendChild(titleDiv);
+                    card.appendChild(detailsDiv);
+                    
+                    card.addEventListener('click', function() {
+                        document.querySelectorAll('.benefit-card').forEach(c => {
+                            c.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    });
+                    
+                    benefitsContainer.appendChild(card);
+                });
+                
+                chartContent.appendChild(benefitsContainer);
+            } else if (content.chartType === 'nutrition-table') {
+                // 创建营养标签对比表格
+                const table = document.createElement('table');
+                table.className = 'nutrition-table';
+                
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+                
+                const oldHeader = document.createElement('th');
+                oldHeader.textContent = '旧标准 (GB 28050-2011)';
+                headerRow.appendChild(oldHeader);
+                
+                const newHeader = document.createElement('th');
+                newHeader.textContent = '新标准 (GB 28050-2025)';
+                headerRow.appendChild(newHeader);
+                
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+                
+                const tbody = document.createElement('tbody');
+                
+                // 找出两个数组中较长的一个
+                const maxLength = Math.max(
+                    content.dataStructure.oldStandard.length,
+                    content.dataStructure.newStandard.length
+                );
+                
+                for (let i = 0; i < maxLength; i++) {
+                    const row = document.createElement('tr');
+                    
+                    const oldCell = document.createElement('td');
+                    if (i < content.dataStructure.oldStandard.length) {
+                        oldCell.textContent = content.dataStructure.oldStandard[i];
+                    } else {
+                        oldCell.textContent = '-';
+                        oldCell.className = 'opacity-50';
+                    }
+                    row.appendChild(oldCell);
+                    
+                    const newCell = document.createElement('td');
+                    if (i < content.dataStructure.newStandard.length) {
+                        newCell.textContent = content.dataStructure.newStandard[i];
+                        // 高亮显示新增项
+                        if (content.dataStructure.newItems.includes(content.dataStructure.newStandard[i])) {
+                            newCell.className = 'highlight';
+                        }
+                    } else {
+                        newCell.textContent = '-';
+                        newCell.className = 'opacity-50';
+                    }
+                    row.appendChild(newCell);
+                    
+                    tbody.appendChild(row);
+                }
+                
+                table.appendChild(tbody);
+                chartContent.appendChild(table);
+            } else {
+                // 默认展示数据结构
+                chartContent.textContent = JSON.stringify(content.dataStructure);
+            }
+            
+            container.appendChild(title);
+            container.appendChild(description);
+            container.appendChild(chartContent);
+            return container;
+        }
+        
+        // 交互功能
+        function initComparisonSlider() {
+            const sliders = document.querySelectorAll('.comparison-slider');
+            
+            sliders.forEach(slider => {
+                const before = slider.querySelector('.before');
+                const after = slider.querySelector('.after');
+                const handle = slider.querySelector('.handle');
+                
+                if (!before || !after || !handle) return;
+                
+                let isDragging = false;
+                let startX;
+                let startWidth;
+                
+                function updateSlider(e) {
+                    const currentX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+                    const diff = currentX - startX;
+                    const newWidth = startWidth + diff;
+                    const maxWidth = slider.offsetWidth;
+                    
+                    const width = Math.max(0, Math.min(newWidth, maxWidth));
+                    const percentage = (width / maxWidth) * 100;
+                    
+                    before.style.width = `${percentage}%`;
+                    after.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+                    handle.style.left = `${percentage}%`;
+                }
+                
+                function startDragging(e) {
+                    isDragging = true;
+                    startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+                    startWidth = before.offsetWidth;
+                    
+                    document.addEventListener('mousemove', updateSlider);
+                    document.addEventListener('mouseup', stopDragging);
+                    document.addEventListener('touchmove', updateSlider);
+                    document.addEventListener('touchend', stopDragging);
+                }
+                
+                function stopDragging() {
+                    isDragging = false;
+                    document.removeEventListener('mousemove', updateSlider);
+                    document.removeEventListener('mouseup', stopDragging);
+                    document.removeEventListener('touchmove', updateSlider);
+                    document.removeEventListener('touchend', stopDragging);
+                }
+                
+                handle.addEventListener('mousedown', startDragging);
+                handle.addEventListener('touchstart', startDragging);
+            });
+        }
+        
+        // 创建交互元素
+        function createInteractiveElement(content) {
+            const container = document.createElement('div');
+            container.className = `interactive-container ${content.animation || ''}`;
+            
+            switch (content.interactiveType) {
+                case 'comparison-slider':
+                    container.innerHTML = `
+                        <div class="comparison-slider">
+                            <div class="before">
+                                <img src="https://placehold.co/600x800/e5e7eb/a3a3a3?text=旧版标签1+4" alt="旧版营养标签">
+                            </div>
+                            <div class="after">
+                                <img src="https://placehold.co/600x800/e5e7eb/a3a3a3?text=新版标签1+6" alt="新版营养标签">
+                            </div>
+                            <div class="handle"></div>
+                        </div>
+                        <p class="text-center text-sm mt-4">${content.description}</p>
+                    `;
+                    break;
+                    
+                case 'timeline':
+                    const timeline = document.createElement('div');
+                    timeline.className = 'timeline';
+                    
+                    content.dataStructure.forEach((item, index) => {
+                        const timelineItem = document.createElement('div');
+                        timelineItem.className = 'timeline-item';
+                        timelineItem.innerHTML = `
+                            <div class="timeline-content">
+                                <div class="timeline-date">${item.date}</div>
+                                <h4 class="text-lg font-bold mt-2">${item.event}</h4>
+                                <p class="mt-2">${item.description}</p>
+                            </div>
+                        `;
+                        timeline.appendChild(timelineItem);
+                    });
+                    
+                    container.appendChild(timeline);
+                    break;
+                    
+                default:
+                    container.textContent = '不支持的交互类型';
+            }
+            
+            return container;
+        }
+        
+        // 创建图片元素
+        function createImageElement(content) {
+            const figure = document.createElement('figure');
+            figure.className = `my-8 ${content.position || ''} ${content.animation || ''}`;
+            
+            const img = document.createElement('img');
+            img.src = content.url;
+            img.alt = content.alt || '';
+            img.className = `w-full ${content.style || ''}`;
+            img.loading = 'lazy';
+            
+            if (content.caption) {
+                const caption = document.createElement('figcaption');
+                caption.className = 'text-sm text-center mt-2 opacity-75';
+                caption.textContent = content.caption;
+                figure.appendChild(caption);
+            }
+            
+            figure.appendChild(img);
+            return figure;
+        }
+        
+        // 创建多栏布局元素
+        function createColumnsElement(content) {
+            const container = document.createElement('div');
+            container.className = 'grid grid-cols-1 md:grid-cols-2 gap-8 my-8';
+            
+            content.columns.forEach(column => {
+                const columnElement = document.createElement('div');
+                columnElement.className = column.style || '';
+                columnElement.innerHTML = column.content;
+                container.appendChild(columnElement);
+            });
+            
+            return container;
+        }
+        
+        // 创建间距元素
+        function createSpacerElement(content) {
+            const spacer = document.createElement('div');
+            spacer.className = `h-${content.size || '8'}`;
+            return spacer;
+        }
+        
+        // 创建呼吁行动元素
+        function createCallToActionElement(content) {
+            const container = document.createElement('div');
+            container.className = 'text-center my-8';
+            
+            const button = document.createElement('button');
+            button.className = `call-to-action ${content.animation || ''}`;
+            button.textContent = content.value;
+            
+            container.appendChild(button);
+            return container;
+        }
+        
+        // 页面加载完成后生成内容
+        document.addEventListener('DOMContentLoaded', () => {
+            generateContent();
+            initComparisonSlider();
+        });
+    </script>
+</body>
+</html> 
