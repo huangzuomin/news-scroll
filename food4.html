@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重塑"舌尖上的说明书" - 中国59项食品安全新标深度解读</title>
+    <!-- Tailwind CSS 通过国内CDN引入 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP 核心库 通过国内CDN引入 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- GSAP ScrollTrigger 插件 通过国内CDN引入 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- GSAP ScrollToPlugin 插件 通过国内CDN引入，用于平滑滚动 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <!-- 图标库 通过国内CDN引入 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 字体引入 - 宋体/黑体/等宽字体 -->
+    <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+Mono&display=swap">
+    
+    <style>
+        /* 基础样式设置 */
+        :root {
+            /* 浅色模式 */
+            --color-primary: #1a5276;
+            --color-secondary: #2e86c1;
+            --color-accent: #f39c12;
+            --color-background: #ffffff;
+            --color-text: #333333;
+            --color-text-light: #666666;
+            --color-border: #e0e0e0;
+            --color-quote-bg: #f7f9fb;
+            --color-quote-border: #cce5ff;
+            --color-heading: #0f3c5d;
+            --color-card: #ffffff;
+            --color-card-hover: #f8f9fa;
+            --gradient-blue-light: linear-gradient(to bottom, rgba(41, 128, 185, 0.2), rgba(41, 128, 185, 0.5));
+            --gradient-green-light: linear-gradient(to bottom, rgba(39, 174, 96, 0.2), rgba(39, 174, 96, 0.5));
+            --gradient-yellow-light: linear-gradient(to bottom, rgba(243, 156, 18, 0.2), rgba(243, 156, 18, 0.5));
+            --overlay-dark-slight: rgba(0, 0, 0, 0.3);
+            --overlay-dark-moderate: rgba(0, 0, 0, 0.5);
+        }
+
+        /* 深色模式 */
+        [data-theme='dark'] {
+            --color-primary: #3498db;
+            --color-secondary: #5dade2;
+            --color-accent: #f39c12;
+            --color-background: #121212;
+            --color-text: #e0e0e0;
+            --color-text-light: #b0b0b0;
+            --color-border: #333333;
+            --color-quote-bg: #1e2a38;
+            --color-quote-border: #2e5984;
+            --color-heading: #5dade2;
+            --color-card: #1e1e1e;
+            --color-card-hover: #252525;
+            --gradient-blue-light: linear-gradient(to bottom, rgba(41, 128, 185, 0.4), rgba(41, 128, 185, 0.7));
+            --gradient-green-light: linear-gradient(to bottom, rgba(39, 174, 96, 0.4), rgba(39, 174, 96, 0.7));
+            --gradient-yellow-light: linear-gradient(to bottom, rgba(243, 156, 18, 0.4), rgba(243, 156, 18, 0.7));
+            --overlay-dark-slight: rgba(0, 0, 0, 0.5);
+            --overlay-dark-moderate: rgba(0, 0, 0, 0.7);
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, blockquote {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--color-heading);
+        }
+
+        code, pre {
+            font-family: 'Noto Sans Mono', monospace;
+        }
+
+        /* 主标题样式 */
+        .hero-title {
+            font-weight: 700;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: white;
+        }
+
+        .hero-subtitle {
+            font-weight: 500;
+            font-size: clamp(1.25rem, 4vw, 2rem);
+            line-height: 1.3;
+            margin-top: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* 章节标题样式 */
+        .section-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        /* 引用样式 */
+        .pull-quote {
+            font-size: clamp(1.25rem, 4vw, 1.75rem);
+            font-weight: 500;
+            line-height: 1.4;
+            border-left: 4px solid var(--color-accent);
+            padding: 1rem 0 1rem 1.5rem;
+            margin: 2rem 0;
+            background-color: var(--color-quote-bg);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quote-attribution {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* 卡片样式 */
+        .info-card {
+            background-color: var(--color-card);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            background-color: var(--color-card-hover);
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-secondary);
+        }
+
+        /* 分隔线样式 */
+        .divider {
+            height: 1px;
+            background-color: var(--color-border);
+            margin: 2rem auto;
+        }
+
+        .divider.short-centered {
+            width: 30%;
+            margin: 2.5rem auto;
+        }
+
+        /* 背景样式 */
+        .section-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .section-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* 覆盖层样式 */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .overlay-gradient-blue-light {
+            background: var(--gradient-blue-light);
+        }
+
+        .overlay-gradient-green-light {
+            background: var(--gradient-green-light);
+        }
+
+        .overlay-gradient-yellow-light {
+            background: var(--gradient-yellow-light);
+        }
+
+        .overlay-dark-slight {
+            background-color: var(--overlay-dark-slight);
+        }
+        
+        .overlay-dark-moderate {
+            background-color: var(--overlay-dark-moderate);
+        }
+
+        /* 动态生成图表样式 */
+        .chart-container {
+            margin: 2rem 0;
+        }
+
+        /* 饼图/环形图样式 */
+        .donut-chart {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* 交互式比较滑块 */
+        .comparison-slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .comparison-slider-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9比例 */
+        }
+
+        .comparison-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .comparison-side {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .comparison-side.left {
+            left: 0;
+        }
+
+        .comparison-side.right {
+            right: 0;
+        }
+
+        .comparison-image {
+            position: absolute;
+            top: 0;
+            width: 200%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comparison-side.left .comparison-image {
+            left: 0;
+        }
+
+        .comparison-side.right .comparison-image {
+            right: -100%;
+        }
+
+        .comparison-slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background-color: var(--color-accent);
+            transform: translateX(-50%);
+            cursor: ew-resize;
+            z-index: 10;
+        }
+
+        .comparison-slider-handle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--color-accent);
+            transform: translate(-50%, -50%);
+        }
+
+        .comparison-slider-handle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 工具栏和主题切换按钮 */
+        #toolbar {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 100;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--color-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 社交分享按钮 */
+        .social-share {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-share-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-card);
+            color: var(--color-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        /* 响应式设计调整 */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .section {
+                padding: 4rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* 动画类 */
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        /* 特定图表样式 */
+        .timeline-chart {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem 0;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--color-border);
+            transform: translateY(-50%);
+        }
+        
+        .timeline-point {
+            position: relative;
+            padding-top: 50px;
+            text-align: center;
+        }
+        
+        .timeline-point::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-event {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        /* 图标列表 */
+        .icon-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .icon-list-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--color-card);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .icon-list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-list-icon {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .icon-list-name {
+            font-weight: 600;
+            color: var(--color-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        /* 点击展开互动 */
+        .click-reveal-container {
+            margin: 2rem 0;
+        }
+        
+        .click-reveal-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .click-reveal-content {
+            background-color: var(--color-card);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* 进度条 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: var(--color-accent);
+            width: 0%;
+            z-index: 999;
+        }
+
+        /* 完全重构的英雄区样式 */
+        #hero {
+            position: relative;
+            min-height: 300vh;
+            overflow: hidden;
+        }
+        
+        /* 固定背景层 */
+        .hero-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            overflow: hidden;
+            transition: opacity 0.8s ease;
+            will-change: opacity;
+        }
+        
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        /* 标题区域 - 随滚动向上移动 */
+        .hero-title-container {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+        
+        .hero-title-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        /* 导语容器 */
+        .hero-intro-container {
+            position: relative;
+            z-index: 3;
+            padding-top: 20vh;
+        }
+        
+        .hero-intro-block {
+            background-color: rgba(0, 0, 0, 0.75);
+            border-left: 4px solid var(--color-accent);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 50vh;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: white;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-intro-block:last-of-type {
+            margin-bottom: 100vh;
+        }
+        
+        /* 过渡区 - 确保平滑过渡到下一节 */
+        .hero-transition {
+            position: relative;
+            height: 150vh; /* 增加高度以确保足够的过渡空间 */
+            margin-top: -150vh; /* 与hero内容重叠 */
+            background: linear-gradient(to bottom, transparent 20%, var(--color-background) 90%);
+            z-index: 5; /* 确保比背景高但比内容低 */
+            pointer-events: none;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .hero-intro-block {
+                margin-bottom: 30vh;
+                padding: 1.25rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .hero-intro-block:last-of-type {
+                margin-bottom: 70vh;
+            }
+        }
+
+        /* 第一节与英雄区的过渡处理 */
+        #section-1-context {
+            position: relative;
+            z-index: 10; /* 确保比hero背景层级高 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度条 -->
+    <div class="progress-bar"></div>
+    
+    <!-- 工具栏 -->
+    <div id="toolbar">
+        <div class="theme-toggle" id="theme-toggle" aria-label="切换深色/浅色模式">
+            <i class="fas fa-moon"></i>
+        </div>
+    </div>
+    
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top" id="back-to-top" aria-label="回到顶部">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- 主内容区域 -->
+    <main>
+        <!-- 英雄区域 - 完全重构 -->
+        <section id="hero">
+            <!-- 固定背景 -->
+            <div class="hero-background">
+                <img src="images/hero-image.png" alt="食品包装标签特写，象征食品安全新规。">
+            </div>
+            
+            <!-- 标题区域 - 会随滚动上移 -->
+            <div class="hero-title-container" id="hero-title">
+                <div class="hero-title-content">
+                    <h1 class="hero-title">重塑"舌尖上的说明书"</h1>
+                    <h2 class="hero-subtitle">中国59项食品安全新标深度解读：从"零添加"禁令到数字标签，新规如何影响食品产业与市民餐桌？</h2>
+                    <div class="mt-8">
+                        <a href="#section-1-context" class="btn btn-primary scroll-to">开始阅读</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 导语区域 - 会依次展示 -->
+            <div class="hero-intro-container container px-4 md:px-8">
+                <!-- 导语段落 -->
+                <div class="hero-intro-block">
+                    <p class="text-lg md:text-xl">当食品包装上曾经醒目的"零添加"字样面临规则的重新界定，当可能引发身体不适的过敏原被要求清晰"亮牌"，当营养成分表以更精细的"1+6"面貌呈现——一场关乎中国食品行业未来走向和亿万消费者日常选择的深刻变革，正随着国家最新发布的一系列食品安全标准悄然展开。</p>
+                </div>
+                
+                <div class="hero-intro-block">
+                    <p class="text-lg md:text-xl">2025年3月27日，国家卫生健康委员会与国家市场监督管理总局联合发布的 <strong>59项</strong> 新的及修订的食品安全国家标准，犹如为高速运行的食品产业设定了新的导航坐标。</p>
+                </div>
+                
+                <div class="hero-intro-block">
+                    <p class="text-lg md:text-xl">这不仅是中国食品安全监管体系的一次意义深远的升级，更清晰传递出强化全链条风险管理、提升消费者知情权与健康权益的决心。</p>
+                </div>
+                
+                <div class="hero-intro-block">
+                    <p class="text-lg md:text-xl">新标的核心要义何在？它们将如何搅动庞大的产业格局，又将怎样触动包括温州在内的广阔市场？本篇报道将依据现有公开信息和研究报告，为您层层解析。</p>
+                </div>
+            </div>
+            
+            <!-- 平滑过渡到下一节 -->
+            <div class="hero-transition"></div>
+        </section>
+        
+        <!-- Section 1: 背景与必要性 -->
+        <section id="section-1-context" class="relative min-h-screen py-24 overflow-hidden">
+            <!-- 确保section1内容有背景色 -->
+            <div class="absolute inset-0 bg-white dark:bg-gray-900 z-1"></div>
+            
+            <!-- 背景 - 将使用ScrollTrigger固定 -->
+            <div class="section-background" id="section-1-bg">
+                <img src="images/section1-image.png" alt="象征食品安全标准体系的背景图" class="w-full h-full object-cover">
+                <div class="overlay overlay-gradient-blue-light"></div>
+            </div>
+            
+            <!-- 内容 -->
+            <div class="container mx-auto px-4 md:px-8 relative z-10">
+                <h2 class="section-title text-center mb-16">时代的呼唤：为何需要这场『舌尖』变革？</h2>
+                
+                <div class="max-w-4xl mx-auto">
+                    <!-- 段落1 - 标准体系描述 -->
+                    <div class="text-content mb-12" data-animation="slide-up">
+                        <p class="text-lg md:text-xl">
+                            民以食为天，食以安为先。中国已构建起一个庞大的食品安全国家标准体系，截至目前，累计发布的标准数量已达 <strong>1660项</strong>，包含超过 <strong>20,000项</strong> 指标，广泛覆盖了 <strong>所有340余种</strong> 食品类别。这套体系，是守护国民"舌尖上的安全"的坚实屏障。
+                        </p>
+                    </div>
+                    
+                    <!-- 信息图表 -->
+                    <div class="chart-container" data-animation="fade-in">
+                        <h3 class="text-xl font-semibold mb-4 text-center">中国食品安全标准体系概览</h3>
+                        <p class="text-center text-gray-600 dark:text-gray-400 mb-8">截至目前，我国已建立起覆盖广泛的食品安全标准体系。</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="info-card text-center">
+                                <i class="fas fa-file-alt text-4xl text-blue-600 mb-4"></i>
+                                <h4 class="font-bold text-lg mb-2">累计标准总数</h4>
+                                <p class="text-2xl font-bold text-blue-700">1660项</p>
+                            </div>
+                            <div class="info-card text-center">
+                                <i class="fas fa-list-check text-4xl text-blue-600 mb-4"></i>
+                                <h4 class="font-bold text-lg mb-2">包含指标数</h4>
+                                <p class="text-2xl font-bold text-blue-700">>20,000项</p>
+                            </div>
+                            <div class="info-card text-center">
+                                <i class="fas fa-utensils text-4xl text-blue-600 mb-4"></i>
+                                <h4 class="font-bold text-lg mb-2">覆盖食品类别</h4>
+                                <p class="text-2xl font-bold text-blue-700">>340种</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 段落2 - 挑战描述 -->
+                    <div class="text-content my-12 bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg" data-animation="fade-in">
+                        <p class="text-lg">
+                            然而，时代在发展，消费在升级，新的需求与挑战也应运而生。市场上部分食品标签的宣传语模糊不清，甚至可能误导消费者；对特定人群，如食物过敏者的保护措施亟待加强；公众对营养健康的关注日益高涨，需要更透明、更科学的食品信息作为指引。
+                        </p>
+                    </div>
+                    
+                    <!-- 段落3 - 发布背景 -->
+                    <div class="text-content mb-12" data-animation="fade-in">
+                        <p class="text-lg">
+                            正是在这样的时代背景下，国家卫健委与市场监管总局在深入的风险评估、产业调研和社会关切分析基础上，于2025年3月27日正式推出了此次涉及 <strong>59个项目</strong>（包括 <strong>50项新制定标准</strong> 和 <strong>9项标准修改单</strong>）的重大更新。
+                        </p>
+                    </div>
+                    
+                    <!-- 引用 -->
+                    <blockquote class="pull-quote" data-animation="fade-in">
+                        <p>进一步提升食品安全保障水平，维护公众健康，促进食品产业高质量发展。</p>
+                        <div class="quote-attribution">国家卫健委与市场监管总局官方公告 (2025.3.27)</div>
+                    </blockquote>
+                    
+                    <!-- 段落4 - 更新内容广泛性 -->
+                    <div class="text-content my-12" data-animation="slide-up">
+                        <p class="text-lg">
+                            官方公告明确指出，此举旨在"进一步提升食品安全保障水平，维护公众健康，促进食品产业高质量发展"。本次更新内容广泛，触及食品标签、特殊膳食食品（如婴幼儿配方食品）、乳制品、肉制品、食品添加剂、生产经营规范乃至检验方法等多个关键环节，充分展现了监管机构以动态、科学的标准体系应对新形势、满足新期待的决心与行动力。
+                        </p>
+                    </div>
+                    
+                    <!-- 环形图 -->
+                    <div class="chart-container mb-12" data-animation="fade-in">
+                        <h3 class="text-xl font-semibold mb-4 text-center">新发布标准构成 (共59项)</h3>
+                        <p class="text-center text-gray-600 dark:text-gray-400 mb-8">本次更新涵盖新制定与修订的标准。</p>
+                        
+                        <div class="donut-chart">
+                            <svg viewBox="0 0 100 100" class="w-full">
+                                <!-- 圆环底色 -->
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#e0e0e0" stroke-width="15"></circle>
+                                
+                                <!-- 第一段 - 新制定标准 -->
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3498db" stroke-width="15" stroke-dasharray="251.2 0" stroke-dashoffset="0" transform="rotate(-90 50 50)"></circle>
+                                
+                                <!-- 第二段 - 标准修改单 -->
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f39c12" stroke-width="15" stroke-dasharray="45.2 206" stroke-dashoffset="0" transform="rotate(-90 50 50)"></circle>
+                                
+                                <!-- 中心文字 -->
+                                <text x="50" y="50" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="bold" fill="var(--color-text)">59项</text>
+                            </svg>
+                            
+                            <!-- 图例 -->
+                            <div class="flex justify-center items-center mt-6 space-x-8">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+                                    <span>新制定标准 (50项)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
+                                    <span>标准修改单 (9项)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 2: 核心变革 - 零添加与过敏原 -->
+        <section id="section-2-core-changes-1" class="relative min-h-screen py-24 overflow-hidden">
+            <!-- 背景 - 将使用ScrollTrigger实现视差效果 -->
+            <div class="section-background" id="section-2-bg">
+                <img src="images/section2-image.png" alt="对比新旧食品标签或禁止零添加概念的背景图" class="w-full h-full object-cover">
+                <div class="overlay overlay-dark-slight"></div>
+            </div>
+            
+            <!-- 内容 -->
+            <div class="container mx-auto px-4 md:px-8 relative z-10">
+                <h2 class="section-title text-center mb-16">告别模糊，亮明底牌：标签核心变革</h2>
+                
+                <div class="max-w-4xl mx-auto text-white">
+                    <!-- 引导段落 -->
+                    <div class="text-content mb-16" data-animation="fade-in">
+                        <p class="text-lg md:text-xl">
+                            在众多新标中，与消费者日常购物体验关联最直接、引发讨论最热烈的，莫过于对预包装食品标签提出的一系列革新性要求。其中四大焦点，尤为引人瞩目，它们共同勾勒出未来食品信息沟通的新图景：
+                        </p>
+                    </div>
+                    
+                    <!-- 锚点 - 零添加 -->
+                    <div id="zero-additive-ban"></div>
+                    
+                    <!-- 1. 零添加 -->
+                    <div class="mb-20">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-8">1. 告别"零添加"模糊地带：规范宣传，回归本真</h3>
+                        
+                        <!-- 新规速览 -->
+                        <div class="text-content mb-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>新规速览</strong>：《食品安全国家标准 预包装食品标签通则》（GB 7718-2025）明确亮剑，禁止使用"不添加"、"零添加"或类似字样，来刻意强调食品配料中未使用或未添加某些成分。与此同时，若食品名称提及了特定配料（如"燕窝月饼"），则需在标签中清晰标示其添加量或在成品中的含量。
+                            </p>
+                        </div>
+                        
+                        <!-- 背后逻辑与影响 -->
+                        <div class="text-content mb-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>背后逻辑与影响</strong>：长期以来，"零添加"概念被部分商家作为营销"捷径"，利用了消费者对"天然"、"无添加"的朴素追求，但这往往与产品的整体营养真相存在偏差。例如，报告中提及，标称"不添加蔗糖"的饮品可能含有其他添加糖类（如果葡糖浆等），易造成误解。
+                            </p>
+                        </div>
+                        
+                        <!-- 引用 -->
+                        <blockquote class="pull-quote bg-white/20" data-animation="fade-in">
+                            <p>此举是规范行业乱象、引导消费者建立正确认知的关键一步。</p>
+                            <div class="quote-attribution">钟凯, 科信食品与健康信息交流中心主任</div>
+                        </blockquote>
+                        
+                        <!-- 影响分析 -->
+                        <div class="text-content mt-12" data-animation="slide-up">
+                            <p class="text-lg md:text-xl font-medium">
+                                可以预见，这将倒逼企业告别模糊营销，更加注重产品本身的品质与科学信息的准确传达，同时也将引导消费者跳出"零添加=绝对健康"的认知误区，学会更细致地审阅配料表与营养成分表。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 分隔线 -->
+                    <div class="divider short-centered"></div>
+                    
+                    <!-- 锚点 - 过敏原 -->
+                    <div id="allergen-mandatory"></div>
+                    
+                    <!-- 2. 过敏原 -->
+                    <div class="mb-20">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-8">2. 过敏原"强制可见"：为特殊人群筑起信息"防火墙"</h3>
+                        
+                        <!-- 新规速览 -->
+                        <div class="text-content mb-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>新规速览</strong>：面对日益增多的食物过敏问题，新标准给出了强制性解决方案：必须在食品标签上清晰标示致敏物质信息。具体而言，当预包装食品使用了以下 <strong>八大类</strong> 食品及其制品作为配料时—— <strong>①含麸质的谷物（如小麦、大麦）；②甲壳纲类（如虾、蟹）；③鱼类；④蛋类；⑤花生；⑥大豆；⑦乳；⑧坚果及其制品</strong> ——必须在配料表中以醒目方式（如加粗、加下划线）标示，或在配料表邻近处使用明确的提示语。
+                            </p>
+                        </div>
+                        
+                        <!-- 八大类过敏原图标列表 -->
+                        <div class="chart-container my-12" data-animation="fade-in">
+                            <h3 class="text-xl font-semibold mb-4 text-center">强制标示的八大类过敏原</h3>
+                            <p class="text-center text-gray-300 mb-8">当食品使用以下类别及其制品作为配料时，必须醒目标示：</p>
+                            
+                            <div class="icon-list">
+                                <div class="icon-list-item bg-white/10">
+                                    <i class="icon-list-icon fas fa-wheat-awn"></i>
+                                    <div class="icon-list-name">含麸质的谷物</div>
+                                </div>
+                                <div class="icon-list-item bg-white/10">
+                                    <i class="icon-list-icon fas fa-shrimp"></i>
+                                    <div class="icon-list-name">甲壳纲类</div>
+                                </div>
+                                <div class="icon-list-item bg-white/10">
+                                    <i class="icon-list-icon fas fa-fish"></i>
+                                    <div class="icon-list-name">鱼类</div>
+                                </div>
+                                <div class="icon-list-item bg-white/10">
+                                    <i class="icon-list-icon fas fa-egg"></i>
+                                    <div class="icon-list-name">蛋类</div>
+                                </div>
+                                <div class="icon-list-item bg-white/10">
+                                    <i class="icon-list-icon fas fa-seedling"></i>
+                                    <div class="icon-list-name">花生</div>
+                                </div>
+                                <div class="icon-list-item bg-white/10">
+                                    <i class="icon-list-icon fas fa-seedling"></i>
+                                    <div class="icon-list-name">大豆</div>
+                                </div>
+                                <div class="icon-list-item bg-white/10">
+                                    <i class="icon-list-icon fas fa-bottle-droplet"></i>
+                                    <div class="icon-list-name">乳</div>
+                                </div>
+                                <div class="icon-list-item bg-white/10">
+                                    <i class="icon-list-icon fas fa-apple-whole"></i>
+                                    <div class="icon-list-name">坚果及其制品</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 意义与变革 -->
+                        <div class="text-content mb-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>意义与变革</strong>：这一强制性要求，极大地提升了对食物过敏消费者的保护力度。
+                            </p>
+                        </div>
+                        
+                        <!-- 引用 -->
+                        <blockquote class="pull-quote bg-white/20" data-animation="fade-in">
+                            <p>"这将有助于保护食物过敏人群的健康，" 国家食品安全风险评估中心标准中心主任朱蕾强调。</p>
+                            <div class="quote-attribution">朱蕾, 国家食品安全风险评估中心标准中心主任</div>
+                        </blockquote>
+                        
+                        <!-- 意义分析 -->
+                        <div class="text-content mt-12" data-animation="slide-up">
+                            <p class="text-lg md:text-xl font-medium">
+                                此前，过敏原信息标示在我国并非全面强制，消费者识别风险存在困难。新规的实施，意味着过敏人群在购物时将拥有更可靠的"避雷针"，显著降低误食风险。这不仅与国际主流做法接轨，更体现了食品安全监管的人文关怀。对企业而言，则意味着从原料采购到生产加工的全链条，都需要建立更严格的控制体系，确保过敏原信息的准确无误。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 3: 核心变革 - 营养标签与数字标签 -->
+        <section id="section-3-core-changes-2" class="relative min-h-screen py-24 overflow-hidden">
+            <!-- 背景 -->
+            <div class="section-background" id="section-3-bg">
+                <img src="images/section3-image.png" alt="新旧营养标签对比或数字标签概念背景图" class="w-full h-full object-cover">
+                <div class="overlay overlay-gradient-green-light"></div>
+            </div>
+            
+            <!-- 内容 -->
+            <div class="container mx-auto px-4 md:px-8 relative z-10">
+                <h2 class="section-title text-center mb-16">精细画像，数字赋能：标签核心变革（下）</h2>
+                
+                <div class="max-w-4xl mx-auto">
+                    <!-- 锚点 - 营养标签 -->
+                    <div id="nutrition-1plus6"></div>
+                    
+                    <!-- 3. 营养成分 -->
+                    <div class="mb-20">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-8">3. 营养成分"精细画像"："1+6"助力健康选择</h3>
+                        
+                        <!-- 新规速览 -->
+                        <div class="text-content mb-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>新规速览</strong>：《预包装食品营养标签通则》（GB 28050-2025）对强制标示的营养成分进行了升级扩容，从过去的"1+4"格式（能量+蛋白质、脂肪、碳水化合物、钠）升级为 <strong>"1+6"格式</strong>，即强制要求额外标示 <strong>"糖"</strong> 和 <strong>"饱和脂肪（或饱和脂肪酸）"</strong> 的含量。标准同时细化了标示格式及营养素参考值（NRV%）的计算要求。
+                            </p>
+                        </div>
+                        
+                        <!-- 交互式比较滑块 -->
+                        <div class="comparison-slider-container" data-animation="fade-in">
+                            <div class="mb-4 text-center text-gray-600 dark:text-gray-400">拖动滑块，对比新旧营养标签强制标示内容的变化。</div>
+                            <div class="comparison-slider-wrapper">
+                                <div class="comparison-slider" id="nutrition-comparison-slider">
+                                    <div class="comparison-side left">
+                                        <img src="images/old-label.png" alt="旧版1+4营养标签示例" class="comparison-image">
+                                        <div class="absolute top-0 left-0 p-4 bg-black/50 text-white text-sm rounded-br-lg">旧版: 1+4</div>
+                                    </div>
+                                    <div class="comparison-side right">
+                                        <img src="images/new-label.png" alt="新版1+6营养标签示例" class="comparison-image">
+                                        <div class="absolute top-0 right-0 p-4 bg-black/50 text-white text-sm rounded-bl-lg">新版: 1+6</div>
+                                    </div>
+                                    <div class="comparison-slider-handle" id="slider-handle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 驱动力与效用 -->
+                        <div class="text-content my-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>驱动力与效用</strong>："三减"（减盐、减油、减糖）已成健康共识。将糖和饱和脂肪这两项备受关注的成分纳入强制标示范围，旨在让食品的营养构成更加透明化。消费者，特别是关注心血管健康、体重管理的人群，将能更直观、便捷地比较不同产品的相关含量，从而做出更符合自身需求的健康选择。
+                            </p>
+                        </div>
+                        
+                        <!-- 效用分析 -->
+                        <div class="text-content mt-12" data-animation="slide-up">
+                            <p class="text-lg md:text-xl font-medium">
+                                这一变化预计将产生显著的"指挥棒"效应，引导食品企业在产品研发中更加注重营养均衡，积极探索降糖、降脂的技术路径，推出更多满足健康消费趋势的产品。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 分隔线 -->
+                    <div class="divider short-centered"></div>
+                    
+                    <!-- 锚点 - 数字标签 -->
+                    <div id="digital-label"></div>
+                    
+                    <!-- 4. 数字标签 -->
+                    <div class="mb-20">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-8">4. 标签进入"数字时代"：扫一扫，信息全掌握</h3>
+                        
+                        <!-- 新规速览 -->
+                        <div class="text-content mb-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>新规速览</strong>：紧随数字化浪潮，新标准明确鼓励并规范食品数字标签的应用，例如，利用二维码技术，为消费者打开一个获取更全面食品信息的窗口。
+                            </p>
+                        </div>
+                        
+                        <!-- 图片 -->
+                        <div class="my-12 text-center" data-animation="fade-in">
+                            <img src="images/section3-image2.png" alt="手机扫描食品包装二维码获取数字标签信息的示意图" class="max-w-md mx-auto rounded-lg shadow-lg">
+                            <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">数字标签：突破物理限制，提供海量食品信息。</p>
+                        </div>
+                        
+                        <!-- 创新与前景 -->
+                        <div class="text-content mb-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>创新与前景</strong>：小小的传统标签，常因版面有限而信息拥挤、字号偏小。数字标签则能突破物理空间的束缚，成为一个信息富矿。理论上，它可以包含从原料溯源、生产工艺、过敏原详细解释，到营养科普、食用建议视频、企业资质认证等海量信息。
+                            </p>
+                        </div>
+                        
+                        <!-- 前景分析 -->
+                        <div class="text-content mb-12" data-animation="fade-in">
+                            <p class="text-lg">
+                                更妙的是，借助智能手机，还能实现字体放大、语音播报等辅助功能，惠及老年人等不同群体。据报告一信息，目前已有 <strong>超过400款</strong> 预包装食品率先试水数字标签，新标准的出台无疑将为其规范化、规模化应用铺平道路。
+                            </p>
+                        </div>
+                        
+                        <!-- 数字标签的潜力 -->
+                        <div class="chart-container my-12" data-animation="fade-in">
+                            <h3 class="text-xl font-semibold mb-4 text-center">数字标签的潜力</h3>
+                            <p class="text-center text-gray-600 dark:text-gray-400 mb-8">一个小小的二维码，可以解锁前所未有的信息维度：</p>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+                                    <div class="text-3xl text-blue-600 mr-4">
+                                        <i class="fas fa-database"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg">海量信息</h4>
+                                        <p class="text-gray-600 dark:text-gray-400">原料溯源、生产工艺、完整配料表、检测报告等</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+                                    <div class="text-3xl text-blue-600 mr-4">
+                                        <i class="fas fa-user-cog"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg">个性化服务</h4>
+                                        <p class="text-gray-600 dark:text-gray-400">过敏原深度解读、营养计算器、食用建议视频</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+                                    <div class="text-3xl text-blue-600 mr-4">
+                                        <i class="fas fa-universal-access"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg">辅助功能</h4>
+                                        <p class="text-gray-600 dark:text-gray-400">字体放大、语音播报，惠及老年人等群体</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+                                    <div class="text-3xl text-blue-600 mr-4">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg">互动与追溯</h4>
+                                        <p class="text-gray-600 dark:text-gray-400">消费者反馈、品牌故事、防伪查询</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 前景分析续 -->
+                        <div class="text-content my-8 bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg" data-animation="slide-up">
+                            <p class="text-lg font-medium">
+                                这不仅是信息透明化的重要一步，也为企业与消费者互动、传递品牌价值开辟了新渠道，当然，这也对企业的数字化建设提出了新要求。
+                            </p>
+                        </div>
+                        
+                        <!-- 点击展开互动 -->
+                        <div class="click-reveal-container my-12" data-animation="fade-in">
+                            <div class="mb-4 text-center text-gray-600 dark:text-gray-400">点击下方的模拟按钮，体验数字标签可能包含的部分内容：</div>
+                            <div class="click-reveal-buttons flex justify-center flex-wrap gap-4">
+                                <button id="btn-traceability" class="btn btn-primary">查看溯源</button>
+                                <button id="btn-allergen" class="btn btn-primary">过敏原详情</button>
+                                <button id="btn-nutrition" class="btn btn-primary">营养科普</button>
+                            </div>
+                            <div id="click-reveal-content" class="click-reveal-content mt-6 hidden">
+                                <!-- 内容将通过JS动态插入 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4: 影响分析 -->
+        <section id="section-4-impact" class="relative min-h-screen py-24 overflow-hidden">
+            <!-- 背景 - 将使用ScrollTrigger实现视差效果 -->
+            <div class="section-background" id="section-4-bg">
+                <img src="images/section4-image.png" alt="食品工厂流水线或消费者购物场景背景图" class="w-full h-full object-cover">
+                <div class="overlay overlay-dark-moderate"></div>
+            </div>
+            
+            <!-- 内容 -->
+            <div class="container mx-auto px-4 md:px-8 relative z-10">
+                <h2 class="section-title text-center mb-16 text-white">涟漪效应：新标如何重塑产业与餐桌？</h2>
+                
+                <div class="max-w-4xl mx-auto text-white">
+                    <!-- 引导段落 -->
+                    <div class="text-content mb-16" data-animation="fade-in">
+                        <p class="text-lg md:text-xl">
+                            新标准的实施，如同投入平静湖面的一颗石子，其产生的涟漪将广泛触及食品产业的各个角落，也必然对温州这座兼具发达食品制造业和庞大消费市场的城市产生影响。
+                        </p>
+                    </div>
+                    
+                    <!-- 产业层面 -->
+                    <div class="mb-16">
+                        <h4 class="text-xl md:text-2xl font-bold mb-6">产业层面：阵痛与升级并存</h4>
+                        
+                        <div class="text-content" data-animation="slide-up">
+                            <p class="text-lg mb-4">
+                                • <strong>合规成本的现实考量</strong>：标签更新、包装换代、生产线调整、员工培训……这些都是企业必须面对的直接成本。特别是对于产品线丰富、更新速度快或规模较小的企业，短期内可能会感受到一定的经营压力。
+                            </p>
+                            <p class="text-lg mb-4">
+                                • <strong>产品策略的重新定位</strong>："零添加"等营销"光环"褪去，强制标示糖、饱和脂肪等信息，将促使企业更加聚焦产品本身的品质、配方和营养价值，推动产品向更健康、更科学的方向迭代。
+                            </p>
+                            <p class="text-lg">
+                                • <strong>管理体系的强化需求</strong>：过敏原的严格管控，要求企业在供应链管理、生产过程控制等方面投入更多精力，确保信息的精准无误。拥抱数字标签，则需要相应的技术和信息管理能力支撑。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 图片 -->
+                    <div class="my-16 flex justify-end" data-animation="fade-in">
+                        <div class="max-w-md">
+                            <img src="images/section4-image2.png" alt="温州食品产业代表性图片" class="rounded-lg border-4 border-white/20">
+                            <p class="mt-2 text-sm text-gray-300">温州食品产业门类齐全，将直接受新规影响。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 温州视角 -->
+                    <div class="mb-16">
+                        <h4 class="text-xl md:text-2xl font-bold mb-6">温州视角：挑战亦是契机</h4>
+                        
+                        <div class="text-content" data-animation="slide-up">
+                            <p class="text-lg">
+                                温州食品产业门类齐全，从海产加工到乳肉制品，从烘焙糕点到休闲零食，都将是新规的直接作用对象。本地海产企业需严谨对待鱼类、甲壳纲类过敏原标示；传统名点、特色小吃则可能需要审视其糖、钠、饱和脂肪含量，探索更健康的改良方案。短期内，本地企业尤其是中小企业需要积极学习新规，投入资源进行调整。但长远看，统一、升级的标准有助于净化市场环境，提升"温州制造"食品的整体形象和信誉度，为那些真正注重品质和合规的企业带来更公平的竞争平台和发展机遇。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 消费者层面 -->
+                    <div class="mb-16">
+                        <h4 class="text-xl md:text-2xl font-bold mb-6">消费者层面：赋权与教育同行</h4>
+                        
+                        <div class="text-content" data-animation="slide-up">
+                            <p class="text-lg">
+                                新标的核心受益者是广大消费者。更透明的信息意味着更强的选择能力和安全保障。过敏人群的风险降低，关注健康的消费者有了更清晰的指引。数字标签则提供了前所未有的信息深度。当然，消费者也需要一个学习和适应的过程，学会看懂新标签，理解新信息。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 市场层面 -->
+                    <div class="mb-16">
+                        <h4 class="text-xl md:text-2xl font-bold mb-6">市场层面：优胜劣汰加速</h4>
+                        
+                        <div class="text-content" data-animation="slide-up">
+                            <p class="text-lg">
+                                新规的实施将推动市场竞争格局的演变。那些能够快速响应、严格执行标准、并能提供高品质、高透明度产品的企业，有望赢得消费者青睐，扩大市场份额。反之，跟不上步伐或试图规避的企业则可能面临淘汰。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 监管层面 -->
+                    <div class="mb-16">
+                        <h4 class="text-xl md:text-2xl font-bold mb-6">监管层面：责任与服务并重</h4>
+                        
+                        <div class="text-content" data-animation="slide-up">
+                            <p class="text-lg">
+                                新标准的生命力在于执行。监管部门需要制定配套的实施细则，加强市场监督检查，确保标准不打折扣地落地。同时，也需要做好对企业和公众的宣传、培训和指导工作。温州等地方监管部门在此过程中，将扮演关键的指导者和监督者角色。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 社交分享提示 -->
+                    <div class="mt-20 text-center" data-animation="fade-in">
+                        <p class="text-lg mb-4">新标影响深远，分享给关心食品安全的朋友们吧！</p>
+                        <div class="flex justify-center gap-4">
+                            <a href="#" class="social-share-btn" title="分享到微信">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a href="#" class="social-share-btn" title="分享到微博">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a href="#" class="social-share-btn" title="复制链接">
+                                <i class="fas fa-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 5: 多方声音与未来展望 -->
+        <section id="section-5-voices-future" class="relative min-h-screen py-24 overflow-hidden">
+            <!-- 背景 - 将使用ScrollTrigger固定 -->
+            <div class="section-background" id="section-5-bg">
+                <img src="images/section5-image.png" alt="指向未来的道路或日历时钟组合的背景图" class="w-full h-full object-cover">
+                <div class="overlay overlay-gradient-yellow-light"></div>
+            </div>
+            
+            <!-- 内容 -->
+            <div class="container mx-auto px-4 md:px-8 relative z-10">
+                <h2 class="section-title text-center mb-16">前路展望：挑战、机遇与落地时间表</h2>
+                
+                <div class="max-w-4xl mx-auto">
+                    <!-- 引导段落 -->
+                    <div class="text-content mb-16" data-animation="fade-in">
+                        <p class="text-lg md:text-xl">
+                            尽管距离新标正式实施尚有过渡期，但其发布已引发各界广泛关注与讨论：
+                        </p>
+                    </div>
+                    
+                    <!-- 多方声音 -->
+                    <div class="mb-16">
+                        <h4 class="text-xl md:text-2xl font-bold mb-6">多方声音：期待、关切与初步反响</h4>
+                        
+                        <!-- 专家解读 -->
+                        <div class="text-content mb-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>专家解读</strong>：多位专家对新标给予积极评价。如科信食品与健康信息交流中心主任钟凯认为，禁止"零添加"等用语是规范市场、引导理性消费的重要举措。国家食品安全风险评估中心标准中心主任朱蕾则高度肯定了强制标示过敏原对保护特定人群健康的价值。
+                            </p>
+                        </div>
+                        
+                        <!-- 行业动态和社会观点 -->
+                        <div class="text-content" data-animation="slide-up">
+                            <p class="text-lg mb-6">
+                                • <strong>行业动态</strong>：部分大型企业已公开表态将积极跟进。例如，光明乳业表示将严格执行新规，调整产品包装。这预示着行业头部力量已开始行动。同时，业界也普遍关注合规成本、技术细节及过渡期的具体安排。
+                            </p>
+                            <p class="text-lg">
+                                • <strong>社会观点</strong>：普遍认为，新标的回应性强，抓住了当前食品安全和消费领域的一些痛点，对生产经营者提出了更高要求，最终将惠及消费者，有助于实现"吃得明白、吃得安全、吃得放心"。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 落地时间表与前瞻 -->
+                    <div class="mb-16">
+                        <h4 class="text-xl md:text-2xl font-bold mb-6">落地时间表与前瞻</h4>
+                        
+                        <!-- 关键节点 -->
+                        <div class="text-content mb-8 bg-white/10 p-6 rounded-lg" data-animation="fade-in">
+                            <p class="text-lg">
+                                • <strong>关键节点</strong>：本次发布的核心标签标准——《食品安全国家标准 预包装食品标签通则》（GB 7718-2025）和《预包装食品营养标签通则》（GB 28050-2025），均设置了 <strong>两年</strong> 的过渡期，将于 <strong>2027年3月16日</strong> 正式生效。这为企业调整生产、消化库存、更新包装提供了宝贵的时间窗口。其他标准的实施日期需依据具体标准文本确定。
+                            </p>
+                        </div>
+                        
+                        <!-- 时间线图表 -->
+                        <div class="timeline-chart my-16" data-animation="fade-in">
+                            <h3 class="text-xl font-semibold mb-6 text-center">核心标签标准实施关键节点</h3>
+                            <p class="text-center text-gray-600 dark:text-gray-400 mb-10">GB 7718 & GB 28050</p>
+                            
+                            <div class="relative">
+                                <!-- 时间线 -->
+                                <div class="timeline-line"></div>
+                                
+                                <!-- 时间点 -->
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div class="timeline-point">
+                                        <div class="timeline-date">2025-03-27</div>
+                                        <div class="timeline-event">新标准发布</div>
+                                        <div class="text-sm text-gray-600 dark:text-gray-400">国家卫健委与市场监管总局联合公告</div>
+                                    </div>
+                                    <div class="timeline-point">
+                                        <div class="timeline-date">2025-03-27 至 2027-03-15</div>
+                                        <div class="timeline-event">过渡期 (2年)</div>
+                                        <div class="text-sm text-gray-600 dark:text-gray-400">企业调整生产、消化库存、更新包装的时间窗口</div>
+                                    </div>
+                                    <div class="timeline-point">
+                                        <div class="timeline-date">2027-03-16</div>
+                                        <div class="timeline-event">正式生效</div>
+                                        <div class="text-sm text-gray-600 dark:text-gray-400">此日期后生产的食品必须符合新标签标准要求</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 未来图景 -->
+                        <div class="text-content" data-animation="fade-in">
+                            <p class="text-lg mb-6">
+                                • <strong>未来图景</strong>：此次大规模的标准更新，清晰地描绘了中国食品安全监管的发展方向：更加科学化、精细化，更加注重营养健康引导，更加积极地与国际标准对接。可以预见，未来：
+                            </p>
+                            <ul class="list-disc pl-10 space-y-3 text-lg">
+                                <li>食品标签将告别模糊，走向精准和易读。</li>
+                                <li>数字化工具将在食品信息追溯与传递中扮演越来越重要的角色。</li>
+                                <li>"健康"将不再只是宣传口号，而是融入产品研发与市场竞争的核心要素。</li>
+                                <li>基于风险预防的监管理念将得到进一步强化。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 结论部分 -->
+        <section id="conclusion" class="py-24 bg-gray-50 dark:bg-gray-900">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <!-- 结尾段落 -->
+                    <div class="mb-16" data-animation="fade-in">
+                        <p class="text-lg mb-6">
+                            59项食品安全新标准的发布，是中国食品安全治理现代化征程上的又一个坚实足迹。它不仅是对法规文本的修订，更是对食品生产、流通、消费全链条的一次深度重塑。"零添加"的规范、"过敏原"的明示、"营养表"的精进、"二维码"的链接，共同指向一个更诚实、更透明、更负责任的食品市场未来，其最终目标是护航公众的健康与安全。
+                        </p>
+                        <p class="text-lg mb-6">
+                            对食品行业而言，这既是必须迎接的挑战，也是实现高质量发展的契机。对于温州这样的食品产业重镇，积极拥抱变化，化压力为动力，不仅关乎企业的生存发展，也关乎城市食品安全的整体声誉。
+                        </p>
+                        <p class="text-lg">
+                            虽然变革的阵痛在所难免，但一个信息更对称、选择更智慧、消费更安心的食品新时代正迎面走来。未来两年过渡期将是关键的适应阶段，而确保新标的最终有效实施，让其红利真正惠及每一位国民，将是全社会共同的期待与责任。
+                        </p>
+                    </div>
+                    
+                    <!-- 行动号召 -->
+                    <div class="text-center mb-12" data-animation="fade-in">
+                        <p class="text-xl font-medium mb-6">您对食品标签新规有何看法？欢迎在评论区分享您的观点。</p>
+                        
+                        <!-- 分享选项 -->
+                        <div class="flex justify-center gap-6">
+                            <a href="#" class="social-share-btn" title="分享到微信">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a href="#" class="social-share-btn" title="分享到微博">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a href="#" class="social-share-btn" title="分享到QQ">
+                                <i class="fab fa-qq"></i>
+                            </a>
+                            <a href="#" class="social-share-btn" title="复制链接">
+                                <i class="fas fa-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 页脚 -->
+        <footer class="py-12 bg-gray-800 text-white">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="mb-6 md:mb-0">
+                            <p class="text-lg font-bold">温州新闻网AIGC实验室</p>
+                            <p class="text-sm mt-2">© 2024 版权所有</p>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <a href="#" class="text-white hover:text-blue-400 transition-colors" title="官方网站">
+                                <i class="fas fa-globe text-xl"></i>
+                            </a>
+                            <a href="#" class="text-white hover:text-blue-400 transition-colors" title="微信公众号">
+                                <i class="fab fa-weixin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-white hover:text-blue-400 transition-colors" title="微博">
+                                <i class="fab fa-weibo text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    
+    <!-- GSAP 和 ScrollTrigger 初始化脚本 -->
+    <script>
+        // 注册插件
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+        
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化主题（根据系统偏好）
+            initTheme();
+            
+            // 初始化滚动动画
+            initScrollAnimations();
+            
+            // 初始化交互功能
+            initInteractions();
+            
+            // 初始化进度条
+            initProgressBar();
+        });
+        
+        // 主题初始化与切换
+        function initTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const icon = themeToggle.querySelector('i');
+            
+            // 检测系统深色模式偏好
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // 根据系统偏好设置初始主题
+            if (prefersDarkMode) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+            
+            // 主题切换点击事件
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                
+                if (currentTheme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            });
+        }
+        
+        // 滚动动画初始化
+        function initScrollAnimations() {
+            // 设置默认的动画配置
+            ScrollTrigger.defaults({
+                // markers: true,  // 开发调试用，生产环境注释掉
+                toggleActions: 'play none none reverse'
+            });
+            
+            // ======= 优雅的英雄区滚动效果 =======
+            
+            // 标题向上滚动效果
+            gsap.to("#hero-title", {
+                yPercent: -100, // 向上滚动一个视口高度
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "top top", // 从页面顶部开始
+                    end: "50% top", // 当hero区域滚动50%时结束
+                    scrub: true, // 平滑跟随滚动
+                    invalidateOnRefresh: true // 窗口大小改变时重新计算
+                }
+            });
+            
+            // 确保背景到下一节之前平滑过渡
+            ScrollTrigger.create({
+                trigger: "#section-1-context",
+                start: "top bottom", // 当section1的顶部到达视口底部时
+                end: "top 20%", // 延长过渡区间，确保足够的渐变空间
+                onEnter: () => {
+                    gsap.to(".hero-background", {
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: "power2.inOut"
+                    });
+                },
+                onLeaveBack: () => {
+                    gsap.to(".hero-background", {
+                        opacity: 1,
+                        duration: 0.8,
+                        ease: "power2.inOut"
+                    });
+                }
+            });
+            
+            // 添加额外的触发器，确保在接近第一节时保持背景可见
+            ScrollTrigger.create({
+                trigger: ".hero-transition",
+                start: "top 80%",
+                end: "bottom top",
+                onLeave: () => {
+                    gsap.to(".hero-background", {
+                        opacity: 0,
+                        duration: 0.8
+                    });
+                },
+                onEnterBack: () => {
+                    gsap.to(".hero-background", {
+                        opacity: 1,
+                        duration: 0.8
+                    });
+                }
+            });
+            
+            // 确保导语区域平滑滚动
+            gsap.utils.toArray(".hero-intro-block").forEach((block, i) => {
+                // 添加进入视野的动画
+                ScrollTrigger.create({
+                    trigger: block,
+                    start: "top 80%", // 当区块顶部到达视口80%位置时
+                    once: true, // 只触发一次
+                    onEnter: () => {
+                        gsap.fromTo(block, 
+                            { y: 50, opacity: 0.5 },
+                            { 
+                                y: 0, 
+                                opacity: 1, 
+                                duration: 0.8,
+                                ease: "power2.out"
+                            }
+                        );
+                    }
+                });
+            });
+            
+            // ======= 章节1：背景固定 =======
+            ScrollTrigger.create({
+                trigger: '#section-1-context',
+                start: 'top top',
+                end: 'bottom bottom',
+                pin: '#section-1-bg',
+                pinSpacing: false
+            });
+            
+            // ======= 章节2：视差背景 =======
+            gsap.to('#section-2-bg', {
+                y: '20%',
+                scrollTrigger: {
+                    trigger: '#section-2-core-changes-1',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                }
+            });
+            
+            // ======= 章节4：视差背景 =======
+            gsap.to('#section-4-bg', {
+                y: '20%',
+                scrollTrigger: {
+                    trigger: '#section-4-impact',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                }
+            });
+            
+            // ======= 章节5：背景固定 =======
+            ScrollTrigger.create({
+                trigger: '#section-5-voices-future',
+                start: 'top top',
+                end: 'bottom bottom',
+                pin: '#section-5-bg',
+                pinSpacing: false
+            });
+            
+            // ======= 内容块动画 =======
+            // 批量处理滑入动画
+            ScrollTrigger.batch('[data-animation="slide-up"]', {
+                onEnter: batch => {
+                    gsap.from(batch, {
+                        y: 50,
+                        opacity: 0,
+                        stagger: 0.2,
+                        duration: 0.8,
+                        ease: 'power2.out'
+                    });
+                },
+                start: 'top 80%'
+            });
+            
+            // 批量处理淡入动画
+            ScrollTrigger.batch('[data-animation="fade-in"]', {
+                onEnter: batch => {
+                    gsap.from(batch, {
+                        opacity: 0,
+                        stagger: 0.2,
+                        duration: 0.8,
+                        ease: 'power2.out'
+                    });
+                },
+                start: 'top 85%'
+            });
+        }
+        
+        // 交互功能初始化
+        function initInteractions() {
+            // 平滑滚动到锚点 - 使用原生scrollTo而不是GSAP
+            document.querySelectorAll('.scroll-to').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    // 使用原生平滑滚动
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                        inline: 'nearest'
+                    });
+                });
+            });
+            
+            // 回到顶部按钮
+            const backToTop = document.getElementById('back-to-top');
+            
+            // 滚动监听，显示/隐藏回到顶部按钮
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > window.innerHeight) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // 回到顶部点击事件 - 使用原生scrollTo
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 比较滑块交互
+            if (document.getElementById('slider-handle')) {
+                const sliderHandle = document.getElementById('slider-handle');
+                const comparisonSlider = document.getElementById('nutrition-comparison-slider');
+                const comparisonSideRight = comparisonSlider.querySelector('.comparison-side.right');
+                
+                let isDragging = false;
+                
+                // 鼠标/触摸事件处理
+                const startDrag = (e) => {
+                    isDragging = true;
+                    e.preventDefault();
+                };
+                
+                const stopDrag = () => {
+                    isDragging = false;
+                };
+                
+                const drag = (e) => {
+                    if (!isDragging) return;
+                    
+                    let clientX;
+                    
+                    // 处理鼠标和触摸事件
+                    if (e.type === 'mousemove') {
+                        clientX = e.clientX;
+                    } else {
+                        clientX = e.touches[0].clientX;
+                    }
+                    
+                    // 计算滑块位置
+                    const rect = comparisonSlider.getBoundingClientRect();
+                    const position = ((clientX - rect.left) / rect.width) * 100;
+                    
+                    // 限制范围在0-100%之间
+                    const positionClamped = Math.max(0, Math.min(100, position));
+                    
+                    // 更新滑块和图片位置
+                    sliderHandle.style.left = `${positionClamped}%`;
+                    comparisonSideRight.style.width = `${100 - positionClamped}%`;
+                };
+                
+                // 注册事件
+                sliderHandle.addEventListener('mousedown', startDrag);
+                sliderHandle.addEventListener('touchstart', startDrag);
+                
+                document.addEventListener('mouseup', stopDrag);
+                document.addEventListener('touchend', stopDrag);
+                
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('touchmove', drag);
+            }
+            
+            // 点击展开互动
+            const revealButtons = document.querySelectorAll('#btn-traceability, #btn-allergen, #btn-nutrition');
+            const revealContent = document.getElementById('click-reveal-content');
+            
+            if (revealButtons.length > 0 && revealContent) {
+                const contents = {
+                    'btn-traceability': "示例：该产品牛奶来自[某牧场]，加工于[某工厂]，批次号[XXX]，可追溯物流链条及生产环节的全部信息。产品已通过有机认证，奶源100%来自散养奶牛。",
+                    'btn-allergen': "示例：本品含牛奶、大豆。生产线同时处理含花生、坚果的食品，请易敏者注意。过敏原检测灵敏度：蛋白质含量 ≥ 10ppm。如出现不适，请立即停止食用并咨询医生。",
+                    'btn-nutrition': "示例：饱和脂肪是什么？每日建议摄入量不超过总热量的10%。长期过量摄入可能增加心血管疾病风险。健康成人每日糖摄入量建议不超过50克，本产品每份含糖量为5克，约占建议量的10%。"
+                };
+                
+                revealButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.id;
+                        revealContent.textContent = contents[id];
+                        revealContent.classList.remove('hidden');
+                        
+                        // 添加进入动画
+                        gsap.from(revealContent, {
+                            y: 20,
+                            opacity: 0,
+                            duration: 0.5,
+                            ease: 'power2.out'
+                        });
+                    });
+                });
+            }
+        }
+        
+        // 初始化进度条
+        function initProgressBar() {
+            const progressBar = document.querySelector('.progress-bar');
+            
+            window.addEventListener('scroll', function() {
+                const windowScroll = document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (windowScroll / height) * 100;
+                
+                progressBar.style.width = scrolled + '%';
+            });
+        }
+    </script>
+</body>
+</html> 
