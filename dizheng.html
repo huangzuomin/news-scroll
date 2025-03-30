@@ -1,1246 +1,1470 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="scroll-smooth">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大地悲鸣：7.7级强震撕裂缅甸，曼德勒古城泣血</title>
-    <meta name="description" content="直击萨加因断裂带上的创伤与救援，温商守望相助传递跨国暖流">
-    <meta name="author" content="温州新闻网AIGC实验室">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>大地悲鸣：7.7级强震撕裂缅甸，曼德勒古城泣血</title>
+  <!-- Tailwind CSS from BootCDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP Core and ScrollTrigger plugins from BootCDN -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <!-- FontAwesome for icons -->
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts: Noto Serif SC for headings, Noto Sans SC for body text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Base styles */
+    :root {
+      --primary-color: #e74c3c;
+      --secondary-color: #3498db;
+      --accent-color: #f39c12;
+      --text-color-light: #f8f9fa;
+      --text-color-dark: #343a40;
+      --bg-color-light: #f8f9fa;
+      --bg-color-dark: #1a202c;
+    }
     
-    <!-- GSAP and ScrollTrigger via CDN -->
-    <script src="https://cdn.staticfile.org/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.staticfile.org/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      line-height: 1.6;
+      background-color: var(--bg-color-light);
+      color: var(--text-color-dark);
+      overflow-x: hidden;
+      width: 100%;
+    }
     
-    <style>
-        /* Custom CSS */
-        :root {
-            --font-sans: 'Noto Sans SC', system-ui, sans-serif;
-            --font-serif: 'Noto Serif SC', serif;
-            
-            /* Light mode colors */
-            --color-text: #111827;
-            --color-bg: #f9fafb;
-            --color-bg-secondary: #f3f4f6;
-            --color-primary: #dc2626;
-            --color-secondary: #4b5563;
-            --color-accent: #f59e0b;
-            --color-quote-border: #f97316;
-            --color-overlay: rgba(0, 0, 0, 0.5);
-        }
-        
-        .dark {
-            --color-text: #f3f4f6;
-            --color-bg: #111827;
-            --color-bg-secondary: #1f2937;
-            --color-primary: #ef4444;
-            --color-secondary: #9ca3af;
-            --color-accent: #fbbf24;
-            --color-quote-border: #fb923c;
-            --color-overlay: rgba(0, 0, 0, 0.7);
-        }
-        
-        body {
-            font-family: var(--font-sans);
-            color: var(--color-text);
-            background-color: var(--color-bg);
-            overflow-x: hidden;
-        }
-        
-        .font-serif {
-            font-family: var(--font-serif);
-        }
-        
-        /* Section specific styles */
-        section {
-            position: relative;
-            padding: 4rem 1rem;
-            min-height: 100vh;
-            width: 100%;
-            overflow: hidden;
-        }
-        
-        .bg-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        
-        .bg-fixed {
-            background-attachment: fixed;
-        }
-        
-        .bg-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-overlay);
-            z-index: -1;
-        }
-        
-        .section-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* Quote styles */
-        .quote {
-            position: relative;
-            font-family: var(--font-serif);
-            font-style: italic;
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 0.5rem;
-            border-left: 4px solid var(--color-quote-border);
-        }
-        
-        .quote::before {
-            content: '"';
-            font-size: 3rem;
-            position: absolute;
-            top: -0.5rem;
-            left: 0.5rem;
-            opacity: 0.2;
-        }
-        
-        /* For two-column layouts */
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        
-        @media (min-width: 768px) {
-            .two-columns {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        /* Animation helper classes */
-        .hidden-element {
-            visibility: hidden;
-            opacity: 0;
-        }
-        
-        /* Theme toggle button */
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            z-index: 100;
-            background-color: var(--color-bg-secondary);
-            color: var(--color-text);
-            border: none;
-            border-radius: 50%;
-            width: 3rem;
-            height: 3rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: background-color 0.3s ease;
-        }
-        
-        .theme-toggle:hover {
-            background-color: var(--color-secondary);
-            color: white;
-        }
-        
-        /* Navigation */
-        .article-nav {
-            position: fixed;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-            display: none;
-        }
-        
-        @media (min-width: 1280px) {
-            .article-nav {
-                display: block;
-            }
-        }
-        
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--color-secondary);
-            margin: 10px 0;
-            opacity: 0.5;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-dot.active {
-            opacity: 1;
-            transform: scale(1.3);
-            background-color: var(--color-primary);
-        }
-        
-        /* Loading spinner */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top-color: var(--color-primary);
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Video background styling */
-        .video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-        }
-    </style>
+    .dark body {
+      background-color: var(--bg-color-dark);
+      color: var(--text-color-light);
+    }
+    
+    h1, h2, h3, h4, h5, h6, .serif {
+      font-family: 'Noto Serif SC', serif;
+    }
+    
+    .quote {
+      border-left-width: 4px;
+      font-style: italic;
+    }
+    
+    /* Hero section styling */
+    .hero-container {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    
+    /* Section background styles */
+    .section-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    /* Markdown-like styling for content */
+    .content strong,
+    .content b {
+      font-weight: 700;
+    }
+    
+    .content p {
+      margin-bottom: 1rem;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Dark mode toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .dark .theme-toggle {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Focus styles for accessibility */
+    button:focus, a:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+    
+    /* Navigation styles */
+    nav a {
+      transition: color 0.3s ease;
+    }
+    
+    nav a:hover {
+      color: var(--primary-color);
+    }
+    
+    .text-primary-color {
+      color: var(--primary-color) !important;
+    }
+    
+    .bg-primary-color {
+      background-color: var(--primary-color) !important;
+    }
+    
+    .bg-primary-color\/80 {
+      background-color: rgba(231, 76, 60, 0.8) !important;
+    }
+    
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background-color: rgba(231, 76, 60, 0.8);
+      color: white;
+      padding: 0.75rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--primary-color);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    /* Footer styles */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    footer a:hover {
+      color: var(--primary-color);
+    }
+    
+    /* Loader */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .dark .loader {
+      background: var(--bg-color-dark);
+    }
+    
+    /* Navigation */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--primary-color);
+      z-index: 1000;
+      transition: width 0.2s ease;
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 20px;
+      opacity: 0.5;
+      transition: all 0.5s ease;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 20px;
+      width: 2px;
+      height: calc(100% + 10px);
+      background: rgba(200, 200, 200, 0.5);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .timeline-item.active {
+      opacity: 1;
+    }
+    
+    .timeline-item.active::before {
+      transform: scale(1.2);
+      box-shadow: 0 0 10px rgba(231, 76, 60, 0.7);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 1.75rem;
+        line-height: 1.2;
+      }
+      
+      .hero-subtitle {
+        font-size: 1rem;
+        line-height: 1.3;
+      }
+      
+      .max-w-4xl, .max-w-3xl, .max-w-2xl, .max-w-prose {
+        width: 100%;
+      }
+      
+      blockquote {
+        font-size: 1rem !important;
+      }
+      
+      figure img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    
+    /* Earthquake shake animation */
+    @keyframes shake {
+      0%, 100% {transform: translateX(0);}
+      10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+      20%, 40%, 60%, 80% {transform: translateX(5px);}
+    }
+    
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
+  </style>
 </head>
-<body>
-    <!-- Loading Spinner -->
-    <div class="loader" id="loader">
-        <div class="spinner"></div>
+<body class="min-h-screen">
+  <!-- Loader -->
+  <div class="loader" aria-hidden="true">
+    <div class="text-center">
+      <div class="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto"></div>
+      <p class="mt-4 text-lg">页面加载中...</p>
+    </div>
+  </div>
+  
+  <!-- Reading progress bar -->
+  <div class="progress-bar" aria-hidden="true" role="presentation"></div>
+  
+  <!-- Navigation Menu -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-sm text-white py-2 px-4">
+    <div class="container mx-auto flex flex-wrap justify-between items-center">
+      <div class="text-lg font-semibold">缅甸地震特别报道</div>
+      <div class="hidden md:flex space-x-4">
+        <a href="#section-intro" class="hover:text-primary-color transition-colors py-2">介绍</a>
+        <a href="#section-1-disaster-strikes" class="hover:text-primary-color transition-colors py-2">灾难降临</a>
+        <a href="#section-2-damage-assessment" class="hover:text-primary-color transition-colors py-2">曼德勒伤痕</a>
+        <a href="#section-3-mutual-aid" class="hover:text-primary-color transition-colors py-2">守望相助</a>
+        <a href="#section-4-wenzhou-china-aid" class="hover:text-primary-color transition-colors py-2">温州力量</a>
+        <a href="#section-5-geology" class="hover:text-primary-color transition-colors py-2">地质成因</a>
+        <a href="#section-6-challenges" class="hover:text-primary-color transition-colors py-2">救援挑战</a>
+        <a href="#conclusion" class="hover:text-primary-color transition-colors py-2">结语</a>
+        <a href="#references" class="hover:text-primary-color transition-colors py-2">参考资料</a>
+      </div>
+      <button id="menuToggle" class="md:hidden text-white focus:outline-none" aria-label="打开菜单">
+        <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+      </button>
+    </div>
+    <!-- Mobile menu (hidden by default) -->
+    <div id="mobileMenu" class="hidden md:hidden w-full mt-2 px-2">
+      <div class="flex flex-col space-y-2 pb-2">
+        <a href="#section-intro" class="hover:text-primary-color transition-colors py-2">介绍</a>
+        <a href="#section-1-disaster-strikes" class="hover:text-primary-color transition-colors py-2">灾难降临</a>
+        <a href="#section-2-damage-assessment" class="hover:text-primary-color transition-colors py-2">曼德勒伤痕</a>
+        <a href="#section-3-mutual-aid" class="hover:text-primary-color transition-colors py-2">守望相助</a>
+        <a href="#section-4-wenzhou-china-aid" class="hover:text-primary-color transition-colors py-2">温州力量</a>
+        <a href="#section-5-geology" class="hover:text-primary-color transition-colors py-2">地质成因</a>
+        <a href="#section-6-challenges" class="hover:text-primary-color transition-colors py-2">救援挑战</a>
+        <a href="#conclusion" class="hover:text-primary-color transition-colors py-2">结语</a>
+        <a href="#references" class="hover:text-primary-color transition-colors py-2">参考资料</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Dark mode toggle button 
+  <button class="theme-toggle" id="themeToggle" aria-label="切换深色/浅色模式">
+    <i class="fas fa-moon text-yellow-500 dark:hidden" aria-hidden="true"></i>
+    <i class="fas fa-sun text-yellow-300 hidden dark:block" aria-hidden="true"></i>
+  </button>
+  -->
+  
+  <!-- Hero section -->
+  <header class="hero-container">
+    <div class="absolute inset-0 bg-black/50 z-0"></div>
+    <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="assets/top.mp4" type="video/mp4">
+      <!-- Fallback image if video doesn't load -->
+      <img src="assets/1.jpg" alt="缅甸地震后的受损建筑" class="w-full h-full object-cover">
+    </video>
+    
+    <div class="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center text-white">
+      <h1 class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight mx-auto serif">
+        大地悲鸣：7.7级强震撕裂缅甸，曼德勒古城泣血
+      </h1>
+      <h2 class="hero-subtitle text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 mx-auto serif">
+        直击萨加因断裂带上的创伤与救援，温商守望相助传递跨国暖流
+      </h2>
+      <div class="mt-4">
+        <p class="text-xs sm:text-sm md:text-base opacity-80">温州新闻网AIGC实验室 · 2025年3月29日</p>
+        <div class="mt-6 sm:mt-8">
+          <button id="scrollToContent" class="bg-white/20 hover:bg-white/30 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 backdrop-blur-sm focus:ring-2 focus:ring-accent-color focus:outline-none">
+            <span class="mr-2">开始阅读</span>
+            <i class="fas fa-arrow-down animate-bounce" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="relative" role="main">
+    <!-- Section: Introduction -->
+    <section id="section-intro" class="relative py-12 sm:py-16 bg-gray-100 dark:bg-gray-900">
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div id="intro-text-1" class="text-base sm:text-lg lg:text-xl leading-relaxed font-serif mx-auto mt-8 mb-4">
+            缅甸当地时间2025年3月28日中午，大地骤然发出毁灭性的怒吼。一场里氏7.7级的强烈地震（中国地震台网测定为7.9级）突袭缅甸中部萨加因地区，震波迅速蔓延，将繁华都市与宁静乡村瞬间拖入深渊。
+          </div>
+          <div id="intro-text-2" class="text-base sm:text-lg lg:text-xl leading-relaxed font-serif mx-auto mb-4">
+            缅甸第二大城市曼德勒、首都内比都等地遭受重创，千年古迹在摇晃中断裂，无数生命在废墟下消逝。截至发稿时，官方确认死亡人数已逾千人，数千人受伤，失踪名单仍在拉长。
+          </div>
+          <div id="intro-text-3" class="text-base sm:text-lg lg:text-xl leading-relaxed font-serif mx-auto mb-4">
+            这场发生在活跃的萨加因断裂带上的浅源强震，不仅在缅甸国内引发严峻的人道主义危机，其威力更波及邻国泰国、中国，引发国际社会高度关注和紧急驰援。
+          </div>
+          <div id="intro-text-4" class="text-base sm:text-lg lg:text-xl leading-relaxed font-serif mx-auto mb-8">
+            在灾难的阴影下，救援刻不容缃，人性的光辉与守望相助的故事正在断壁残垣间上演，其中亦闪耀着来自温州商界的力量。本篇报道将带您探寻灾难背后的地质成因，记录生死瞬间与救援困境，并展望这片土地艰难的重建之路。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Disaster Strikes -->
+    <section id="section-1-disaster-strikes" class="relative py-12 sm:py-16 min-h-screen">
+      <div class="section-background" id="disaster-bg" style="background-image: url('assets/救援人员在曼谷一栋在建高层建筑的倒塌现场工作此前该建筑在周五遭遇地震Wason Wanichakorn.jpg');">
+        <div class="absolute inset-0 bg-black/80"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 md:px-8 relative z-10 text-white">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-center serif">天崩地裂：灾难降临的"黑色星期五"</h2>
+        
+        <div class="max-w-4xl mx-auto">
+          <p id="disaster-text-1" class="text-base sm:text-lg leading-relaxed mb-6">
+            2025年3月28日，星期五，中午12点50分54秒（缅甸当地时间）。对于许多缅甸民众，尤其是穆斯林信徒而言，这本应是前往清真寺进行主麻日聚礼的时刻。然而，平静瞬间被撕裂。
+          </p>
+          
+          <div id="disaster-text-2" class="font-semibold text-base sm:text-lg md:text-xl my-4 p-4 bg-white/10 backdrop-blur-sm rounded">
+            美国地质调查局（USGS）测定，一场高达里氏7.7级的地震猛烈袭击了北纬22.013度、东经95.922度的萨加因地区。震源深度仅10公里，属于破坏力巨大的浅源地震。几乎同一时间，中国地震台网测定震级为7.9级，震源深度30公里。
+          </div>
+          
+          <p id="disaster-text-3" class="text-base sm:text-lg leading-relaxed mb-6">
+            尽管数据略有差异，但都指向同一个事实：一场毁灭性的灾难降临了。
+          </p>
+
+          <div class="my-8 mx-auto">
+            <figure class="">
+                <img src="assets/26d8b810-0d2a-11f0-ba12-8d27eb561761.png" alt="缅甸地震：泰国、中国、印度均有震感 震感程度地图" class="w-full h-auto">
+                <figcaption class="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-3 text-sm backdrop-blur-sm">
+                    <p class="font-bold mb-1">缅甸地震：泰國、中國、印度均有震感</p>
+                    <div class="flex items-center flex-wrap gap-1 text-xs">
+                        <span class="px-2 py-1 rounded bg-[#f9e8c7] text-black">轻微</span>
+                        <span class="px-2 py-1 rounded bg-[#f0cb64] text-black">中等</span>
+                        <span class="px-2 py-1 rounded bg-[#f29339] text-white">强烈</span>
+                        <span class="px-2 py-1 rounded bg-[#b7542c] text-white">非常强烈</span>
+                        <span class="px-2 py-1 rounded bg-[#6e361b] text-white">严重</span>
+                    </div>
+                    <p class="text-xs mt-2 text-gray-300">资料来源：美国地质调查局（USGS）</p>
+                </figcaption>
+            </figure>
+        </div>
+          
+          <blockquote id="disaster-quote-1" class="italic text-base sm:text-lg md:text-xl my-6 p-4 border-l-4 border-orange-400 bg-black/30 rounded-r-lg mx-auto">
+            当时我们正在展厅里，突然感觉天旋地转，根本站不稳！旁边的同事喊'是不是地震了'，我抬头一看，天花板上的灯具和通风管都在剧烈摇晃，持续了大概两分钟，所有人都惊慌地往外跑。
+            <footer class="mt-2 text-sm">— 周剑峰 (温州商人，正在仰光参加展会)</footer>
+          </blockquote>
+          
+          <blockquote id="disaster-quote-2" class="italic text-base sm:text-lg md:text-xl my-6 p-4 border-l-4 border-orange-400 bg-black/30 rounded-r-lg mx-auto">
+            头顶的灯哗啦啦地晃，天花板的碎块不停掉下来，我几乎是匍匐着爬出去的，周围全是尖叫声和呼救声，那一刻真的以为世界末日到了。
+            <footer class="mt-2 text-sm">— 媚媚 (化名，曼德勒居民，事发时在酒店大堂)</footer>
+          </blockquote>
+          
+          <p id="disaster-text-4" class="text-base sm:text-lg leading-relaxed my-4 text-center text-red-300">
+            仅仅12分钟后，一次6.7级的强烈余震再次袭来，加剧了人们的恐慌和建筑的损毁。随后，4.4至4.9级的小型余震不断，如同大地难以平复的抽搐。
+          </p>
+          
+          <p id="disaster-text-5" class="text-base sm:text-lg leading-relaxed mb-6">
+            震波跨越国界。泰国首都曼谷，高层建筑明显摇晃，屋顶泳池的水剧烈晃动，甚至造成一栋在建高楼倒塌，导致人员伤亡。一位泰国流行歌星形容地震的声音"像滚雷"，看到受损建筑冒烟的景象让他联想到"9·11"。
+          </p>
+          
+          <figure id="disaster-image-1" class="my-6 mx-auto">
+            <img data-src="assets/救援人员周五在曼谷倒塌的高层建筑现场工作。(Sakchai Lalit-AP).jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" alt="泰国曼谷一栋在地震中倒塌的在建高楼现场，救援人员正在工作" class="rounded-lg shadow-lg w-full sm:max-w-2xl mx-auto" loading="lazy">
+            <figcaption class="text-center text-sm mt-2 text-gray-300">
+              泰国曼谷一栋在建高楼在地震中倒塌，救援人员正在现场工作。(图片来源: Sakchai Lalit-AP)
+            </figcaption>
+          </figure>
+          
+          <p id="disaster-text-6" class="text-base sm:text-lg leading-relaxed mb-6">
+            在中国西南部，与缅甸接壤的云南、四川、贵州、广西多地均有明显震感。云南瑞丽市部分老旧房屋受损，出现人员轻伤。
+          </p>
+          
+          <p id="disaster-text-7" class="text-lg sm:text-xl font-semibold text-center mt-8">
+            然而，灾难的核心，无疑是缅甸，特别是萨加因和曼德勒地区。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Damage Assessment -->
+    <section id="section-2-damage-assessment" class="relative py-12 sm:py-16 min-h-screen bg-blue-900">
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-950 to-blue-800 opacity-90"></div>
+      
+      <div class="container mx-auto px-4 md:px-8 relative z-10 text-white">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-center serif">废墟之上：曼德勒与萨加因的累累伤痕</h2>
+        
+        <div class="max-w-4xl mx-auto">
+          <p class="text-base sm:text-lg leading-relaxed">
+            强震过后，昔日繁华的城市与村庄化为一片狼藉。官方通报的伤亡数字令人心碎：
+          </p>
+          
+          <div class="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-red-500 my-8 leading-tight break-words whitespace-pre-line">
+            超过 1000 人遇难
+            2400 多人受伤
+            至少 30 人失踪
+          </div>
+          
+          <p class="text-center text-sm text-gray-400 mb-10">
+            (数字仍在攀升。美国地质调查局（USGS）基于模型的初步评估甚至认为，死亡人数可能高达数千人。)
+          </p>
+          
+          <p class="text-xl sm:text-2xl font-semibold text-center my-10 pt-6 border-t border-gray-600">
+            曼德勒，缅甸的文化心脏，此刻正在泣血。
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="text-base leading-relaxed pr-0 md:pr-4">
+              <p class="mb-4"><strong>建筑倒塌与火灾：</strong> 无数住宅、商业楼宇轰然倒塌或在震后起火。一座五层楼的建筑在目击者眼前夷为平地。一家两层茶馆倒塌，约70人被困；一家三层汽车配件商店倒塌，十多名员工生死未卜。一座在建建筑的垮塌也造成了伤亡。</p>
+              
+              <p><strong>宗教场所的悲剧：</strong> 地震发生时正值周五祈祷时间，多座清真寺屋顶坍塌导致大量正在祈祷的穆斯林信徒遇难。东吁镇的一位目击者描述了清真寺屋顶坠落的恐怖瞬间。著名的摩诃昂冕宝藏寺被毁，一座寺庙倒塌时数名僧侣受伤，历史悠久的马哈牟尼佛塔和曼德勒皇宫也出现严重结构性损坏。</p>
+            </div>
+            <div>
+              <img data-src="assets/1.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" alt="曼德勒一栋楼体在地震中倾斜受损" class="rounded-lg shadow-md w-full h-auto object-cover" loading="lazy">
+              <p class="text-center text-sm mt-2 text-gray-300">震中较近的曼德勒现场图片，显示当地有楼体倾斜受损。</p>
+            </div>
+          </div>
+          
+          <figure class="my-6 mx-auto">
+            <img data-src="assets/缅甸内比都周五发生地震后，受损的宝塔。（Aung Shine Oo-AP）.jpg" src="assets/缅甸内比都周五发生地震后，受损的宝塔。（Aung Shine Oo-AP）.jpg" alt="缅甸内比都一座宝塔在地震后受损" class="rounded-lg shadow-lg w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto cursor-pointer transition-transform duration-300 hover:scale-[1.02]" loading="lazy" onclick="openImageModal(this.src)">
+            <figcaption class="text-center text-sm mt-2 text-gray-300">缅甸内比都一座宝塔在地震后受损。(图片来源: Aung Shine Oo-AP) <span class="text-xs italic">点击可查看大图</span></figcaption>
+          </figure>
+          
+          <p class="text-base sm:text-lg leading-relaxed my-4 font-semibold">
+            <strong>基础设施瘫痪：</strong> 曼德勒国际机场的天花板塌落，地下室受损，跑道亦发现裂缝，导致航班全面停飞。连接曼德勒与实皆省的重要通道——历史悠久的阿瓦大桥（Ava Bridge）被毁。曼德勒-仰光高速公路部分路段受损，通行受阻。据报道，曼德勒附近甚至有一座水坝发生溃坝，引发局部洪水。
+          </p>
+          
+          <div class="my-6 mx-auto">
+            <video class="rounded-lg shadow-lg w-full sm:max-w-2xl mx-auto" controls loading="lazy">
+              <source src="assets/仰曼高速大面积破损 道路变形严重（潮新闻）.mp4" type="video/mp4">
+              您的浏览器不支持视频标签。
+            </video>
+            <p class="text-center text-sm mt-2 text-gray-300">仰光-曼德勒高速公路部分路段在地震中受损严重。(来源: 潮新闻)</p>
+          </div>
+          
+          <p class="text-base sm:text-lg leading-relaxed my-4">
+            <strong>萨加因地区，作为震中，同样满目疮痍。</strong> 一栋高层建筑倒塌夺去了两条生命。这里本就聚集了大量因国内冲突而流离失所的民众，地震无疑让他们的处境雪上加霜。
+          </p>
+          
+          <p class="text-base sm:text-lg leading-relaxed my-4">
+            <strong>首都内比都，也未能幸免。</strong> 包括医院和急救设施在内的建筑物严重受损或倒塌，道路出现裂缝，进一步加剧了医疗资源的紧张。勃固、掸邦、皎栖等城镇也纷纷报告建筑物受损。
+          </p>
+          
+          <figure class="my-6 mx-auto">
+            <img data-src="assets/这是3月28日在缅甸内比都拍摄的地震后受损的建筑。新华社发.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" alt="缅甸内比都地震后受损的建筑" class="rounded-lg shadow-lg w-full sm:max-w-xl mx-auto" loading="lazy">
+            <figcaption class="text-center text-sm mt-2 text-gray-300">3月28日缅甸内比都地震后受损的建筑。(来源: 新华社)</figcaption>
+          </figure>
+          
+          <p class="text-base sm:text-lg leading-relaxed text-yellow-300 my-4">
+            全国范围内的通信和电力中断，使得信息传递和协调救援变得异常困难。医院挤满了伤者，血液和医疗用品极度匮乏，部分医院甚至因设备损坏或资源耗尽而被迫暂停接收病人。
+          </p>
+          
+          <figure class="my-6 mx-auto">
+            <img data-src="assets/3月28日，受灾民众在缅甸内比都接受救治。新华社发.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" alt="缅甸内比都地震受灾民众在医院外接受救治" class="rounded-lg shadow-lg w-full sm:max-w-xl mx-auto" loading="lazy">
+            <figcaption class="text-center text-sm mt-2 text-gray-300">3月28日，受灾民众在缅甸内比都接受救治。(来源: 新华社)</figcaption>
+          </figure>
+          
+          <p class="text-base sm:text-lg leading-relaxed my-4 bg-red-900/50 p-4 rounded">
+            这场地震不仅夺走了生命，摧毁了家园，更让缅甸本已严峻的人道主义危机急剧恶化。据统计，地震前缅甸国内已有超过300万流离失所者，如今这个数字无疑将大幅增加。幸存者们面临着余震的威胁、水电食物的短缺以及传染病爆发的风险。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Mutual Aid -->
+    <section id="section-3-mutual-aid" class="relative py-12 sm:py-16 min-h-screen">
+      <div class="section-background" id="mutual-aid-bg" style="background-image: url('assets/曼德勒当地景象。受访者供图.jpeg');">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/90 to-black/96"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 md:px-8 relative z-10 text-white">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-center serif">"我们都在挺身而出"：守望相助的现场</h2>
+        
+        <div class="max-w-4xl mx-auto">
+          <p class="text-center italic text-xl sm:text-2xl my-8">
+            灾难面前，人性的光辉从未缺席。
+          </p>
+          
+          <blockquote class="text-base sm:text-lg md:text-xl my-6 p-4 border-l-4 border-green-500 bg-white/20 backdrop-blur-sm rounded-r-lg mx-auto shadow">
+            我已经来缅甸6年了，在曼德勒开了5家餐厅。灾难面前，我们华人都在挺身而出。
+            <footer class="mt-2 text-sm">— 苏元元 (华人，灾区互助车队组织者之一)</footer>
+          </blockquote>
+          
+          <p class="text-base sm:text-lg leading-relaxed">
+            地震发生后，在缅甸的中国公民、华人华侨迅速行动起来。"20多辆私家车，一夜之间就凑齐了。我这边组织的志愿者就有30多人，大家都是自愿赶赴灾区。"苏元元一边指挥着志愿者搬运矿泉水、方便面、药品等物资，一边对潮新闻记者说。
+          </p>
+          
+          <p class="text-base sm:text-lg leading-relaxed mb-4">
+            她经营的餐馆门口，不断有人送来牛奶、食品，甚至现金，委托她送往灾区。"仰光的物价还算平稳，这些基本物资没有涨价，大家都在尽力帮忙。"
+          </p>
+          
+          <div class="my-6 mx-auto flex justify-center">
+            <div class="w-full sm:w-2/3 md:w-1/2 lg:w-2/5 max-w-md">
+              <video class="rounded-lg shadow-lg w-full mx-auto" controls loading="lazy">
+                <source src="assets/缅甸当地华人自发组织灾区互助车队 护送救援队和物资至震中曼德勒.mp4" type="video/mp4">
+                您的浏览器不支持视频标签。
+              </video>
+              <p class="text-center text-sm mt-2 text-gray-300">缅甸当地华人自发组织的灾区互助车队，正护送救援物资前往曼德勒。</p>
+            </div>
+          </div>
+          
+          <p class="text-base sm:text-lg leading-relaxed">
+            苏元元的车队，还承担了一项特殊的任务——护送刚刚抵达缅甸的浙江公羊救援队前往曼德勒。同行的，还有浙江温州商会的"爱心护送队"。
+          </p>
+          
+          <blockquote class="text-base sm:text-lg md:text-xl my-6 p-4 border-l-4 border-green-500 bg-white/20 backdrop-blur-sm rounded-r-lg mx-auto shadow">
+            从仰光到曼德勒，正常开车7个小时。现在高速路段有损坏，我们需要当地人带路绕行，估计要10个小时以上。路况不明，只能一步步往前摸索。
+            <footer class="mt-2 text-sm">— 苏元元</footer>
+          </blockquote>
+          
+          <p class="text-base sm:text-lg leading-relaxed italic text-gray-400">
+            据潮新闻特派记者报道，随车队行驶在仰曼高速上，感受到的是异样的冷清。除了零星的救援车辆，几乎看不到其他车流。部分路面出现的裂缝和临时修补的痕迹，无声地诉说着地震的威力。
+          </p>
+          
+          <p class="text-base sm:text-lg leading-relaxed mt-6">
+            在曼德勒，惊魂未定的玉石商人媚媚和同伴们，在酒店前的空地上度过了艰难的一夜。"余震不断，停水停电，网络时好时坏。酒店发了蚊帐和一些吃的，但大家还是很害怕。"
+          </p>
+          
+          <figure class="my-6 mx-auto">
+            <img data-src="assets/曼德勒当地景象。受访者供图.jpeg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" alt="曼德勒当地地震后的景象" class="rounded-lg shadow-lg w-full sm:max-w-xl mx-auto" loading="lazy">
+            <figcaption class="text-center text-sm mt-2 text-gray-300">曼德勒当地地震后的景象。(来源: 受访者供图)</figcaption>
+          </figure>
+          
+          <p class="text-base sm:text-lg leading-relaxed">
+            她告诉潮新闻记者，曼德勒老城区不少房屋受损严重，尤其是全球知名的玉石交易市场——皎湾市场，部分铁皮棚和茅草棚搭建的商铺屋顶坍塌，墙体开裂。"以前这里很热闹，很多中国主播来这里直播卖玉石，现在……"
+          </p>
+          
+          <p class="text-base sm:text-lg leading-relaxed mt-6 p-4 bg-blue-900/50 rounded">
+            温州商人周剑峰虽然人在仰光，但心系曼德勒的灾情和商会同仁。"目前我们温州商会正在统计曼德勒地区浙商的情况，暂时没有收到人员伤亡的报告，这是不幸中的万幸。曼德勒和仰光经济联系紧密，交通中断、基础设施破坏，对经济活动的影响肯定很大。"
+          </p>
+        </div>
+      </div>
+    </section>
+
+ <!-- Section: Wenzhou Aid -->
+ <section id="section-4-wenzhou-china-aid" class="relative py-12 sm:py-16 min-h-screen">
+    <div class="section-background" id="wenzhou-bg" style="background-image: url('assets/救灾物资随中国云南救援医疗队一起飞赴缅甸地震灾区（3月29日摄）。新华社发（叶勤茹摄）.jpg');">
+      <div class="absolute inset-0 bg-black/90"></div>
     </div>
     
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle" aria-label="切换深色/浅色模式">
-        <svg xmlns="http://www.w3.org/2000/svg" class="sun-icon h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" class="moon-icon h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-    </button>
-    
-    <!-- Navigation Dots -->
-    <div class="article-nav" id="articleNav"></div>
-    
-    <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <video class="video-bg" autoplay muted loop playsinline>
-            <source src="assets/002.mp4" type="video/mp4">
-        </video>
-        <div class="bg-overlay bg-black/50"></div>
+    <div class="container mx-auto px-4 md:px-8 relative z-10 text-white">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-center serif">温州力量在行动：跨越国界的驰援暖流</h2>
+      
+      <div class="max-w-4xl mx-auto">
+        <p class="text-lg sm:text-xl font-semibold mb-4 text-center">在这次跨国救援行动中，来自温州的力量格外引人注目。</p>
         
-        <div class="section-content text-center text-white z-10 px-4 hidden-element" id="heroContent">
-            <h1 class="text-4xl md:text-6xl font-bold font-serif mb-4 leading-tight">大地悲鸣：7.7级强震撕裂缅甸，曼德勒古城泣血</h1>
-            <h2 class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">直击萨加因断裂带上的创伤与救援，温商守望相助传递跨国暖流</h2>
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-sm opacity-80">
-                <p class="font-serif">温州新闻网AIGC实验室</p>
-                <span class="hidden md:inline">|</span>
-                <p>约 2025年3月29日</p>
-            </div>
-            <div class="mt-16 animate-bounce">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Introduction Section -->
-    <section id="section-intro" class="relative">
-        <div class="bg-image" style="background-color: #f8f8f8;"></div>
-        <div class="section-content">
-            <div class="max-w-prose mx-auto">
-                <p class="text-lg lg:text-xl leading-relaxed font-serif mt-8 mb-4 hidden-element intro-para">缅甸当地时间2025年3月28日中午，大地骤然发出毁灭性的怒吼。一场里氏7.7级的强烈地震（中国地震台网测定为7.9级）突袭缅甸中部萨加因地区，震波迅速蔓延，将繁华都市与宁静乡村瞬间拖入深渊。</p>
-                
-                <p class="text-lg lg:text-xl leading-relaxed font-serif mb-4 hidden-element intro-para">缅甸第二大城市曼德勒、首都内比都等地遭受重创，千年古迹在摇晃中断裂，无数生命在废墟下消逝。截至发稿时，官方确认死亡人数已逾千人，数千人受伤，失踪名单仍在拉长。</p>
-                
-                <p class="text-lg lg:text-xl leading-relaxed font-serif mb-4 hidden-element intro-para">这场发生在活跃的萨加因断裂带上的浅源强震，不仅在缅甸国内引发严峻的人道主义危机，其威力更波及邻国泰国、中国，引发国际社会高度关注和紧急驰援。</p>
-                
-                <p class="text-lg lg:text-xl leading-relaxed font-serif mb-8 hidden-element intro-para">在灾难的阴影下，救援刻不容缓，人性的光辉与守望相助的故事正在断壁残垣间上演，其中亦闪耀着来自温州商界的力量。本篇报道将带您探寻灾难背后的地质成因，记录生死瞬间与救援困境，并展望这片土地艰难的重建之路。</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Disaster Strikes Section -->
-    <section id="section-1-disaster-strikes" class="relative">
-        <div class="bg-image" style="background-image: url('https://images.unsplash.com/photo-1626100593409-c3c7cbcb332a?q=80&w=1740&auto=format');"></div>
-        <div class="bg-overlay"></div>
+        <p class="text-base sm:text-lg leading-relaxed mb-6">
+          地震发生后，缅甸浙江温州商会迅速行动起来，一方面紧急排查在缅温商的安全状况，建立互助联系网络；另一方面，积极响应救援呼吁，组织了"爱心护送队"，与其他华人社团一道，为驰援灾区的专业救援队伍提供宝贵的地面交通支持。
+        </p>
         
-        <div class="section-content text-white">
-            <h2 class="text-3xl md:text-4xl font-bold font-serif mb-12 text-center hidden-element">天崩地裂：灾难降临的"黑色星期五"</h2>
+        <blockquote class="italic text-base sm:text-lg md:text-xl my-6 p-4 border-l-4 border-blue-500 bg-white/20 backdrop-blur-sm rounded-r-lg mx-auto">
+          大家都是安全的，这是最重要的。现在就是要尽我们所能，帮助灾区渡过难关。
+          <footer class="mt-2 text-sm">— 周剑峰 (代表温州商会)</footer>
+        </blockquote>
+        
+        <p class="text-base sm:text-lg leading-relaxed mt-8 pt-6 border-t border-gray-600">
+          温州力量的加入，是中国整体援助行动的一个缩影。地震发生后，中国政府迅速做出反应：
+        </p>
+        
+        <div class="text-base sm:text-lg leading-relaxed my-4 p-4 bg-gray-800/70 rounded whitespace-pre-line">
+          • <strong>高层慰问：</strong> 国家主席习近平向缅甸领导人致慰问电，表示中方愿提供必要帮助。
+          • <strong>资金援助：</strong> 中国政府决定向缅甸提供 <strong>1亿元人民币</strong> 紧急人道主义地震救灾援助。
+          • <strong>专业队伍：</strong> 一支82人中国救援队、一支37人云南紧急医疗救援队，携带先进装备第一时间飞抵缅甸。
+          • <strong>物资援助：</strong> 大批帐篷、毛毯、急救包、食品、饮用水等急需物资随同运抵。
+          • <strong>使馆行动：</strong> 中国驻缅甸使领馆启动应急机制，核实中国公民受灾情况，提供领事保护。
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+          <div>
+            <video class="w-full h-auto rounded-lg shadow-md mb-4 md:mb-0" controls loading="lazy">
+              <source src="assets/中国公羊救援队抵达仰光国际机场。视频由公羊队提供.mp4" type="video/mp4">
+              您的浏览器不支持视频标签。
+            </video>
+            <p class="text-center text-sm mt-2 text-gray-300">中国公羊救援队抵达仰光国际机场。(视频由公羊队提供)</p>
+          </div>
+          <div>
+            <img data-src="assets/3月29日，蓝天救援队车队从云南瑞丽口岸进入缅甸救援。新华社记者陈欣波摄.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" alt="蓝天救援队车队从云南瑞丽口岸进入缅甸" class="w-full h-auto rounded-lg shadow-md object-cover" loading="lazy">
+            <p class="text-center text-sm mt-2 text-gray-300">3月29日，蓝天救援队车队从云南瑞丽口岸进入缅甸救援。(来源: 新华社记者陈欣波摄)</p>
+          </div>
+        </div>
+        
+        <figure class="my-6 mx-auto">
+          <img data-src="assets/救灾物资随中国云南救援医疗队一起飞赴缅甸地震灾区（3月29日摄）。新华社发（叶勤茹摄）.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" alt="救灾物资随中国云南救援医疗队飞赴缅甸" class="rounded-lg shadow-lg w-full sm:max-w-2xl mx-auto" loading="lazy">
+          <figcaption class="text-center text-sm mt-2 text-gray-300">救灾物资随中国云南救援医疗队一起飞赴缅甸地震灾区 (3月29日摄)。(来源: 新华社发 叶勤茹摄)</figcaption>
+        </figure>
+        
+        <p class="text-base sm:text-lg leading-relaxed mt-6">
+          除了中国，印度也迅速派遣了救援和医疗队伍，并空运了救援物资。韩国承诺提供200万美元人道援助，俄罗斯、美国、马来西亚等国也表达了援助意愿或派出队伍。国际社会的广泛关注和援助，为处于困境中的缅甸人民带来了希望。
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- Section: Geology Explanation -->
+    <section id="section-5-geology" class="relative py-12 sm:py-16 min-h-screen bg-blue-900 text-white">
+      <div class="container mx-auto px-4 md:px-8 relative z-10">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-center serif text-white">解析强震："地质炸弹"萨加因断裂带</h2>
+        
+        <div class="max-w-5xl mx-auto">
+          <p class="text-lg sm:text-xl font-semibold my-6 text-center text-blue-200">
+            为何缅甸会遭遇如此强烈的地震？答案直指其脚下的地质构造。
+          </p>
+          
+          <!-- Main Explanation Section with inline diagram -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 my-12">
+            <!-- Text Explanation -->
+            <div class="md:col-span-7">
+              <div class="bg-blue-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg h-full border border-blue-700">
+                <h3 class="text-xl font-bold mb-4 text-blue-200">断裂带：地壳中的"定时炸弹"</h3>
+                <p class="text-base sm:text-lg leading-relaxed mb-4">
+                  中国地震学会科学普及委员会委员王晓民向潮新闻记者解释道，缅甸位于印度板块与欧亚板块碰撞挤压的活跃地带东缘，地质构造极其复杂，断裂带十分发育。此次地震的"罪魁祸首"，正是贯穿缅甸南北的 <strong class="text-yellow-300">萨加因断裂带（Sagaing Fault）</strong>。
+                </p>
+                
+                <p class="text-base sm:text-lg leading-relaxed">
+                  这是一条规模巨大的右旋走滑断裂带，是印度板块和巽他板块（欧亚板块的一部分）的边界。
+                </p>
+              </div>
+            </div>
             
-            <div class="max-w-prose mx-auto">
-                <p class="text-lg leading-relaxed mb-6 hidden-element disaster-content">2025年3月28日，星期五，中午12点50分54秒（缅甸当地时间）。对于许多缅甸民众，尤其是穆斯林信徒而言，这本应是前往清真寺进行主麻日聚礼的时刻。然而，平静瞬间被撕裂。</p>
-                
-                <div class="font-semibold text-xl my-4 p-4 bg-white/10 backdrop-blur-sm rounded hidden-element disaster-content">
-                    <p>美国地质调查局（USGS）测定，一场高达里氏7.7级的地震猛烈袭击了北纬22.013度、东经95.922度的萨加因地区。震源深度仅10公里，属于破坏力巨大的浅源地震。几乎同一时间，中国地震台网测定震级为7.9级，震源深度30公里。</p>
-                </div>
-                
-                <p class="text-lg leading-relaxed mb-6 hidden-element disaster-content">尽管数据略有差异，但都指向同一个事实：一场毁灭性的灾难降临了。</p>
-                
-                <blockquote class="quote hidden-element disaster-quote">
-                    <p class="text-xl">当时我们正在展厅里，突然感觉天旋地转，根本站不稳！旁边的同事喊'是不是地震了'，我抬头一看，天花板上的灯具和通风管都在剧烈摇晃，持续了大概两分钟，所有人都惊慌地往外跑。</p>
-                    <footer class="mt-2 text-sm">— 周剑峰 (温州商人，正在仰光参加展会)</footer>
-                </blockquote>
-                
-                <blockquote class="quote hidden-element disaster-quote">
-                    <p class="text-xl">头顶的灯哗啦啦地晃，天花板的碎块不停掉下来，我几乎是匍匐着爬出去的，周围全是尖叫声和呼救声，那一刻真的以为世界末日到了。</p>
-                    <footer class="mt-2 text-sm">— 媚媚 (化名，曼德勒居民，事发时在酒店大堂)</footer>
-                </blockquote>
-                
-                <p class="text-lg leading-relaxed my-4 text-center text-red-300 hidden-element disaster-content">仅仅12分钟后，一次6.7级的强烈余震再次袭来，加剧了人们的恐慌和建筑的损毁。随后，4.4至4.9级的小型余震不断，如同大地难以平复的抽搐。</p>
-                
-                <p class="text-lg leading-relaxed hidden-element disaster-content">震波跨越国界。泰国首都曼谷，高层建筑明显摇晃，屋顶泳池的水剧烈晃动，甚至造成一栋在建高楼倒塌，导致人员伤亡。一位泰国流行歌星形容地震的声音"像滚雷"，看到受损建筑冒烟的景象让他联想到"9·11"。</p>
-                
-                <figure class="my-6 hidden-element disaster-image">
-                    <img src="assets/救援人员周五在曼谷倒塌的高层建筑现场工作。(Sakchai Lalit-AP)jpg" alt="泰国曼谷一栋在地震中倒塌的在建高楼现场，救援人员正在工作" class="rounded-lg shadow-lg w-full h-auto mx-auto" loading="lazy">
-                    <figcaption class="text-center text-sm mt-2 text-gray-300">泰国曼谷一栋在建高楼在地震中倒塌，救援人员正在现场工作。(图片来源: Sakchai Lalit-AP)</figcaption>
-                </figure>
-                
-                <p class="text-lg leading-relaxed hidden-element disaster-content">在中国西南部，与缅甸接壤的云南、四川、贵州、广西多地均有明显震感。云南瑞丽市部分老旧房屋受损，出现人员轻伤。</p>
-                
-                <p class="text-xl font-semibold text-center mt-8 hidden-element disaster-content">然而，灾难的核心，无疑是缅甸，特别是萨加因和曼德勒地区。</p>
+            <!-- Earthquake Diagram -->
+            <div class="md:col-span-5">
+              <figure class="h-full rounded-xl overflow-hidden shadow-xl relative group">
+                <img src="assets/缅甸地震图示。图片来源：浙江省地震局官微.jpeg" alt="缅甸萨加因断裂带地震示意图" class="w-full rounded-lg shadow-lg transition-all duration-500 group-hover:scale-105">
+                <figcaption class="bg-blue-800/80 text-white py-2 px-3 text-sm rounded-b-lg">
+                  萨加因断裂带位于印度板块与欧亚板块接触处，是一个主要的板块边界断层。(来源：浙江省地震局)
+                </figcaption>
+              </figure>
             </div>
-        </div>
-    </section>
-    
-    <!-- Damage Assessment Section -->
-    <section id="section-2-damage-assessment" class="relative">
-        <div class="bg-image" style="background-image: url('assets/照片显示，周五在缅甸曼德勒，一栋建筑物倒塌。(Stringer-法新社 通过 Getty lmages)jpg');"></div>
-        <div class="bg-overlay bg-black/60"></div>
-        
-        <div class="section-content text-white">
-            <h2 class="text-3xl md:text-4xl font-bold font-serif mb-12 text-center hidden-element">废墟之上：曼德勒与萨加因的累累伤痕</h2>
+          </div>
+          
+          <!-- Expert Quote -->
+          <blockquote class="text-base sm:text-lg md:text-xl my-8 p-6 border-l-4 border-blue-300 bg-blue-800/40 rounded-r-lg mx-auto backdrop-blur-sm">
+            这条断裂带的年平均滑动速率接近2厘米，这是个惊人的数据。意味着每一百多年就能积累起数米量级的滑动亏损，而数米的滑动量，正是大地震的特征。
+            <footer class="mt-2 text-sm text-blue-200">— 王晓民 (中国地震学会科学普及委员会委员)</footer>
+          </blockquote>
+          
+          <!-- Key Data Visualization -->
+          <div class="my-12 bg-blue-800/50 p-6 rounded-xl shadow-xl backdrop-blur-sm border border-blue-700">
+            <h3 class="text-xl font-bold mb-6 text-center text-blue-200">断裂带数据解析</h3>
             
-            <div class="max-w-prose mx-auto">
-                <p class="text-lg leading-relaxed hidden-element damage-content">强震过后，昔日繁华的城市与村庄化为一片狼藉。官方通报的伤亡数字令人心碎：</p>
-                
-                <div class="text-center text-3xl lg:text-4xl font-bold text-red-500 my-8 leading-tight break-words whitespace-pre-line hidden-element damage-casualties">
-                    超过 1000 人遇难
-                    2400 多人受伤
-                    至少 30 人失踪
-                </div>
-                
-                <p class="text-center text-sm text-gray-400 mb-10 hidden-element damage-content">(数字仍在攀升。美国地质调查局（USGS）基于模型的初步评估甚至认为，死亡人数可能高达数千人。)</p>
-                
-                <p class="text-2xl font-semibold text-center my-10 pt-6 border-t border-gray-600 hidden-element damage-content">曼德勒，缅甸的文化心脏，此刻正在泣血。</p>
-                
-                <div class="two-columns hidden-element damage-columns">
-                    <div class="text-base leading-relaxed pr-4">
-                        <p class="mb-4"><strong>建筑倒塌与火灾：</strong> 无数住宅、商业楼宇轰然倒塌或在震后起火。一座五层楼的建筑在目击者眼前夷为平地。一家两层茶馆倒塌，约70人被困；一家三层汽车配件商店倒塌，十多名员工生死未卜。一座在建建筑的垮塌也造成了伤亡。</p>
-                        
-                        <p><strong>宗教场所的悲剧：</strong> 地震发生时正值周五祈祷时间，多座清真寺屋顶坍塌导致大量正在祈祷的穆斯林信徒遇难。东吁镇的一位目击者描述了清真寺屋顶坠落的恐怖瞬间。著名的摩诃昂冕宝藏寺被毁，一座寺庙倒塌时数名僧侣受伤，历史悠久的马哈牟尼佛塔和曼德勒皇宫也出现严重结构性损坏。</p>
-                    </div>
-                    <div>
-                        <img src="assets/1.jpg" alt="曼德勒一栋楼体在地震中倾斜受损" class="rounded-lg shadow-md w-full h-auto object-cover" loading="lazy">
-                        <p class="text-center text-sm mt-2 text-gray-300">震中较近的曼德勒现场图片，显示当地有楼体倾斜受损。</p>
-                    </div>
-                </div>
-                
-                <figure class="my-6 hidden-element damage-image">
-                    <img src="assets/缅甸内比都周五发生地震后，受损的宝塔。(Aung Shine Oo-AP)jpg" alt="缅甸内比都一座宝塔在地震后受损" class="rounded-lg shadow-lg max-w-xl mx-auto" loading="lazy">
-                    <figcaption class="text-center text-sm mt-2 text-gray-300">缅甸内比都一座宝塔在地震后受损。(图片来源: Aung Shine Oo-AP)</figcaption>
-                </figure>
-                
-                <p class="text-lg leading-relaxed my-4 font-semibold hidden-element damage-content"><strong>基础设施瘫痪：</strong> 曼德勒国际机场的天花板塌落，地下室受损，跑道亦发现裂缝，导致航班全面停飞。连接曼德勒与实皆省的重要通道——历史悠久的阿瓦大桥（Ava Bridge）被毁。曼德勒-仰光高速公路部分路段受损，通行受阻。据报道，曼德勒附近甚至有一座水坝发生溃坝，引发局部洪水。</p>
-                
-                <div class="my-6 hidden-element damage-video">
-                    <video class="rounded-lg shadow-lg max-w-2xl mx-auto" controls loading="lazy">
-                        <source src="assets/仰曼高速大面积破损 道路变形严重(潮新闻).mp4" type="video/mp4">
-                        您的浏览器不支持视频标签。
-                    </video>
-                    <p class="text-center text-sm mt-2 text-gray-300">仰光-曼德勒高速公路部分路段在地震中受损严重。(来源: 潮新闻)</p>
-                </div>
-                
-                <p class="text-lg leading-relaxed my-4 hidden-element damage-content"><strong>萨加因地区，作为震中，同样满目疮痍。</strong> 一栋高层建筑倒塌夺去了两条生命。这里本就聚集了大量因国内冲突而流离失所的民众，地震无疑让他们的处境雪上加霜。</p>
-                
-                <p class="text-lg leading-relaxed my-4 hidden-element damage-content"><strong>首都内比都，也未能幸免。</strong> 包括医院和急救设施在内的建筑物严重受损或倒塌，道路出现裂缝，进一步加剧了医疗资源的紧张。勃固、掸邦、皎栖等城镇也纷纷报告建筑物受损。</p>
-                
-                <figure class="my-6 hidden-element damage-image">
-                    <img src="assets/这是3月28日在缅甸内比都拍摄的地震后受损的建筑。新华社发jpg" alt="缅甸内比都地震后受损的建筑" class="rounded-lg shadow-lg max-w-xl mx-auto" loading="lazy">
-                    <figcaption class="text-center text-sm mt-2 text-gray-300">3月28日缅甸内比都地震后受损的建筑。(来源: 新华社)</figcaption>
-                </figure>
-                
-                <p class="text-lg leading-relaxed text-yellow-300 my-4 hidden-element damage-content">全国范围内的通信和电力中断，使得信息传递和协调救援变得异常困难。医院挤满了伤者，血液和医疗用品极度匮乏，部分医院甚至因设备损坏或资源耗尽而被迫暂停接收病人。</p>
-                
-                <figure class="my-6 hidden-element damage-image">
-                    <img src="assets/3月28日，受灾民众在缅甸内比都接受救治。新华社发jpg" alt="缅甸内比都地震受灾民众在医院外接受救治" class="rounded-lg shadow-lg max-w-xl mx-auto" loading="lazy">
-                    <figcaption class="text-center text-sm mt-2 text-gray-300">3月28日，受灾民众在缅甸内比都接受救治。(来源: 新华社)</figcaption>
-                </figure>
-                
-                <p class="text-lg leading-relaxed my-4 bg-red-900/50 p-4 rounded hidden-element damage-content">这场地震不仅夺走了生命，摧毁了家园，更让缅甸本已严峻的人道主义危机急剧恶化。据统计，地震前缅甸国内已有超过300万流离失所者，如今这个数字无疑将大幅增加。幸存者们面临着余震的威胁、水电食物的短缺以及传染病爆发的风险。</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
+              <div class="bg-blue-900/60 p-4 rounded-lg text-center shadow-md flex flex-col items-center justify-center transform hover:scale-105 transition-transform border border-blue-700">
+                <div class="text-4xl font-bold text-yellow-300 mb-2">2厘米/年</div>
+                <p class="text-sm">萨加因断裂带的平均滑动速率</p>
+              </div>
+              
+              <div class="bg-blue-900/60 p-4 rounded-lg text-center shadow-md flex flex-col items-center justify-center transform hover:scale-105 transition-transform border border-blue-700">
+                <div class="text-4xl font-bold text-yellow-300 mb-2">~10公里</div>
+                <p class="text-sm">地震震源深度（浅源地震）</p>
+              </div>
+              
+              <div class="bg-blue-900/60 p-4 rounded-lg text-center shadow-md flex flex-col items-center justify-center transform hover:scale-105 transition-transform border border-blue-700">
+                <div class="text-4xl font-bold text-yellow-300 mb-2">200-350km</div>
+                <p class="text-sm">断裂带可能破裂长度</p>
+              </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Mutual Aid Section -->
-    <section id="section-3-mutual-aid" class="relative">
-        <div class="bg-image" style="background-image: url('https://images.unsplash.com/photo-1469571486292-b53601bbfc73?q=80&w=1760&auto=format');"></div>
-        <div class="bg-overlay bg-gradient-to-b from-transparent via-black/30 to-black/70"></div>
-        
-        <div class="section-content text-white">
-            <h2 class="text-3xl md:text-4xl font-bold font-serif mb-12 text-center hidden-element">"我们都在挺身而出"：守望相助的现场</h2>
+          </div>
+          
+          <!-- Improved Historical Timeline Section -->
+          <div class="my-16">
+            <h3 class="text-xl font-bold mb-6 text-center text-blue-200">萨加因断裂带的历史地震</h3>
+            <p class="text-base sm:text-lg leading-relaxed mb-8 text-center">
+              历史记录印证了萨加因断裂带的"暴脾气"。自1900年以来，该断裂带附近300公里范围内发生过至少10次7级以上强震。
+            </p>
             
-            <div class="max-w-prose mx-auto">
-                <p class="text-center italic text-2xl my-8 hidden-element aid-content">灾难面前，人性的光辉从未缺席。</p>
-                
-                <blockquote class="quote border-l-4 border-green-500 bg-white/80 dark:bg-black/60 rounded-r-lg max-w-prose mx-auto shadow hidden-element aid-quote">
-                    <p class="text-xl">我已经来缅甸6年了，在曼德勒开了5家餐厅。灾难面前，我们华人都在挺身而出。</p>
-                    <footer class="mt-2 text-sm">— 苏元元 (华人，灾区互助车队组织者之一)</footer>
-                </blockquote>
-                
-                <p class="text-lg leading-relaxed hidden-element aid-content">地震发生后，在缅甸的中国公民、华人华侨迅速行动起来。"20多辆私家车，一夜之间就凑齐了。我这边组织的志愿者就有30多人，大家都是自愿赶赴灾区。"苏元元一边指挥着志愿者搬运矿泉水、方便面、药品等物资，一边对记者说。</p>
-                
-                <p class="text-lg leading-relaxed mb-4 hidden-element aid-content">她经营的餐馆门口，不断有人送来牛奶、食品，甚至现金，委托她送往灾区。"仰光的物价还算平稳，这些基本物资没有涨价，大家都在尽力帮忙。"</p>
-                
-                <div class="my-6 hidden-element aid-video">
-                    <video class="rounded-lg shadow-lg max-w-2xl mx-auto" controls loading="lazy">
-                        <source src="assets/缅甸当地华人自发组织灾区互助车队 护送救援队和物资至震中曼德勒.mp4o" type="video/mp4">
-                        您的浏览器不支持视频标签。
-                    </video>
-                    <p class="text-center text-sm mt-2 text-gray-300">缅甸当地华人自发组织的灾区互助车队，正护送救援物资前往曼德勒。</p>
+            <div class="relative max-w-3xl mx-auto p-8 bg-blue-800/30 rounded-xl backdrop-blur-sm border border-blue-700">
+              <!-- Vertical Timeline Line -->
+              <div class="absolute left-[50%] top-8 bottom-8 transform -translate-x-1/2 w-1 bg-blue-400"></div>
+              
+              <!-- Timeline Events -->
+              <div class="space-y-20 relative">
+                <!-- 1912 Event -->
+                <div class="relative opacity-100 timeline-item">
+                  <div class="flex flex-row items-center justify-center">
+                    <!-- Year Circle -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-500 rounded-full border-4 border-blue-300 z-10 shadow-md"></div>
+                    
+                    <!-- Left Content (Year) -->
+                    <div class="w-[45%] pr-8 text-right">
+                      <div class="text-blue-200 text-xl font-bold">1912年5月23日</div>
+                      <div class="text-blue-300 text-sm">缅甸现代记录最强地震之一</div>
+                    </div>
+                    
+                    <!-- Right Content (Magnitude) -->
+                    <div class="w-[45%] pl-8">
+                      <div class="text-yellow-300 text-3xl font-bold">8.0级</div>
+                    </div>
+                  </div>
                 </div>
                 
-                <p class="text-lg leading-relaxed hidden-element aid-content">苏元元的车队，还承担了一项特殊的任务——护送刚刚抵达缅甸的浙江公羊救援队前往曼德勒。同行的，还有浙江温州商会的"爱心护送队"。</p>
+                <!-- 1930 Event -->
+                <div class="relative opacity-100 timeline-item">
+                  <div class="flex flex-row items-center justify-center">
+                    <!-- Year Circle -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-500 rounded-full border-4 border-blue-300 z-10 shadow-md"></div>
+                    
+                    <!-- Left Content (Magnitude) -->
+                    <div class="w-[45%] pr-8 text-right">
+                      <div class="text-yellow-300 text-3xl font-bold">7.3级 + 7.5级</div>
+                    </div>
+                    
+                    <!-- Right Content (Year) -->
+                    <div class="w-[45%] pl-8">
+                      <div class="text-blue-200 text-xl font-bold">1930年</div>
+                      <div class="text-blue-300 text-sm">双震，其中一次引发海啸</div>
+                    </div>
+                  </div>
+                </div>
                 
-                <blockquote class="quote border-l-4 border-green-500 bg-white/80 dark:bg-black/60 rounded-r-lg max-w-prose mx-auto shadow hidden-element aid-quote">
-                    <p class="text-xl">从仰光到曼德勒，正常开车7个小时。现在高速路段有损坏，我们需要当地人带路绕行，估计要10个小时以上。路况不明，只能一步步往前摸索。</p>
-                    <footer class="mt-2 text-sm">— 苏元元</footer>
-                </blockquote>
+                <!-- 1931 Event -->
+                <div class="relative opacity-100 timeline-item">
+                  <div class="flex flex-row items-center justify-center">
+                    <!-- Year Circle -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-500 rounded-full border-4 border-blue-300 z-10 shadow-md"></div>
+                    
+                    <!-- Left Content (Year) -->
+                    <div class="w-[45%] pr-8 text-right">
+                      <div class="text-blue-200 text-xl font-bold">1931年</div>
+                    </div>
+                    
+                    <!-- Right Content (Magnitude) -->
+                    <div class="w-[45%] pl-8">
+                      <div class="text-yellow-300 text-3xl font-bold">7.6级</div>
+                    </div>
+                  </div>
+                </div>
                 
-                <p class="text-lg leading-relaxed italic text-gray-300 hidden-element aid-content">记者随车队行驶在仰曼高速上，感受到的是异样的冷清。除了零星的救援车辆，几乎看不到其他车流。部分路面出现的裂缝和临时修补的痕迹，无声地诉说着地震的威力。</p>
+                <!-- 1946 Event -->
+                <div class="relative opacity-100 timeline-item">
+                  <div class="flex flex-row items-center justify-center">
+                    <!-- Year Circle -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-500 rounded-full border-4 border-blue-300 z-10 shadow-md"></div>
+                    
+                    <!-- Left Content (Magnitude) -->
+                    <div class="w-[45%] pr-8 text-right">
+                      <div class="text-yellow-300 text-3xl font-bold">7.8级 + 8.0级</div>
+                    </div>
+                    
+                    <!-- Right Content (Year) -->
+                    <div class="w-[45%] pl-8">
+                      <div class="text-blue-200 text-xl font-bold">1946年</div>
+                      <div class="text-blue-300 text-sm">同年发生两次强震</div>
+                    </div>
+                  </div>
+                </div>
                 
-                <p class="text-lg leading-relaxed mt-6 hidden-element aid-content">在曼德勒，惊魂未定的玉石商人媚媚和同伴们，在酒店前的空地上度过了艰难的一夜。"余震不断，停水停电，网络时好时坏。酒店发了蚊帐和一些吃的，但大家还是很害怕。"</p>
+                <!-- 1956 Event -->
+                <div class="relative opacity-100 timeline-item">
+                  <div class="flex flex-row items-center justify-center">
+                    <!-- Year Circle -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-500 rounded-full border-4 border-blue-300 z-10 shadow-md"></div>
+                    
+                    <!-- Left Content (Year) -->
+                    <div class="w-[45%] pr-8 text-right">
+                      <div class="text-blue-200 text-xl font-bold">1956年</div>
+                    </div>
+                    
+                    <!-- Right Content (Magnitude) -->
+                    <div class="w-[45%] pl-8">
+                      <div class="text-yellow-300 text-3xl font-bold">7.1级</div>
+                    </div>
+                  </div>
+                </div>
                 
-                <figure class="my-6 hidden-element aid-image">
-                    <img src="assets/曼德勒当地景象。受访者供图.jpeg" alt="曼德勒当地地震后的景象" class="rounded-lg shadow-lg max-w-xl mx-auto" loading="lazy">
-                    <figcaption class="text-center text-sm mt-2 text-gray-300">曼德勒当地地震后的景象。(来源: 受访者供图)</figcaption>
-                </figure>
+                <!-- 1991 Event -->
+                <div class="relative opacity-100 timeline-item">
+                  <div class="flex flex-row items-center justify-center">
+                    <!-- Year Circle -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-500 rounded-full border-4 border-blue-300 z-10 shadow-md"></div>
+                    
+                    <!-- Left Content (Magnitude) -->
+                    <div class="w-[45%] pr-8 text-right">
+                      <div class="text-yellow-300 text-3xl font-bold">7.0级</div>
+                    </div>
+                    
+                    <!-- Right Content (Year) -->
+                    <div class="w-[45%] pl-8">
+                      <div class="text-blue-200 text-xl font-bold">1991年</div>
+                    </div>
+                  </div>
+                </div>
                 
-                <p class="text-lg leading-relaxed hidden-element aid-content">她告诉记者，曼德勒老城区不少房屋受损严重，尤其是全球知名的玉石交易市场——皎湾市场，部分铁皮棚和茅草棚搭建的商铺屋顶坍塌，墙体开裂。"以前这里很热闹，很多中国主播来这里直播卖玉石，现在……"</p>
-                
-                <p class="text-lg leading-relaxed mt-6 p-4 bg-blue-900/50 rounded hidden-element aid-content">温州商人周剑峰虽然人在仰光，但心系曼德勒的灾情和商会同仁。"目前我们温州商会正在统计曼德勒地区浙商的情况，暂时没有收到人员伤亡的报告，这是不幸中的万幸。曼德勒和仰光经济联系紧密，交通中断、基础设施破坏，对经济活动的影响肯定很大。"</p>
+                <!-- 2025 Current Event (Highlighted) -->
+                <div class="relative timeline-item current">
+                  <div class="flex flex-row items-center justify-center">
+                    <!-- Year Circle -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-red-500 rounded-full border-4 border-yellow-300 z-10 animate-pulse shadow-lg shadow-red-500/50"></div>
+                    
+                    <!-- Left Content (Year) -->
+                    <div class="w-[45%] pr-8 text-right">
+                      <div class="text-blue-200 text-xl font-bold">2025年3月</div>
+                      <div class="text-red-300 text-sm font-semibold">本次地震</div>
+                    </div>
+                    
+                    <!-- Right Content (Magnitude) -->
+                    <div class="w-[45%] pl-8">
+                      <div class="text-red-300 text-4xl font-bold">7.7级</div>
+                      <div class="text-blue-300 text-sm">(中国地震台网测得7.9级)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          
+          <!-- Current Earthquake Analysis -->
+          <div class="my-10 bg-blue-800/50 p-6 rounded-xl shadow-lg backdrop-blur-sm border border-blue-700">
+            <p class="text-base sm:text-lg leading-relaxed font-semibold my-4">
+              本次7.7级（或7.9级）地震，再次证明了该区域巨大的地震风险。专家推测，此次地震可能导致萨加因断裂带长达 <strong class="text-yellow-300">200至350公里</strong> 的段落发生破裂。而仅 <strong class="text-yellow-300">10公里</strong> 的浅源深度，使得地震能量几乎没有衰减就直接作用于地表，极大地放大了破坏效应。
+            </p>
+          </div>
+          
+          <!-- Warning Quote -->
+          <blockquote class="text-base sm:text-lg md:text-xl my-10 p-6 border-l-4 border-red-500 bg-blue-800/50 rounded-r-lg mx-auto backdrop-blur-sm">
+            大地震会显著改变区域地壳应力状态。这次强震后，未来一段时间内，震中附近区域，特别是破裂带南段，地震活动频率可能会增强，存在发生较强余震甚至触发新地震的可能性。当地政府和民众需要保持警惕。
+            <footer class="mt-2 text-sm text-blue-200">— 王晓民</footer>
+          </blockquote>
         </div>
+      </div>
     </section>
-    
-    <!-- Wenzhou China Aid Section -->
-    <section id="section-4-wenzhou-china-aid" class="relative">
-        <div class="bg-image" style="background-image: url('assets/救灾物资随中国云南救援医疗队一起飞赴缅甸地震灾区(3月29日摄)。新华社发(叶勤茹摄)Jpg');"></div>
-        <div class="bg-overlay bg-black/20"></div>
-        
-        <div class="section-content text-white">
-            <h2 class="text-3xl md:text-4xl font-bold font-serif mb-12 text-center hidden-element">温州力量在行动：跨越国界的驰援暖流</h2>
-            
-            <div class="max-w-prose mx-auto">
-                <p class="text-xl font-semibold mb-4 text-center hidden-element china-aid-content">在这次跨国救援行动中，来自温州的力量格外引人注目。</p>
-                
-                <p class="text-lg leading-relaxed hidden-element china-aid-content">地震发生后，缅甸浙江温州商会迅速行动起来，一方面紧急排查在缅温商的安全状况，建立互助联系网络；另一方面，积极响应救援呼吁，组织了"爱心护送队"，与其他华人社团一道，为驰援灾区的专业救援队伍提供宝贵的地面交通支持。</p>
-                
-                <blockquote class="quote border-l-4 border-blue-500 bg-white/80 dark:bg-black/60 rounded-r-lg max-w-prose mx-auto shadow hidden-element china-aid-quote">
-                    <p class="text-xl">大家都是安全的，这是最重要的。现在就是要尽我们所能，帮助灾区渡过难关。</p>
-                    <footer class="mt-2 text-sm">— 周剑峰 (代表温州商会)</footer>
-                </blockquote>
-                
-                <p class="text-lg leading-relaxed mt-8 pt-6 border-t border-gray-600 hidden-element china-aid-content">温州力量的加入，是中国整体援助行动的一个缩影。地震发生后，中国政府迅速做出反应：</p>
-                
-                <div class="text-lg leading-relaxed my-4 list-disc list-inside bg-gray-800/70 p-4 rounded whitespace-pre-line hidden-element china-aid-list">
-                    • <strong>高层慰问：</strong> 国家主席习近平向缅甸领导人致慰问电，表示中方愿提供必要帮助。
-                    • <strong>资金援助：</strong> 中国政府决定向缅甸提供 <strong>1亿元人民币</strong> 紧急人道主义地震救灾援助。
-                    • <strong>专业队伍：</strong> 一支82人中国救援队、一支37人云南紧急医疗救援队，携带先进装备第一时间飞抵缅甸。
-                    • <strong>物资援助：</strong> 大批帐篷、毛毯、急救包、食品、饮用水等急需物资随同运抵。
-                    • <strong>使馆行动：</strong> 中国驻缅甸使领馆启动应急机制，核实中国公民受灾情况，提供领事保护。
-                </div>
-                
-                <div class="two-columns hidden-element china-aid-columns">
-                    <div>
-                        <video class="w-full h-auto rounded-lg shadow-md mb-4 md:mb-0" controls loading="lazy">
-                            <source src="assets/中国公羊救援队抵达仰光国际机场。视频由公羊队提供.mp4" type="video/mp4">
-                            您的浏览器不支持视频标签。
-                        </video>
-                        <p class="text-center text-sm mt-2 text-gray-300">中国公羊救援队抵达仰光国际机场。(视频由公羊队提供)</p>
-                    </div>
-                    <div>
-                        <img src="assets/3月29日，蓝天救援队车队从云南瑞丽口岸进入缅甸救援。新华社记者陈欣波摄Jjpg" alt="蓝天救援队车队从云南瑞丽口岸进入缅甸" class="w-full h-auto rounded-lg shadow-md object-cover" loading="lazy">
-                        <p class="text-center text-sm mt-2 text-gray-300">3月29日，蓝天救援队车队从云南瑞丽口岸进入缅甸救援。(来源: 新华社记者陈欣波摄)</p>
-                    </div>
-                </div>
-                
-                <figure class="my-6 hidden-element china-aid-image">
-                    <img src="assets/救灾物资随中国云南救援医疗队一起飞赴缅甸地震灾区(3月29日摄)。新华社发(叶勤茹摄)Jpg" alt="救灾物资随中国云南救援医疗队飞赴缅甸" class="rounded-lg shadow-lg max-w-xl mx-auto" loading="lazy">
-                    <figcaption class="text-center text-sm mt-2 text-gray-300">救灾物资随中国云南救援医疗队一起飞赴缅甸地震灾区 (3月29日摄)。(来源: 新华社发 叶勤茹摄)</figcaption>
-                </figure>
-                
-                <p class="text-lg leading-relaxed mt-6 hidden-element china-aid-content">除了中国，印度也迅速派遣了救援和医疗队伍，并空运了救援物资。韩国承诺提供200万美元人道援助，俄罗斯、美国、马来西亚等国也表达了援助意愿或派出队伍。国际社会的广泛关注和援助，为处于困境中的缅甸人民带来了希望。</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Geology Section -->
-    <section id="section-5-geology" class="relative">
-        <div class="bg-image" style="background-image: url('assets/缅甸地震图示。图片来源:浙江省地震局官微,jpeg');"></div>
-        <div class="bg-overlay bg-black/20"></div>
-        
-        <div class="section-content text-white">
-            <h2 class="text-3xl md:text-4xl font-bold font-serif mb-12 text-center hidden-element">解析强震："地质炸弹"萨加因断裂带</h2>
-            
-            <div class="max-w-prose mx-auto">
-                <p class="text-xl font-semibold my-6 text-center hidden-element geology-content">为何缅甸会遭遇如此强烈的地震？答案直指其脚下的地质构造。</p>
-                
-                <p class="text-lg leading-relaxed hidden-element geology-content">中国地震学会科学普及委员会委员王晓民向记者解释道，缅甸位于印度板块与欧亚板块碰撞挤压的活跃地带东缘，地质构造极其复杂，断裂带十分发育。此次地震的"罪魁祸首"，正是贯穿缅甸南北的 <strong>萨加因断裂带（Sagaing Fault）</strong>。</p>
-                
-                <p class="text-lg leading-relaxed hidden-element geology-content">这是一条规模巨大的右旋走滑断裂带，是印度板块和巽他板块（欧亚板块的一部分）的边界。</p>
-                
-                <blockquote class="quote border-l-4 border-gray-500 bg-black/40 rounded-r-lg max-w-prose mx-auto backdrop-blur-sm hidden-element geology-quote">
-                    <p class="text-xl">这条断裂带的年平均滑动速率接近2厘米，这是个惊人的数据。意味着每一百多年就能积累起数米量级的滑动亏损，而数米的滑动量，正是大地震的特征。</p>
-                    <footer class="mt-2 text-sm">— 王晓民 (中国地震学会科学普及委员会委员)</footer>
-                </blockquote>
-                
-                <p class="text-lg leading-relaxed mt-6 hidden-element geology-content">历史记录印证了萨加因断裂带的"暴脾气"。自1900年以来，该断裂带附近300公里范围内发生过至少10次7级以上强震，包括：</p>
-                
-                <div class="timeline my-8 relative hidden-element" id="earthquake-timeline">
-                    <div class="absolute top-0 bottom-0 left-5 w-0.5 bg-white/30"></div>
-                    
-                    <div class="timeline-item relative pl-14 pb-8">
-                        <div class="absolute left-0 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-bold">1912</div>
-                        <div class="p-4 bg-black/30 backdrop-blur-sm rounded-lg">
-                            <h4 class="text-xl font-bold">8.0级</h4>
-                            <p>缅甸现代记录最强之一</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item relative pl-14 pb-8">
-                        <div class="absolute left-0 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-bold">1930</div>
-                        <div class="p-4 bg-black/30 backdrop-blur-sm rounded-lg">
-                            <h4 class="text-xl font-bold">7.3/7.5级</h4>
-                            <p>两次强震，一次引发海啸</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item relative pl-14 pb-8">
-                        <div class="absolute left-0 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-bold">1946</div>
-                        <div class="p-4 bg-black/30 backdrop-blur-sm rounded-lg">
-                            <h4 class="text-xl font-bold">7.8/8.0级</h4>
-                            <p>双震</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item relative pl-14 pb-8">
-                        <div class="absolute left-0 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-bold">1931</div>
-                        <div class="p-4 bg-black/30 backdrop-blur-sm rounded-lg">
-                            <h4 class="text-xl font-bold">7.6级</h4>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item relative pl-14 pb-8">
-                        <div class="absolute left-0 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-bold">1956</div>
-                        <div class="p-4 bg-black/30 backdrop-blur-sm rounded-lg">
-                            <h4 class="text-xl font-bold">7.1级</h4>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item relative pl-14">
-                        <div class="absolute left-0 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-bold">1991</div>
-                        <div class="p-4 bg-black/30 backdrop-blur-sm rounded-lg">
-                            <h4 class="text-xl font-bold">7.0级</h4>
-                        </div>
-                    </div>
-                </div>
-                
-                <p class="text-lg leading-relaxed font-semibold my-4 hidden-element geology-content">本次7.7级（或7.9级）地震，再次证明了该区域巨大的地震风险。专家推测，此次地震可能导致萨加因断裂带长达 <strong>200至350公里</strong> 的段落发生破裂。而仅 <strong>10公里</strong> 的浅源深度，使得地震能量几乎没有衰减就直接作用于地表，极大地放大了破坏效应。</p>
-                
-                <blockquote class="quote border-l-4 border-yellow-500 bg-black/40 rounded-r-lg max-w-prose mx-auto backdrop-blur-sm hidden-element geology-quote">
-                    <p class="text-xl">大地震会显著改变区域地壳应力状态。这次强震后，未来一段时间内，震中附近区域，特别是破裂带南段，地震活动频率可能会增强，存在发生较强余震甚至触发新地震的可能性。当地政府和民众需要保持警惕。</p>
-                    <footer class="mt-2 text-sm">— 王晓民</footer>
-                </blockquote>
-            </div>
-        </div>
-    </section>
-    
+
+   
+
     <!-- Challenges Section -->
-    <section id="section-6-challenges" class="relative">
-        <div class="bg-image" style="background-image: url('assets/地震造成缅甸实皆省、曼德勒省和掸邦等多地建筑严重损毁，桥梁、道路等基础设施不同程度受损(央视).jpg');"></div>
-        <div class="bg-overlay bg-black/60"></div>
+    <section id="section-6-challenges" class="relative py-12 sm:py-16 min-h-screen">
+      <div class="section-background" id="challenges-bg" style="background-image: url('assets/地震造成缅甸实皆省、曼德勒省和掸邦等多地建筑严重损毁，桥梁、道路等基础设施不同程度受损(央视).jpg');">
+        <div class="absolute inset-0 bg-black/80"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 md:px-8 relative z-10 text-white">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-center serif">多重困境交织：救援路上的重重挑战</h2>
         
-        <div class="section-content text-white">
-            <h2 class="text-3xl md:text-4xl font-bold font-serif mb-12 text-center hidden-element">多重困境交织：救援路上的重重挑战</h2>
-            
-            <div class="max-w-prose mx-auto">
-                <p class="text-lg leading-relaxed text-center my-6 hidden-element challenges-content">尽管国际援助纷纷涌入，缅甸国内也在全力自救，但救援工作仍面临着严峻挑战，这是一场与时间赛跑，更需克服重重障碍的战斗。</p>
-                
-                <div class="text-lg leading-relaxed my-3 p-3 bg-red-900/60 rounded shadow hidden-element challenge-item">
-                    <p><strong>1. 基础设施损毁：</strong> 阿瓦大桥等关键桥梁被毁，高速公路受损，曼德勒机场关闭，严重阻碍了救援人员和大型设备、物资进入核心灾区。道路中断也使得伤员转运和灾情评估变得困难重重。</p>
-                </div>
-                
-                <figure class="my-4 hidden-element challenges-image">
-                    <img src="assets/地震造成缅甸实皆省、曼德勒省和掸邦等多地建筑严重损毁，桥梁、道路等基础设施不同程度受损(央视).jpg" alt="缅甸地震造成道路、桥梁等基础设施损毁" class="rounded-lg shadow-lg max-w-xl mx-auto" loading="lazy">
-                    <figcaption class="text-center text-sm mt-2 text-gray-300">地震造成缅甸多地桥梁、道路等基础设施严重损毁。(来源: 央视)</figcaption>
-                </figure>
-                
-                <div class="text-lg leading-relaxed my-3 p-3 bg-yellow-900/60 rounded shadow hidden-element challenge-item">
-                    <p><strong>2. 通信与电力瘫痪：</strong> 大范围的通讯和电力中断，不仅影响了灾区与外界的联系，也使得救援指挥、信息发布和需求对接效率低下。</p>
-                </div>
-                
-                <div class="text-lg leading-relaxed my-3 p-3 bg-red-900/60 rounded shadow hidden-element challenge-item">
-                    <p><strong>3. 医疗资源挤兑：</strong> 幸存的医院早已不堪重负，伤员激增，而药品、血液、手术设备、甚至医护人员都严重短缺。部分医院因自身受损或资源耗尽，已无法继续收治病人。</p>
-                </div>
-                
-                <figure class="my-4 hidden-element challenges-image">
-                    <img src="assets/2025年3月28日缅甸中部发生7.7级地震后，缅甸红十字会救援队在一栋倒塌的建筑物内寻找幸存者.webp" alt="缅甸红十字会救援队在倒塌建筑中搜救" class="rounded-lg shadow-lg max-w-xl mx-auto" loading="lazy">
-                    <figcaption class="text-center text-sm mt-2 text-gray-300">缅甸红十字会救援队在倒塌建筑中搜寻幸存者，救援工作面临巨大挑战。</figcaption>
-                </figure>
-                
-                <div class="text-lg leading-relaxed my-3 p-3 bg-purple-900/60 rounded shadow hidden-element challenge-item">
-                    <p><strong>4. 人道主义危机叠加：</strong> 震区，特别是萨加因地区，本就存在大量因国内武装冲突而流离失所的民众。地震使得原有的难民营地可能被毁，人道需求急剧增加。帐篷、毛毯、清洁饮用水、食品等基本生存物资极度匮乏。</p>
-                </div>
-                
-                <div class="text-lg leading-relaxed my-3 p-3 bg-orange-900/60 rounded shadow hidden-element challenge-item">
-                    <p><strong>5. 持续的余震威胁：</strong> 频繁且强度不低的余震，不仅给幸存者带来持续的心理恐惧，也对受损建筑构成二次破坏的风险，使得搜救工作危险重重，并可能导致新的伤亡。</p>
-                </div>
-                
-                <div class="text-lg leading-relaxed my-3 p-3 bg-gray-700/60 rounded shadow hidden-element challenge-item">
-                    <p><strong>6. 国内复杂局势：</strong> 缅甸国内持续的政治不稳定和部分地区的武装冲突，无疑给大规模、跨区域的救援协调和援助物资公平有效的分发带来了额外的复杂性和挑战。</p>
-                </div>
-            </div>
+        <div class="max-w-4xl mx-auto">
+          <p class="text-base sm:text-lg leading-relaxed text-center my-6">
+            尽管国际援助纷纷涌入，缅甸国内也在全力自救，但救援工作仍面临着严峻挑战，这是一场与时间赛跑，更需克服重重障碍的战斗。
+          </p>
+          
+          <div class="text-base sm:text-lg leading-relaxed my-3 p-3 bg-red-900/60 rounded shadow">
+            <p><strong>1. 基础设施损毁：</strong> 阿瓦大桥等关键桥梁被毁，高速公路受损，曼德勒机场关闭，严重阻碍了救援人员和大型设备、物资进入核心灾区。道路中断也使得伤员转运和灾情评估变得困难重重。</p>
+          </div>
+          
+          <figure class="my-4 mx-auto">
+            <img data-src="assets/地震造成缅甸实皆省、曼德勒省和掸邦等多地建筑严重损毁，桥梁、道路等基础设施不同程度受损(央视).jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" alt="缅甸地震造成道路、桥梁等基础设施损毁" class="rounded-lg shadow-lg w-full sm:max-w-2xl mx-auto" loading="lazy">
+            <figcaption class="text-center text-sm mt-2 text-gray-300">地震造成缅甸多地桥梁、道路等基础设施严重损毁。(来源: 央视)</figcaption>
+          </figure>
+          
+          <div class="text-base sm:text-lg leading-relaxed my-3 p-3 bg-yellow-900/60 rounded shadow">
+            <p><strong>2. 通信与电力瘫痪：</strong> 大范围的通讯和电力中断，不仅影响了灾区与外界的联系，也使得救援指挥、信息发布和需求对接效率低下。</p>
+          </div>
+          
+          <div class="text-base sm:text-lg leading-relaxed my-3 p-3 bg-blue-900/60 rounded shadow">
+            <p><strong>3. 缺水缺粮：</strong> 灾区大批居民食物和饮用水短缺，尤其是偏远农村地区，援助物资配送困难，部分地区可能面临人道主义危机。</p>
+          </div>
+          
+          <div class="text-base sm:text-lg leading-relaxed my-3 p-3 bg-green-900/60 rounded shadow">
+            <p><strong>4. 医疗资源紧张：</strong> 伤员众多，医院设施受损，许多病人被迫露天治疗，医疗物资和专业医护人员严重不足，血液和麻醉药品等关键资源尤为短缺。</p>
+          </div>
+          
+          <div class="text-base sm:text-lg leading-relaxed my-3 p-3 bg-purple-900/60 rounded shadow">
+            <p><strong>5. 余震与次生灾害：</strong> 强烈余震不断，既增加了建筑物进一步倒塌风险，也严重影响救援工作。临近雨季，山体滑坡、洪水等次生灾害风险上升，部分地区出现自来水污染和卫生状况恶化问题，传染病爆发风险增大。</p>
+          </div>
+          
+          <div class="text-base sm:text-lg leading-relaxed my-3 p-3 bg-gray-700/60 rounded shadow">
+            <p><strong>6. 国内复杂局势：</strong> 缅甸国内持续的政治不稳定和部分地区的武装冲突，无疑给大规模、跨区域的救援协调和援助物资公平有效的分发带来了额外的复杂性和挑战。</p>
+          </div>
         </div>
+      </div>
     </section>
-    
+
     <!-- Conclusion Section -->
-    <section id="conclusion" class="relative">
-        <div class="bg-image" style="background-color: #1a202c;"></div>
-        
-        <div class="section-content text-white">
-            <div class="max-w-prose mx-auto">
-                <p class="text-xl font-semibold mt-12 mb-6 text-center hidden-element conclusion-content">随着黄金72小时救援窗口的关闭，搜救的重心将逐步转向安置、防疫和重建。然而，对于缅甸而言，这条路注定漫长而艰辛。</p>
-                
-                <p class="text-lg font-semibold mb-2 hidden-element conclusion-content"><strong>重建之路的挑战：</strong></p>
-                
-                <div class="text-base leading-relaxed my-2 list-disc list-inside bg-gray-800/50 p-4 rounded whitespace-pre-line hidden-element conclusion-challenges">
-                    • <strong>漫长的重建：</strong> 大量基础设施需巨额资金和漫长时间。
-                    • <strong>经济冲击波：</strong> 对曼德勒等经济重镇及玉石贸易等产业影响深远。
-                    • <strong>心理创伤抚慰：</strong> 无数幸存者需长期心理援助。
-                    • <strong>潜在的次生灾害：</strong> 雨季临近，滑坡、泥石流、疫情风险增加。
-                    • <strong>地质风险常在：</strong> 萨加因断裂带活跃，需提升抗震标准和应急机制。
-                </div>
-                
-                <p class="text-lg leading-relaxed mt-8 hidden-element conclusion-content">缅甸萨加因地区的这场强震，再次以残酷的方式提醒人类，我们所栖居的星球潜藏着巨大的自然力量。成千上万的生命在这场灾难中逝去或陷入困境，古老的文化遗产遭受重创，一个国家的发展进程被迫中断。</p>
-                
-                <p class="text-lg leading-relaxed hidden-element conclusion-content">在无情的灾难面前，我们看到了生命的脆弱，也见证了守望相助的温暖。从自发组织的华人互助车队，到星夜兼程的国际救援力量，再到温州商会那份跨越国界的同胞情谊，点点星火汇聚成希望之光，照亮了废墟中的前行之路。</p>
-                
-                <p class="text-lg leading-relaxed hidden-element conclusion-content">然而，救援只是开始。对于缅甸，尤其是受灾最严重的地区而言，未来的重建之路充满荆棘。地质的隐忧、经济的困顿、社会心理的修复，以及国内复杂局势带来的不确定性，都将是沉重的负担。唯有持续的国际关注与援助，加上缅甸自身的坚韧与努力，才能抚平大地的创伤，让这片饱受磨难的土地，重新焕发生机与希望。</p>
-                
-                <p class="text-lg leading-relaxed italic text-center my-8 hidden-element conclusion-content">此刻，让我们为逝者祈祷，为生者祝福，也为所有在灾难中伸出援手的人们，致以最深的敬意。</p>
-                
-                <div class="mt-16 text-center hidden-element conclusion-cta">
-                    <p class="text-lg mb-4">关注缅甸震后重建进展，为人道主义援助贡献力量。</p>
-                    
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M6.293 13.293a1 1 0 011.414 0L10 15.586l2.293-2.293a1 1 0 011.414 0 1 1 0 010 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd" />
-                                <path d="M10 4a1 1 0 011 1v7a1 1 0 11-2 0V5a1 1 0 011-1z" clip-rule="evenodd" fill-rule="evenodd" />
-                            </svg>
-                            分享
-                        </a>
-                        <a href="#hero" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M13.707 6.707a1 1 0 00-1.414 0L10 8.586 7.707 6.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 000-1.414z" clip-rule="evenodd" fill-rule="evenodd" />
-                                <path d="M10 16a1 1 0 01-1-1V5a1 1 0 112 0v10a1 1 0 01-1 1z" clip-rule="evenodd" fill-rule="evenodd" />
-                            </svg>
-                            返回顶部
-                        </a>
-                    </div>
-                </div>
+    <section id="conclusion" class="relative py-12 sm:py-16 min-h-screen bg-gray-900">
+      <div class="section-background" id="conclusion-bg">
+        <div class="absolute inset-0 bg-black/80"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 md:px-8 relative z-10 text-white">
+        <div class="max-w-4xl mx-auto">
+          <p class="text-lg sm:text-xl font-semibold mt-12 mb-6 text-center">
+            随着黄金72小时救援窗口的关闭，搜救的重心将逐步转向安置、防疫和重建。然而，对于缅甸而言，这条路注定漫长而艰辛。
+          </p>
+          
+          <p class="text-base sm:text-lg font-semibold mb-2"><strong>重建之路的挑战：</strong></p>
+          
+          <div class="text-sm sm:text-base leading-relaxed my-2 list-disc list-inside bg-gray-800/50 p-4 rounded whitespace-pre-line">
+            • <strong>漫长的重建：</strong> 大量基础设施需巨额资金和漫长时间。
+            • <strong>经济冲击波：</strong> 对曼德勒等经济重镇及玉石贸易等产业影响深远。
+            • <strong>心理创伤抚慰：</strong> 无数幸存者需长期心理援助。
+            • <strong>潜在的次生灾害：</strong> 雨季临近，滑坡、泥石流、疫情风险增加。
+            • <strong>地质风险常在：</strong> 萨加因断裂带活跃，需提升抗震标准和应急机制。
+          </div>
+          
+          <p class="text-base sm:text-lg leading-relaxed mt-8">
+            缅甸萨加因地区的这场强震，再次以残酷的方式提醒人类，我们所栖居的星球潜藏着巨大的自然力量。成千上万的生命在这场灾难中逝去或陷入困境，古老的文化遗产遭受重创，一个国家的发展进程被迫中断。
+          </p>
+          
+          <p class="text-base sm:text-lg leading-relaxed mt-4">
+            在无情的灾难面前，我们看到了生命的脆弱，也见证了守望相助的温暖。从自发组织的华人互助车队，到星夜兼程的国际救援力量，再到温州商会那份跨越国界的同胞情谊，点点星火汇聚成希望之光，照亮了废墟中的前行之路。
+          </p>
+          
+          <p class="text-base sm:text-lg leading-relaxed mt-4">
+            然而，救援只是开始。对于缅甸，尤其是受灾最严重的地区而言，未来的重建之路充满荆棘。地质的隐忧、经济的困顿、社会心理的修复，以及国内复杂局势带来的不确定性，都将是沉重的负担。唯有持续的国际关注与援助，加上缅甸自身的坚韧与努力，才能抚平大地的创伤，让这片饱受磨难的土地，重新焕发生机与希望。
+          </p>
+          
+          <p class="text-base sm:text-lg leading-relaxed italic text-center my-8">
+            此刻，让我们为逝者祈祷，为生者祝福，也为所有在灾难中伸出援手的人们，致以最深的敬意。
+          </p>
+        </div>
+      </div>
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-2xl font-bold mb-6 text-center serif">参考资料</h2>
+          
+          <div class="space-y-4">
+            <div class="p-3 bg-gray-700/50 rounded">
+              <a href="https://tidenews.com.cn/subject.html?id=3084310" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-200 font-semibold">
+                潮新闻 聚焦缅甸7.9级地震
+              </a>
+              <p class="text-sm text-gray-300 mt-1">潮新闻专题报道，提供了地震相关综合信息与现场图片视频。</p>
             </div>
+            
+            <div class="p-3 bg-gray-700/50 rounded">
+              <a href="https://en.wikipedia.org/wiki/2025_Myanmar_earthquake" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-200 font-semibold">
+                2025 年缅甸地震 - 维基百科（英文）
+              </a>
+              <p class="text-sm text-gray-300 mt-1">提供灾害基本资料、伤亡数据、国际救援行动信息等。</p>
+            </div>
+            
+            <div class="p-3 bg-gray-700/50 rounded">
+              <a href="https://economictimes.indiatimes.com/news/india/myanmar-earthquake-india-to-send-15-tonnes-of-relief-material/articleshow/119684727.cms?from=mdr" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-200 font-semibold">
+                Myanmar earthquake: India to send 15 tonnes of relief material - The Economic Times
+              </a>
+              <p class="text-sm text-gray-300 mt-1">印度媒体报道印度政府向缅甸提供15吨救灾物资的相关信息。</p>
+            </div>
+            
+            <div class="p-3 bg-gray-700/50 rounded">
+              <a href="https://www.sciencemediacentre.org/expert-reaction-to-myanmar-earthquake/" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-200 font-semibold">
+                Expert reaction to Myanmar earthquake | Science Media Centre
+              </a>
+              <p class="text-sm text-gray-300 mt-1">科学媒体中心收集的地质专家对此次地震的分析和评论。</p>
+            </div>
+            
+            <div class="p-3 bg-gray-700/50 rounded">
+              <a href="https://www.yahoo.com/news/earthquake-rocks-myanmar-and-thailand-heartbreaking-photos-video-show-extent-of-devastation-181536365.html" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-200 font-semibold">
+                Earthquake rocks Myanmar and Thailand: Heartbreaking photos, video show extent of devastation - Yahoo News
+              </a>
+              <p class="text-sm text-gray-300 mt-1">雅虎新闻报道，包含现场图片和视频资料，展示地震破坏程度。</p>
+            </div>
+            
+            <div class="p-3 bg-gray-700/50 rounded">
+              <a href="https://hqtime.huanqiu.com/share/article/4M3k4vf5cdi" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-200 font-semibold">
+                环球时报相关报道
+              </a>
+              <p class="text-sm text-gray-300 mt-1">环球时报针对缅甸地震的相关报道和分析。</p>
+            </div>
+            
+            <div class="p-3 bg-gray-700/50 rounded">
+              <a href="http://news.china.com.cn/2025-03/28/content_117793386.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-200 font-semibold">
+                现场直击！缅甸7.7级强震 - 中国网
+              </a>
+              <p class="text-sm text-gray-300 mt-1">中国网对缅甸强震的现场报道，包含一手资料和图片。</p>
+            </div>
+          </div>
+          
+          <p class="text-sm text-gray-400 mt-8 text-center">
+            本专题内容参考了上述资料，所有权利归原作者和出版机构所有。如有侵权，请联系我们删除。
+          </p>
         </div>
+      </div>
     </section>
-    
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-4 text-center text-sm">
-            <p>© 2025 温州新闻网AIGC实验室. 模拟内容，仅用于展示。</p>
-            <p class="mt-2 text-gray-400">注：本文中的地震及救援事件为模拟内容，图片和视频仅作展示用途。</p>
-        </div>
-    </footer>
-    
-    <!-- JavaScript -->
-    <script>
-        // Register GSAP plugins
-        gsap.registerPlugin(ScrollTrigger);
+<!-- References Section -->
+
+
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="border-t border-gray-700 pt-8 mb-4"></div>
         
-        // Wait for document to be ready
-        document.addEventListener('DOMContentLoaded', function() {
-            // Theme toggle functionality
-            setupThemeToggle();
-            
-            // Setup navigation dots
-            setupNavDots();
-            
-            // Initialize GSAP animations
-            initAnimations();
-            
-            // Hide loader after everything is loaded
-            window.addEventListener('load', function() {
-                const loader = document.getElementById('loader');
-                gsap.to(loader, {
-                    opacity: 0,
-                    duration: 0.5,
-                    onComplete: function() {
-                        loader.style.display = 'none';
-                    }
-                });
-            });
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <h3 class="text-lg font-semibold serif mb-2">缅甸地震特别报道</h3>
+            <p class="text-sm text-gray-400">© 2025 温州新闻网AIGC实验室. 保留所有权利.</p>
+          </div>
+          
+          <div class="flex space-x-4 text-sm">
+            <a href="#section-intro" class="text-gray-400 hover:text-white transition-colors">返回顶部</a>
+            <span class="text-gray-600">|</span>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">联系我们</a>
+            <span class="text-gray-600">|</span>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">关于我们</a>
+          </div>
+        </div>
+        
+   
+      </div>
+    </div>
+  </footer>
+
+  
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm hidden">
+    <div class="relative max-w-[90vw] max-h-[90vh]">
+      <img id="modalImage" src="" alt="Enlarged Image" class="max-w-full max-h-[90vh] object-contain">
+      <button id="closeModal" class="absolute top-2 right-2 text-white bg-black/50 hover:bg-black/70 rounded-full w-10 h-10 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- JavaScript for functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle loader
+      const loader = document.querySelector('.loader');
+      if (loader) {
+        setTimeout(() => {
+          loader.style.opacity = '0';
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 500);
+        }, 1000);
+      }
+      
+      // Handle mobile menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', function() {
+          mobileMenu.classList.toggle('hidden');
+          // Change the icon based on menu state
+          const icon = menuToggle.querySelector('i');
+          if (icon) {
+            if (mobileMenu.classList.contains('hidden')) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            } else {
+              icon.classList.remove('fa-bars');
+              icon.classList.add('fa-times');
+            }
+          }
         });
         
-        function setupThemeToggle() {
-            const themeToggle = document.getElementById('themeToggle');
-            const sunIcon = document.querySelector('.sun-icon');
-            const moonIcon = document.querySelector('.moon-icon');
-            
-            // Check for saved theme preference or use system preference
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-                document.documentElement.classList.add('dark');
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
+        // Close mobile menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            const icon = menuToggle.querySelector('i');
+            if (icon) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
             }
-            
-            // Theme toggle click handler
-            themeToggle.addEventListener('click', function() {
-                document.documentElement.classList.toggle('dark');
-                sunIcon.classList.toggle('hidden');
-                moonIcon.classList.toggle('hidden');
-                
-                // Save preference
-                if (document.documentElement.classList.contains('dark')) {
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    localStorage.setItem('theme', 'light');
-                }
+          });
+        });
+      }
+      
+      // Handle smooth scrolling for all hash links (navigation and footer)
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Special case for # links that should do nothing
+          if (this.getAttribute('href') === '#' && !this.classList.contains('smooth-scroll')) {
+            return;
+          }
+          
+          const targetId = this.getAttribute('href');
+          
+          // Special case for returning to top
+          if (targetId === '#section-intro' || targetId === '#top') {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
             });
+            return;
+          }
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            // Account for fixed header height
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Handle scroll to content button
+      const scrollToContentBtn = document.getElementById('scrollToContent');
+      if (scrollToContentBtn) {
+        scrollToContentBtn.addEventListener('click', function() {
+          const introSection = document.getElementById('section-intro');
+          if (introSection) {
+            // Account for fixed header height
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = introSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      }
+      
+      // Add a back to top button that appears when scrolling down
+      const backToTopBtn = document.createElement('button');
+      backToTopBtn.innerHTML = '<i class="fas fa-arrow-up" aria-hidden="true"></i>';
+      backToTopBtn.className = 'back-to-top';
+      backToTopBtn.setAttribute('aria-label', '返回顶部');
+      document.body.appendChild(backToTopBtn);
+      
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Show back to top button when scrolled down
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
         }
-        
-        function setupNavDots() {
-            const sections = document.querySelectorAll('section');
-            const nav = document.getElementById('articleNav');
-            
-            sections.forEach((section, index) => {
-                const dot = document.createElement('div');
-                dot.classList.add('nav-dot');
-                dot.dataset.section = section.id;
-                dot.addEventListener('click', () => {
-                    window.scrollTo({
-                        top: section.offsetTop,
-                        behavior: 'smooth'
-                    });
-                });
-                nav.appendChild(dot);
-            });
-            
-            // Update active dot on scroll
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                document.querySelectorAll('.nav-dot').forEach(dot => {
-                    dot.classList.remove('active');
-                    if (dot.dataset.section === current) {
-                        dot.classList.add('active');
-                    }
-                });
-            });
+      });
+      
+      // Handle dark mode toggle
+      const themeToggle = document.getElementById('themeToggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+          document.documentElement.classList.toggle('dark');
+        });
+      }
+      
+      // Handle reading progress bar
+      const progressBar = document.querySelector('.progress-bar');
+      if (progressBar) {
+        window.addEventListener('scroll', function() {
+          const scrollTop = window.scrollY;
+          const docHeight = document.body.offsetHeight - window.innerHeight;
+          const scrollPercent = (scrollTop / docHeight) * 100;
+          progressBar.style.width = scrollPercent + '%';
+        });
+      }
+      
+      // Add nav background opacity based on scroll position
+      const nav = document.querySelector('nav');
+      if (nav) {
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 50) {
+            nav.classList.remove('bg-black/70');
+            nav.classList.add('bg-black/90');
+          } else {
+            nav.classList.remove('bg-black/90');
+            nav.classList.add('bg-black/70');
+          }
+        });
+      }
+      
+      // Set background images for each section if needed
+      const sectionBackgrounds = {
+        'disaster-bg': 'assets/1.jpg',
+        'wenzhou-bg': 'assets/救灾物资随中国云南救援医疗队一起飞赴缅甸地震灾区（3月29日摄）。新华社发（叶勤茹摄）.jpg',
+        'challenges-bg': 'assets/地震造成缅甸实皆省、曼德勒省和掸邦等多地建筑严重损毁，桥梁、道路等基础设施不同程度受损(央视).jpg',
+        'conclusion-bg': 'assets/1.jpg'
+      };
+      
+      for (const [id, path] of Object.entries(sectionBackgrounds)) {
+        const element = document.getElementById(id);
+        if (element && !element.style.backgroundImage) {
+          // Preload image
+          const img = new Image();
+          img.src = path;
+          img.onload = function() {
+            element.style.backgroundImage = `url('${path}')`;
+          };
         }
+      }
+      
+      // Highlight active nav item based on scroll position
+      const sections = document.querySelectorAll('section');
+      const navItems = document.querySelectorAll('nav a');
+      
+      function setActiveNavItem() {
+        let current = '';
         
-        function initAnimations() {
-            // Hero section animation
-            gsap.to('#heroContent', {
-                opacity: 1,
-                y: 0,
-                duration: 1.5,
-                visibility: 'visible',
-                ease: 'power3.out',
-                delay: 0.5
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          const navHeight = document.querySelector('nav').offsetHeight;
+          
+          if (window.scrollY >= (sectionTop - navHeight - 100)) {
+            current = '#' + section.getAttribute('id');
+          }
+        });
+        
+        navItems.forEach(item => {
+          item.classList.remove('text-primary-color', 'font-semibold');
+          
+          if (item.getAttribute('href') === current) {
+            item.classList.add('text-primary-color', 'font-semibold');
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', setActiveNavItem);
+      window.addEventListener('load', setActiveNavItem);
+      
+      // Safely initialize GSAP animations if library is loaded
+      function initGSAP() {
+        try {
+          if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+            console.warn('GSAP or ScrollTrigger not loaded');
+            return;
+          }
+          
+          // Register ScrollTrigger plugin
+          gsap.registerPlugin(ScrollTrigger);
+          
+          // Clear any existing ScrollTrigger instances to prevent errors
+          ScrollTrigger.getAll().forEach(st => st.kill());
+          
+          // Initialize animations for sections that exist in the DOM
+          const sections = [
+            'section-intro',
+            'section-1-disaster-strikes',
+            'section-2-damage-assessment',
+            'section-3-mutual-aid',
+            'section-4-wenzhou-china-aid',
+            'section-5-geology',
+            'section-6-challenges',
+            'conclusion',
+            'references'
+          ];
+          
+          sections.forEach(sectionId => {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+            
+            // Create a timeline for each section
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: section,
+                start: "top 80%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+              }
             });
             
-            // Introduction section animations
-            gsap.utils.toArray('.intro-para').forEach((para, i) => {
-                gsap.from(para, {
-                    scrollTrigger: {
-                        trigger: para,
-                        start: 'top 80%', 
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 50,
-                    duration: 1,
-                    delay: i * 0.2,
-                    visibility: 'visible'
-                });
-            });
-            
-            // Disaster section animations
-            animateSectionTitle('#section-1-disaster-strikes h2');
-            
-            gsap.utils.toArray('.disaster-content').forEach((elem, i) => {
-                gsap.from(elem, {
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.8,
-                    delay: i * 0.1,
-                    visibility: 'visible'
-                });
-            });
-            
-            gsap.utils.toArray('.disaster-quote').forEach((quote, i) => {
-                gsap.from(quote, {
-                    scrollTrigger: {
-                        trigger: quote,
-                        start: 'top 75%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    x: i % 2 === 0 ? -50 : 50, // Alternate left and right
-                    duration: 1,
-                    visibility: 'visible'
-                });
-            });
-            
-            gsap.utils.toArray('.disaster-image').forEach((img) => {
-                gsap.from(img, {
-                    scrollTrigger: {
-                        trigger: img,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    scale: 0.9,
-                    duration: 1,
-                    visibility: 'visible'
-                });
-            });
-            
-            // Damage assessment section animations
-            animateSectionTitle('#section-2-damage-assessment h2');
-            
-            gsap.utils.toArray('.damage-content').forEach((elem, i) => {
-                gsap.from(elem, {
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.8,
-                    visibility: 'visible'
-                });
-            });
-            
-            gsap.from('.damage-casualties', {
-                scrollTrigger: {
-                    trigger: '.damage-casualties',
-                    start: 'top 75%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                scale: 0.8,
-                duration: 1.5,
-                visibility: 'visible',
-                ease: 'back.out(1.7)'
-            });
-            
-            gsap.from('.damage-columns', {
-                scrollTrigger: {
-                    trigger: '.damage-columns',
-                    start: 'top 75%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                visibility: 'visible'
-            });
-            
-            gsap.utils.toArray('.damage-image').forEach((img) => {
-                gsap.from(img, {
-                    scrollTrigger: {
-                        trigger: img,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    scale: 0.9,
-                    duration: 1,
-                    visibility: 'visible'
-                });
-            });
-            
-            // Mutual aid section animations
-            animateSectionTitle('#section-3-mutual-aid h2');
-            
-            gsap.utils.toArray('.aid-content').forEach((elem) => {
-                gsap.from(elem, {
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.8,
-                    visibility: 'visible'
-                });
-            });
-            
-            gsap.utils.toArray('.aid-quote').forEach((quote) => {
-                gsap.from(quote, {
-                    scrollTrigger: {
-                        trigger: quote,
-                        start: 'top 75%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    x: -50,
-                    duration: 1,
-                    visibility: 'visible'
-                });
-            });
-            
-            gsap.utils.toArray('.aid-image, .aid-video').forEach((media) => {
-                gsap.from(media, {
-                    scrollTrigger: {
-                        trigger: media,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    scale: 0.9,
-                    duration: 1,
-                    visibility: 'visible'
-                });
-            });
-            
-            // Wenzhou China Aid section animations
-            animateSectionTitle('#section-4-wenzhou-china-aid h2');
-            
-            gsap.utils.toArray('.china-aid-content').forEach((elem) => {
-                gsap.from(elem, {
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.8,
-                    visibility: 'visible'
-                });
-            });
-            
-            gsap.from('.china-aid-quote', {
-                scrollTrigger: {
-                    trigger: '.china-aid-quote',
-                    start: 'top 75%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                x: -50,
-                duration: 1,
-                visibility: 'visible'
-            });
-            
-            gsap.from('.china-aid-list', {
-                scrollTrigger: {
-                    trigger: '.china-aid-list',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
+            // Add animations to the timeline
+            const elements = section.querySelectorAll('p, h2, blockquote, figure, div.grid, div.text-base');
+            if (elements.length > 0) {
+              tl.from(elements, {
                 y: 30,
-                duration: 1,
-                visibility: 'visible'
-            });
-            
-            gsap.from('.china-aid-columns', {
-                scrollTrigger: {
-                    trigger: '.china-aid-columns',
-                    start: 'top 75%',
-                    toggleActions: 'play none none none'
-                },
                 opacity: 0,
-                y: 50,
-                duration: 1,
-                visibility: 'visible'
-            });
-            
-            gsap.from('.china-aid-image', {
-                scrollTrigger: {
-                    trigger: '.china-aid-image',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                scale: 0.9,
-                duration: 1,
-                visibility: 'visible'
-            });
-            
-            // Geology section animations
-            animateSectionTitle('#section-5-geology h2');
-            
-            gsap.utils.toArray('.geology-content').forEach((elem) => {
-                gsap.from(elem, {
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.8,
-                    visibility: 'visible'
-                });
-            });
-            
-            gsap.utils.toArray('.geology-quote').forEach((quote) => {
-                gsap.from(quote, {
-                    scrollTrigger: {
-                        trigger: quote,
-                        start: 'top 75%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    scale: 0.95,
-                    duration: 1,
-                    visibility: 'visible'
-                });
-            });
-            
-            // Timeline animation
-            gsap.utils.toArray('.timeline-item').forEach((item, i) => {
-                gsap.from(item, {
-                    scrollTrigger: {
-                        trigger: item,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    x: -30,
-                    duration: 0.8,
-                    delay: i * 0.15,
-                    visibility: 'visible'
-                });
-            });
-            
-            // Challenges section animations
-            animateSectionTitle('#section-6-challenges h2');
-            
-            gsap.from('.challenges-content', {
-                scrollTrigger: {
-                    trigger: '.challenges-content',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                y: 30,
+                stagger: 0.1,
                 duration: 0.8,
-                visibility: 'visible'
+                ease: "power2.out"
+              });
+            }
+          });
+          
+          // Initialize scroll-driven hero parallax effect
+          const heroVideo = document.querySelector('.hero-video');
+          if (heroVideo) {
+            gsap.to(heroVideo, {
+              y: 100,
+              scrollTrigger: {
+                trigger: '.hero-container',
+                start: 'top top', 
+                end: 'bottom top',
+                scrub: true
+              }
             });
-            
-            gsap.utils.toArray('.challenge-item').forEach((item, i) => {
-                gsap.from(item, {
-                    scrollTrigger: {
-                        trigger: item,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 40,
-                    duration: 0.8,
-                    delay: i * 0.15,
-                    visibility: 'visible'
-                });
-            });
-            
-            gsap.utils.toArray('.challenges-image').forEach((img) => {
-                gsap.from(img, {
-                    scrollTrigger: {
-                        trigger: img,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    scale: 0.9,
-                    duration: 1,
-                    visibility: 'visible'
-                });
-            });
-            
-            // Conclusion section animations
-            gsap.utils.toArray('.conclusion-content').forEach((elem, i) => {
-                gsap.from(elem, {
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.8,
-                    delay: i * 0.1,
-                    visibility: 'visible'
-                });
-            });
-            
-            gsap.from('.conclusion-challenges', {
-                scrollTrigger: {
-                    trigger: '.conclusion-challenges',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                y: 20,
-                duration: 1,
-                visibility: 'visible'
-            });
-            
-            gsap.from('.conclusion-cta', {
-                scrollTrigger: {
-                    trigger: '.conclusion-cta',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                y: 30,
-                duration: 1,
-                visibility: 'visible'
-            });
-            
-            // Create parallax effects for background images
-            setupParallaxBackgrounds();
-            
-            // Pin some sections during scroll
-            setupPinnedSections();
+          }
+        } catch (error) {
+          console.error('Error initializing GSAP animations:', error);
         }
+      }
+      
+      // Try to initialize GSAP after a short delay to ensure scripts are loaded
+      setTimeout(initGSAP, 500);
+      
+      // Lazy load images when they come into view
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              const src = img.getAttribute('data-src');
+              
+              if (src) {
+                img.src = src;
+                img.removeAttribute('data-src');
+              }
+              
+              imageObserver.unobserve(img);
+            }
+          });
+        });
         
-        function animateSectionTitle(selector) {
-            gsap.from(selector, {
-                scrollTrigger: {
-                    trigger: selector,
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                y: -30,
-                duration: 1.2,
-                visibility: 'visible'
-            });
-        }
-        
-        function setupParallaxBackgrounds() {
-            // Add parallax effect to certain sections
-            const parallaxSections = [
-                '#section-3-mutual-aid',
-                '#section-4-wenzhou-china-aid',
-                '#section-5-geology'
-            ];
-            
-            parallaxSections.forEach(section => {
-                const bgImage = document.querySelector(`${section} .bg-image`);
-                
-                gsap.to(bgImage, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true // Smooth animation that follows scroll position
-                    },
-                    y: '20%', // Move background slower than content
-                    ease: 'none'
-                });
-            });
-        }
-        
-        function setupPinnedSections() {
-            // Pin the disaster section for a brief moment
-            ScrollTrigger.create({
-                trigger: '#section-1-disaster-strikes',
-                start: 'top top',
-                end: '+=50%', // End trigger point is 50% of viewport height from start
-                pin: true,
-                pinSpacing: true
-            });
-            
-            // Pin the damage assessment section
-            ScrollTrigger.create({
-                trigger: '#section-2-damage-assessment',
-                start: 'top top',
-                end: '+=30%',
-                pin: true,
-                pinSpacing: true
-            });
-            
-            // Create responsive adjustments
-            ScrollTrigger.matchMedia({
-                // Adjust animations for mobile
-                "(max-width: 768px)": function() {
-                    // Disable pinning on mobile for better experience
-                    ScrollTrigger.getAll().forEach(st => {
-                        if (st.vars.pin) {
-                            st.kill();
-                        }
-                    });
-                }
-            });
-        }
-    </script>
+        // Observe all images with data-src attribute
+        document.querySelectorAll('img[data-src]').forEach(img => {
+          imageObserver.observe(img);
+        });
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        document.querySelectorAll('img[data-src]').forEach(img => {
+          img.src = img.getAttribute('data-src');
+        });
+      }
+    });
+
+    // Image Modal
+    function openImageModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      
+      modalImage.src = imageSrc;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    document.getElementById('closeModal').addEventListener('click', function() {
+      document.getElementById('imageModal').classList.add('hidden');
+      document.body.style.overflow = ''; // Re-enable scrolling
+    });
+
+    // Close modal when clicking outside the image
+    document.getElementById('imageModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Escape key to close modal
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !document.getElementById('imageModal').classList.contains('hidden')) {
+        document.getElementById('imageModal').classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
 </body>
 </html> 
